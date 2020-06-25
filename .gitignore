@@ -8,7 +8,7 @@ EObrazovanjeAngular/out-tsc
 EObrazovanjeAngular/bazel-out
 
 # dependencies
-EObrazovanjeAngular//node_modules
+EObrazovanjeAngular/node_modules
 
 # profiling files
 chrome-profiler-events*.json

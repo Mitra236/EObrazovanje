@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "exams")
 public class Exam implements Serializable {
@@ -34,14 +36,14 @@ public class Exam implements Serializable {
 	@Column(name = "course_date", nullable = false)
 	private Date date;
 	
-	@Column(name = "ND", nullable = false)
-	private boolean ND;
+	@Column(name = "status", nullable = false)
+	private EExamStatus status;
 	
 	@ManyToOne
     @JoinColumn(name = "course", referencedColumnName = "course_id", nullable=false)
 	private Course course;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "period", referencedColumnName = "exam_period_id", nullable=false)
 	private ExamPeriod period;
 	
@@ -78,14 +80,6 @@ public class Exam implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public boolean isND() {
-		return ND;
-	}
-
-	public void setND(boolean nD) {
-		ND = nD;
 	}
 
 	public Course getCourse() {
@@ -128,4 +122,21 @@ public class Exam implements Serializable {
 		return serialVersionUID;
 	}
 
+	public EExamStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(EExamStatus status) {
+		this.status = status;
+	}
+
+	public ExamPeriod getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(ExamPeriod period) {
+		this.period = period;
+	}
+
+	
 }
