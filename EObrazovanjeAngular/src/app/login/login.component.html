@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="login-modal">
+    <h2>Login</h2>
+    <hr />
+    <form
+      class="login-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit(loginForm.value)"
+    >
+      <input
+        type="text"
+        placeholder="Username"
+        id="username"
+        formControlName="username"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        id="password"
+        formControlName="password"
+      />
+      <br />
+      <button type="submit" class="btn-dark">LOGIN</button>
+    </form>
+  </div>
+  <ng-template [ngIf]="errorMessage !== ''">
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  </ng-template>
+</div>

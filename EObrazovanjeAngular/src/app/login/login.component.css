@@ -1,0 +1,36 @@
+.container {
+  background-color: #2d3b45;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-modal {
+  width: 300px;
+  background-color: azure;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.login-modal h4 {
+  padding: 15px 0;
+}
+
+.login-form {
+  padding: 10px;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: #cc0000;
+}
+
+hr {
+  -webkit-appearance: none;
+  border-top: 2px solid #2d3b45;
+  height: 1px;
+}

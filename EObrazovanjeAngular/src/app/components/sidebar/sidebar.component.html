@@ -1,0 +1,54 @@
+<div class="sidebar">
+  <div class="title">
+    Studentska sluzba
+  </div>
+
+  <div *ngIf="role === 'student'">
+    <div class="group">
+      <p class="group-title">Profil</p>
+      <a class="item" routerLink="/student">Pregled podataka</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Ispiti</p>
+      <a class="item" routerLink="/student/exams/register">Prijava ispita</a>
+      <a class="item" routerLink="/student/exams/unregister">Odjava ispita</a>
+      <a class="item" routerLink="/student/exams/history">Istorija polaganja</a>
+      <a class="item" routerLink="/student/exams/passed">Polozeni ispiti</a>
+      <a class="item" routerLink="/student/exams/failed">Nepolozeni ispiti</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Placanje</p>
+      <a class="item" routerLink="/student/financing">Finansijska kartica</a>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'admin'">
+    <div class="group">
+      <p class="group-title">Korisnici</p>
+      <a class="item" routerLink="/admin/students">Pregled studenata</a>
+      <a class="item" routerLink="/admin/users/add/student">Dodaj studenta</a>
+      <a class="item" routerLink="/admin/courses">Pregled kurseva</a>
+      <a class="item" routerLink="/admin/exams">Pregled ispita</a>
+      <a class="item" routerLink="/admin/professors">Pregled profesora</a>
+      <a class="item" routerLink="/admin/users/add/professor"
+        >Dodaj profesora</a
+      >
+    </div>
+  </div>
+
+  <div *ngIf="role === 'professor'">
+    <div class="group">
+      <p class="group-title">Profil</p>
+      <a class="item" routerLink="/professor">Pregled podataka</a>
+      <a class="item" routerLink="/professor/edit">Izmena podataka</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Akcije</p>
+      <a class="item" routerLink="/professor/courses">Pregled kurseva</a>
+      <a class="item" routerLink="/professor/addCourse">Dodaj kurs</a>
+      <a class="item" routerLink="/professor/addStudentAtCourse"
+        >Dodaj studenta na kurs</a
+      >
+    </div>
+  </div>
+</div>

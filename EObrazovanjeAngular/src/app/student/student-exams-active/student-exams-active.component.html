@@ -1,0 +1,61 @@
+<div class="content-container">
+  <h2>Prijava ispit</h2>
+  <div class="exam-info">
+    <h3 class="card-title">Ispitni rok: jul</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngIf="registration; else elseBlock">Prijavi</th>
+          <ng-template #elseBlock><th>Odjavi</th></ng-template>
+          <th>Oznaka</th>
+          <th>Naziv predmeta</th>
+          <th>Datum ispita</th>
+          <th class="align-right">Iznos prijave</th>
+          <th>Nastavnik</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let exam of exams"
+          (click)="selectExam(exam)"
+          [class.selected-exam]="isExamSelected(exam.id)"
+        >
+          <td><p *ngIf="isExamSelected(exam.id)">+</p></td>
+          <td>{{ exam.course.courseCode }}</td>
+          <td>{{ exam.course.name }}</td>
+          <td>{{ exam.examDate }}</td>
+          <td class="align-right">{{ exam.examRegistration.paymentAmount }}</td>
+          <td>{{ exam.professor.name }}</td>
+        </tr>
+
+        <tr class="info-rows">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Ukupno:</td>
+          <td class="align-right">{{ selectedExamsCost }}</td>
+          <td></td>
+        </tr>
+        <tr class="info-rows">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Trenutno stanje:</td>
+          <td class="align-right">{{ userAccountBalance }}</td>
+          <td></td>
+        </tr>
+        <tr class="info-rows">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Stanje nakon transakcije:</td>
+          <td class="line align-right">{{ newUserAccountBalance }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btn-container">
+      <button class="filled-btn-dark">Potvrdi</button>
+    </div>
+  </div>
+</div>

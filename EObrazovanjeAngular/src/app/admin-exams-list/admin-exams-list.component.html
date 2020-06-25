@@ -1,0 +1,25 @@
+<div class="content-container">
+    <h2>Lista ispita</h2>
+    <div class="exam-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Naziv</th>
+            <th>Pocetak</th>
+            <th>Kraj odrzavanja</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of exams">
+            <td>{{ exam.examName }}</td>
+            <td>{{ exam.startDate }}</td>
+            <td>{{ exam.endDate }}</td>
+            <td>
+              <button class="filled-btn-dark">Ukloni</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

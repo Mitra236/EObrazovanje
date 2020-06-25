@@ -1,0 +1,29 @@
+<div class="content-container">
+  <h2>{{ title }}</h2>
+  <div class="exam-info">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>R.Br.</th>
+          <th>Oznaka</th>
+          <th>Naziv predmeta</th>
+          <th>ECTS</th>
+          <th>Datum</th>
+          <th>Nastavnik</th>
+          <th>Ocena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams; index as i">
+          <td>{{ i }}</td>
+          <td>{{ exam.course.courseCode }}</td>
+          <td>{{ exam.course.name }}</td>
+          <td>{{ exam.course.ECTS }}</td>
+          <td>{{ exam.examDate }}</td>
+          <td>{{ exam.professor.name }}</td>
+          <td>{{ exam.finalGrade }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

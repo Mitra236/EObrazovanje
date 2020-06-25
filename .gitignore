@@ -1,0 +1,81 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+EObrazovanjeAngular/dist
+EObrazovanjeAngular/tmp
+EObrazovanjeAngular/out-tsc
+# Only exists if Bazel was run
+EObrazovanjeAngular/bazel-out
+
+# dependencies
+EObrazovanjeAngular//node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+EObrazovanjeAngular/.idea
+EObrazovanjeAngular/.project
+EObrazovanjeAngular/.classpath
+EObrazovanjeAngular/.c9/
+EObrazovanjeAngular/*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+EObrazovanjeAngular/.vscode/*
+EObrazovanjeAngular/!.vscode/settings.json
+EObrazovanjeAngular/!.vscode/tasks.json
+EObrazovanjeAngular/!.vscode/launch.json
+EObrazovanjeAngular/!.vscode/extensions.json
+EObrazovanjeAngular/.history/*
+
+# misc
+EObrazovanjeAngular/.sass-cache
+EObrazovanjeAngular/connect.lock
+EObrazovanjeAngular/coverage
+EObrazovanjeAngular/libpeerconnection.log
+EObrazovanjeAngular/npm-debug.log
+EObrazovanjeAngular/yarn-error.log
+EObrazovanjeAngular/testem.log
+EObrazovanjeAngular/typings
+
+# System Files
+EObrazovanjeAngular/.DS_Store
+EObrazovanjeAngular/Thumbs.db
+
+#SPRING BOOT
+
+EObrazovanje/HELP.md
+EObrazovanje/target/
+EObrazovanje/!.mvn/wrapper/maven-wrapper.jar
+EObrazovanje/!**/src/main/**
+EObrazovanje/!**/src/test/**
+
+### STS ###
+EObrazovanje/.apt_generated
+EObrazovanje/.classpath
+EObrazovanje/.factorypath
+EObrazovanje/.project
+EObrazovanje/.settings
+EObrazovanje/.springBeans
+EObrazovanje/.sts4-cache
+
+### IntelliJ IDEA ###
+EObrazovanje/.idea
+EObrazovanje/*.iws
+EObrazovanje/*.iml
+EObrazovanje/*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+

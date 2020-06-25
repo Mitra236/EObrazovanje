@@ -1,0 +1,64 @@
+<div class="content-container">
+  <h2>Podaci o studentu</h2>
+  <div>
+    <div class="account-info">
+      <h3>Podaci o nalogu</h3>
+      <div class="row">
+        <p>Korisnicko ime:</p>
+        <p>{{ student.username }}</p>
+      </div>
+      <div class="row">
+        <p>Lozinka:</p>
+        <p>{{ student.password }}</p>
+      </div>
+    </div>
+
+    <div class="account-info">
+      <h3>Licni podaci</h3>
+      <div class="row">
+        <p>Ime:</p>
+        <p>{{ student.firstName }}</p>
+      </div>
+      <div class="row">
+        <p>Prezime:</p>
+        <p>{{ student.lastName }}</p>
+      </div>
+      <div class="row">
+        <p>Email:</p>
+        <p>{{ student.email }}</p>
+      </div>
+      <div class="row">
+        <p>Broj telefona:</p>
+        <p>{{ student.phoneNumber }}</p>
+      </div>
+      <div class="row">
+        <p>JMBG:</p>
+        <p>{{ student.JMBG }}</p>
+      </div>
+    </div>
+
+    <div class="account-info">
+      <h3>Podaci i studijama</h3>
+      <div class="row">
+        <p>Indeks:</p>
+        <p>{{ student.index }}</p>
+      </div>
+      <div class="row">
+        <p>Godina upisa:</p>
+        <p>{{ student.yearOfEnrollment }}</p>
+      </div>
+      <div class="row">
+        <p>Godina studija:</p>
+        <p>{{ student.yearOfStudy }}</p>
+      </div>
+      <div class="row">
+        <p>Redni broj upisa godine:</p>
+        <p>{{ student.timeEnrolled }}</p>
+      </div>
+      <div class="row">
+        <p>Nacin finansiranja:</p>
+        <p>{{ student.methodOfFinancing }}</p>
+      </div>
+    </div>
+  </div>
+</div>

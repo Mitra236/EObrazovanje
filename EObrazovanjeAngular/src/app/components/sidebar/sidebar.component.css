@@ -1,0 +1,46 @@
+.sidebar {
+  width: 300px;
+  display: flexbox;
+  height: 100%;
+  flex-direction: column;
+  position: absolute;
+  background-color: #2d3b45;
+  color: #e0e6eb;
+  position: fixed;
+}
+
+a {
+  text-decoration: none;
+  color: #e0e6eb;
+}
+
+.title {
+  font-size: 24px;
+  padding: 20px 30px 30px 30px;
+}
+
+.group {
+  padding: 20px 30px 20px 0;
+  border-bottom: 1px solid #516a7b;
+  border-top: 1px solid #516a7b;
+}
+
+.group-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  font-weight: bold;
+}
+
+.item {
+  padding: 7px 0;
+  padding-left: 30px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: block;
+}
+
+.item:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

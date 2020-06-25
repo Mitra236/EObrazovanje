@@ -1,0 +1,30 @@
+<div class="content-container">
+  <h2>Lista studenata</h2>
+  <div class="student-info">
+    <h3 class="card-title"></h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Indeks</th>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Korisnicko ime</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.index }}</td>
+          <td>{{ student.firstName }}</td>
+          <td>{{ student.lastName }}</td>
+          <td>{{ student.username }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <button class="filled-btn-dark">Ukloni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

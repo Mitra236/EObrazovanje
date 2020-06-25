@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+}
+
+button {
+  -webkit-appearance: none;
+  padding: 4px 15px;
+  border: 1px solid grey;
+  border-radius: 2px;
+  background-color: white;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.btn-dark {
+  color: #2d3b45;
+  border: 1px solid #2d3b45;
+}
+
+.filled-btn-dark {
+  background-color: #2d3b45;
+  color: #e0e6eb;
+  border: 1px solid #2d3b45;
+}
+
+.filled-btn-dark:hover {
+  background-color: rgba(45, 59, 69, 0.9);
+  cursor: pointer;
+}
+
+h3,
+h2,
+h1 {
+  padding: 10px 20px;
+}
+
+.content-container {
+  margin-left: 300px;
+  padding: 20px 0;
+}
