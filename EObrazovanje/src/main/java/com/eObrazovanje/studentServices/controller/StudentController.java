@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.Student;
@@ -27,17 +28,17 @@ public class StudentController {
 	}
 	
 	@GetMapping(value="/{studentId}/exams")
-	private List<Exam> getTakenExams(@PathVariable("studentId") int id) {
+	private List<ExamDTO> getTakenExams(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findTakenExams(id);
 	}
 	
-	@GetMapping(value="/{studentId}/passed-exams")
-	private List<Exam> getFailedExams(@PathVariable("studentId") int id) {
+	@GetMapping(value="/{studentId}/failed-exams")
+	private List<ExamDTO> getFailedExams(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findFailedExams(id);
 	}
 	
-	@GetMapping(value="/{studentId}/failed-exams")
-	private List<Exam> getPassedExams(@PathVariable("studentId") int id) {
+	@GetMapping(value="/{studentId}/passed-exams")
+	private List<ExamDTO> getPassedExams(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findPassedExams(id);
 	}
 	
