@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
@@ -46,10 +47,10 @@ public class StudentService implements StudentServiceInterface {
 	}
 
 //	@Override
-//	public List<Exam> findPassedExams(int id) {
+//	public List<ExamDTO> findPassedExams(int id) {
 //		// TODO Auto-generated method stub
 //		Student student = studentRepository.findById(id).orElse(null);
-//		List<Exam> passedExams = new ArrayList<Exam>();
+//		List<ExamDTO> passedExams = new ArrayList<ExamDTO>();
 //		
 //		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
 //			passedExams = filterExams(EExamStatus.Passed,student.getExamsTaken() );
@@ -59,10 +60,10 @@ public class StudentService implements StudentServiceInterface {
 //	}
 //
 //	@Override
-//	public List<Exam> findFailedExams(int id) {
+//	public List<ExamDTO> findFailedExams(int id) {
 //		// TODO Auto-generated method stub
 //		Student student = studentRepository.findById(id).orElse(null);
-//		List<Exam> failedExams = new ArrayList<Exam>();
+//		List<ExamDTO> failedExams = new ArrayList<ExamDTO>();
 //		
 //		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
 //			failedExams = filterExams(EExamStatus.Failed,student.getExamsTaken() );
@@ -71,29 +72,43 @@ public class StudentService implements StudentServiceInterface {
 //		return failedExams;
 //	}
 //	
-//	public List<Exam> filterExams(EExamStatus status, List<Exam> exams){
+//	public List<ExamDTO> filterExams(EExamStatus status, List<Exam> exams){
 //		List<Exam> filteredExams = new ArrayList<Exam>();
 //		
 //		for(Exam e : exams) {
-//			if(e.getStatus() == status) {
+//			if(e.getStatus().equals(status)) {
 //				filteredExams.add(e);
 //			}
 //		}
+//
+//		List<ExamDTO> examsDTO = new ArrayList<>();
+//		if(exams.size()>0) {
+//			for(Exam e : filteredExams) {
+//				examsDTO.add(new ExamDTO(e));
+//			}
+//		}
 //		
-//		return filteredExams;
+//		return examsDTO;
 //	}
 //
 //	@Override
-//	public List<Exam> findTakenExams(int id) {
+//	public List<ExamDTO> findTakenExams(int id) {
 //		// TODO Auto-generated method stub
 //		Student student = studentRepository.findById(id).orElse(null);
 //		
 //		List<Exam> exams = new ArrayList<>();
-//		
 //		if(student != null) {
 //			exams = student.getExamsTaken();
 //		}
-//		return exams;
+//		
+//		List<ExamDTO> examsDTO = new ArrayList<>();
+//		if(exams.size() > 0) {
+//			for(Exam e : exams) {
+//				examsDTO.add(new ExamDTO(e));
+//			}
+//		}
+//
+//		return examsDTO;
 //	}
 
 }
