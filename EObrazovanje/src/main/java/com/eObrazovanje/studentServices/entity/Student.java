@@ -79,7 +79,7 @@ public class Student implements Serializable{
 	private double accountBalance;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "student")
-	private List<Exam> examsTaken = new ArrayList<Exam>();
+	private List<ExamRegistration> examsTaken = new ArrayList<ExamRegistration>();
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "student_financial_card")
 	private List<FinancialCard> studentsFinCard = new ArrayList<FinancialCard>();
@@ -230,11 +230,11 @@ public class Student implements Serializable{
 		this.index = index;
 	}
 
-	public List<Exam> getExamsTaken() {
+	public List<ExamRegistration> getExamsTaken() {
 		return examsTaken;
 	}
 
-	public void setExamsTaken(List<Exam> examsTaken) {
+	public void setExamsTaken(List<ExamRegistration> examsTaken) {
 		this.examsTaken = examsTaken;
 	}
 
@@ -269,7 +269,4 @@ public class Student implements Serializable{
 	public void setEnrollment(List<Enrollment> studentEnrollments) {
 		this.studentEnrollments = studentEnrollments;
 	}
-	
-	
-	
 }

@@ -27,13 +27,16 @@ public class ExamPeriod implements Serializable{
 	private int id;
 	
 	@Column(name = "exam_name", unique = true, nullable = false)
-	private String examName;
+	private EExamPeriodName examName;
 	
 	@Column(name = "start_date", nullable = false)
 	private Date startDate;
 	
 	@Column(name = "end_date", nullable = false)
 	private Date endDate;
+	
+	@Column(name = "payment_amount", nullable = false) 
+	private double paymentAmount;
 	
 	@OneToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY, mappedBy = "period")
 	private List<Exam> examsTaken = new ArrayList<Exam>();
@@ -46,11 +49,11 @@ public class ExamPeriod implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getExamName() {
+	public EExamPeriodName getExamName() {
 		return examName;
 	}
 
-	public void setExamName(String examName) {
+	public void setExamName(EExamPeriodName examName) {
 		this.examName = examName;
 	}
 
@@ -93,7 +96,21 @@ public class ExamPeriod implements Serializable{
 	public void setExamsRegistered(List<ExamRegistration> examsRegistered) {
 		this.examsRegistered = examsRegistered;
 	}
-	
-	
+
+	public double getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public void setPaymentAmount(double paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
+
+	public List<Exam> getExamsTaken() {
+		return examsTaken;
+	}
+
+	public void setExamsTaken(List<Exam> examsTaken) {
+		this.examsTaken = examsTaken;
+	}
 
 }

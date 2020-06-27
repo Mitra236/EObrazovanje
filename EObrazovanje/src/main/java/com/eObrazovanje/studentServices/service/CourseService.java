@@ -31,8 +31,23 @@ public class CourseService implements CourseServiceInterface{
 
 	@Override
 	public boolean remove(int id) {
+		Course course = courseRepo.findById(id).orElse(null);
+		if (course == null) return false;
+		
 		courseRepo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public void update(Course course) {
+		Course updatedCourse = courseRepo.findById(course.getId()).orElse(null);
+		updatedCourse.setCourseCode(course.getCourseCode());
+		updatedCourse.setName(course.getName());
+		updatedCourse.setECTS(course.getECTS());
+		updatedCourse.setLectures(course.getLectures());
+		updatedCourse.setPracticalCLasses(course.getPracticalCLasses());
+		updatedCourse.setStudyProgramme(course.getStudyProgramme());
+		courseRepo.save(updatedCourse);
 	}
 
 }

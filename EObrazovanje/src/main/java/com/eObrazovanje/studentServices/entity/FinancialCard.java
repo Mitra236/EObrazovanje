@@ -1,20 +1,15 @@
 package com.eObrazovanje.studentServices.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -52,9 +47,6 @@ public class FinancialCard implements Serializable{
 	@ManyToOne
     @JoinColumn(name = "student_financial_card", referencedColumnName = "student_id", nullable = false)
 	private Student student_financial_card;
-	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "financial_card")
-	private List<ExamRegistration> examRegistrations = new ArrayList<ExamRegistration>();
 
 	public FinancialCard() {
 		super();
@@ -132,13 +124,4 @@ public class FinancialCard implements Serializable{
 		this.student_financial_card = studentFinancialCard;
 	}
 
-	public List<ExamRegistration> getExamRegistrations() {
-		return examRegistrations;
-	}
-
-	public void setExamRegistrations(List<ExamRegistration> examRegistrations) {
-		this.examRegistrations = examRegistrations;
-	}
-	
-	
 }

@@ -1,10 +1,13 @@
 package com.eObrazovanje.studentServices.controller;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
+import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/courses")
@@ -24,43 +29,64 @@ public class CourseController {
 	@Autowired
 	CourseServiceInterface courseServiceInterface;
 	
+	@Autowired
+	StudyProgrammeServiceInterface studyProgrammeServiceInterface;
+	
 	@GetMapping
-	private ResponseEntity<List<Course>> getAll() {	
-		return new ResponseEntity<List<Course>>(courseServiceInterface.findAll(), HttpStatus.OK);
+	private ResponseEntity<List<CourseDTO>> getAll() {	
+		List<CourseDTO> courses = new ArrayList<>();
+		for(Course c: courseServiceInterface.findAll()) {
+			courses.add(new CourseDTO(c));
+		}
+		return new ResponseEntity<List<CourseDTO>>(courses, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/course")
-	private ResponseEntity<Course> getCourse(@RequestParam("id") int id) {
+	private ResponseEntity<CourseDTO> getCourse(@RequestParam("id") int id) {
 		Course course = courseServiceInterface.findOne(id);
-		if (course == null) { return new ResponseEntity<Course>(HttpStatus.NOT_FOUND);}
+		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
 		
-		return new ResponseEntity<Course>(course, HttpStatus.OK);
+		return new ResponseEntity<CourseDTO>(new CourseDTO(course), HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/{id}", consumes = "application/json")
-	private ResponseEntity<Course> editCourse(@RequestBody Course editedCourse, @PathVariable("id") int id) {
-		Course course = courseServiceInterface.findOne(id);
-		if (course == null) { return new ResponseEntity<Course>(HttpStatus.NOT_FOUND);}
-		course.setName(editedCourse.getName());
-		course.setCourseCode(editedCourse.getCourseCode());
-		course.setLectures(editedCourse.getLectures());
-		course.setPracticalCLasses(editedCourse.getPracticalCLasses());
+	@PutMapping(consumes = "application/json")
+	private ResponseEntity<Void> editCourse(@RequestBody CourseDTO editedCourse) {
+		Course course = courseServiceInterface.findOne(editedCourse.id);
+		if (course == null) return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); 
 		
-		return new ResponseEntity<Course>(course, HttpStatus.CREATED);
+		course.setName(editedCourse.name);
+		course.setCourseCode(editedCourse.courseCode);
+		course.setLectures(editedCourse.lectures);
+		course.setECTS(editedCourse.ECTS);
+		course.setPracticalCLasses(editedCourse.practicalClasses);
+		course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
+		courseServiceInterface.update(course);
+		
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
 	@PostMapping(consumes = "application/json")
-	private ResponseEntity<Course> addCourse(@RequestBody Course course) {
-		Course newCourse = new Course();
-		newCourse.setName(course.getName());
-		newCourse.setECTS(course.getECTS());
-		newCourse.setCourseCode(course.getCourseCode());
-		newCourse.setLectures(course.getLectures());
-		newCourse.setPracticalCLasses(course.getPracticalCLasses());
+	private ResponseEntity<Integer> addCourse(@RequestBody CourseDTO course) {
+		if (course == null) return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
 		
+		Course newCourse = new Course();
+		newCourse.setName(course.name);
+		newCourse.setECTS(course.ECTS);
+		newCourse.setCourseCode(course.courseCode);
+		newCourse.setLectures(course.lectures);
+		newCourse.setPracticalCLasses(course.practicalClasses);
+		newCourse.setStudyProgramme(studyProgrammeServiceInterface.findOne(course.studyProgramme.id));	
 		courseServiceInterface.save(newCourse);
 		
-		return new ResponseEntity<Course>(newCourse, HttpStatus.CREATED);
+		return new ResponseEntity<Integer>(newCourse.getId(), HttpStatus.CREATED);
 	}
 
+	@DeleteMapping(value = "/{id}")
+	private ResponseEntity<Boolean> deleteCourse(@PathVariable("id") int id) {
+		Course course = courseServiceInterface.findOne(id);
+		if (course == null) return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND); 
+		
+		courseServiceInterface.remove(id);	
+		return new ResponseEntity<Boolean>(HttpStatus.OK);
+	}
 }

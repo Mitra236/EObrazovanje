@@ -26,20 +26,20 @@ public class StudentController {
 		return studentServiceInterface.findAll();
 	}
 	
-	@GetMapping(value="/{studentId}/exams")
-	private List<Exam> getTakenExams(@PathVariable("studentId") int id) {
-		return studentServiceInterface.findTakenExams(id);
-	}
-	
-	@GetMapping(value="/{studentId}/passed-exams")
-	private List<Exam> getFailedExams(@PathVariable("studentId") int id) {
-		return studentServiceInterface.findFailedExams(id);
-	}
-	
-	@GetMapping(value="/{studentId}/failed-exams")
-	private List<Exam> getPassedExams(@PathVariable("studentId") int id) {
-		return studentServiceInterface.findPassedExams(id);
-	}
+//	@GetMapping(value="/{studentId}/exams")
+//	private List<Exam> getTakenExams(@PathVariable("studentId") int id) {
+//		return studentServiceInterface.findTakenExams(id);
+//	}
+//	
+//	@GetMapping(value="/{studentId}/passed-exams")
+//	private List<Exam> getFailedExams(@PathVariable("studentId") int id) {
+//		return studentServiceInterface.findFailedExams(id);
+//	}
+//	
+//	@GetMapping(value="/{studentId}/failed-exams")
+//	private List<Exam> getPassedExams(@PathVariable("studentId") int id) {
+//		return studentServiceInterface.findPassedExams(id);
+//	}
 	
 	@GetMapping(value="/{studentId}/financial-card")
 	private List<StudentDTO> getFinancialCardInfo(@PathVariable("studentId") int id) {

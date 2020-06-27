@@ -10,5 +10,6 @@ public interface CourseServiceInterface {
 	List<Course> findAll();
 	int save(Course course);
 	boolean remove(int id);
+	void update(Course course);
 
 }

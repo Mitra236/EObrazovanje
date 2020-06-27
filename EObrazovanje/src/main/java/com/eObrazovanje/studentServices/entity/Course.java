@@ -51,8 +51,6 @@ public class Course implements Serializable{
     @JoinTable( name = "professors_courses", joinColumns = @JoinColumn(name = "course_id") ,inverseJoinColumns = @JoinColumn(name = "professor_id") )
 	private List<Professor> professors = new ArrayList<>();
 	
-//	private StudyProgramme studyProgramme;
-	
 	@ManyToOne
     @JoinColumn(name = "study_programme_courses", referencedColumnName = "study_programme_id", nullable = false)
 	private StudyProgramme study_programme_courses;
@@ -74,7 +72,6 @@ public class Course implements Serializable{
 
 	public Course() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -148,23 +145,5 @@ public class Course implements Serializable{
 	public void setEnrollment(List<Enrollment> enrollment) {
 		this.enrollments = enrollment;
 	}
-	
-	
-
-//	public StudyProgramme getStudyProgramme() {
-//		return studyProgramme;
-//	}
-//
-//	public void setStudyProgramme(StudyProgramme studyProgramme) {
-//		this.studyProgramme = studyProgramme;
-//	}
-//
-//	public List<Professor> getProfessors() {
-//		return professors;
-//	}
-//
-//	public void setProfessors(List<Professor> professors) {
-//		this.professors = professors;
-//	}
 
 }

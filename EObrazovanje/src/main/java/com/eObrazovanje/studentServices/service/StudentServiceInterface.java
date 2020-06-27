@@ -12,7 +12,7 @@ public interface StudentServiceInterface {
 	StudentDTO findOne(int id);
 	List<StudentDTO> findAll();
 	int save(Student student);
-	List<Exam> findPassedExams(int id);
-	List<Exam> findFailedExams(int id);
-	List<Exam> findTakenExams(int id);
+//	List<Exam> findPassedExams(int id);
+//	List<Exam> findFailedExams(int id);
+//	List<Exam> findTakenExams(int id);
 }

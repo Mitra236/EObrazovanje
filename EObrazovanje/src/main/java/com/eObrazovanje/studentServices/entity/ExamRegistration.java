@@ -24,31 +24,29 @@ public class ExamRegistration implements Serializable{
 	@Column(name = "exam_registration_id", unique = true, nullable = false)
 	private int id;
 	
-	@Column(name = "payment_amount", nullable = false)
-	private double paymentAmount;
+	@Column(name = "status", nullable = false)
+	private EExamStatus status;
 	
 	@Column(name = "registered",nullable = false)
 	private boolean registered;
+	
+	@Column(name = "final_grade",nullable = false)
+	private int finalGrade;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "exam_period", referencedColumnName = "exam_period_id", nullable=false)
 	private ExamPeriod exam_period;
 	
 	@ManyToOne
-    @JoinColumn(name = "financial_card", referencedColumnName = "financial_card_id", nullable = false)
-	private FinancialCard financial_card;
+	@JoinColumn(name = "student", referencedColumnName = "student_id", nullable=true)
+	private Student student;
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "exam", referencedColumnName = "exam_id", nullable=false)
+	private Exam exam;
 	
 	public ExamRegistration() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public double getPaymentAmount() {
-		return paymentAmount;
-	}
-	
-	public void setPaymentAmount(double paymentAmount) {
-		this.paymentAmount = paymentAmount;
 	}
 	
 	public boolean isRegistered() {
@@ -71,14 +69,43 @@ public class ExamRegistration implements Serializable{
 		this.exam_period = examPeriod;
 	}
 
-	public FinancialCard getFinancialCard() {
-		return financial_card;
+	public EExamStatus getStatus() {
+		return status;
 	}
 
-	public void setFinancialCard(FinancialCard financial_card) {
-		this.financial_card = financial_card;
+	public void setStatus(EExamStatus status) {
+		this.status = status;
 	}
-	
-	
-	
+
+	public int getFinalGrade() {
+		return finalGrade;
+	}
+
+	public void setFinalGrade(int finalGrade) {
+		this.finalGrade = finalGrade;
+	}
+
+	public ExamPeriod getExam_period() {
+		return exam_period;
+	}
+
+	public void setExam_period(ExamPeriod exam_period) {
+		this.exam_period = exam_period;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
 }

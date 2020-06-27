@@ -1,7 +1,8 @@
 package com.eObrazovanje.studentServices.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "exams")
@@ -33,11 +33,11 @@ public class Exam implements Serializable {
 	@Column(name = "lab_points", nullable = false)
 	private int labPoints;
 	
-	@Column(name = "course_date", nullable = false)
-	private Date date;
+	@Column(name = "exam_date", nullable = false)
+	private Timestamp exam_date;
 	
-	@Column(name = "status", nullable = false)
-	private EExamStatus status;
+	@Column(name = "class_room", nullable = false)
+	private String classRoom;
 	
 	@ManyToOne
     @JoinColumn(name = "course", referencedColumnName = "course_id", nullable=false)
@@ -47,15 +47,11 @@ public class Exam implements Serializable {
     @JoinColumn(name = "period", referencedColumnName = "exam_period_id", nullable=false)
 	private ExamPeriod period;
 	
-	@ManyToOne
-    @JoinColumn(name = "student", referencedColumnName = "student_id", nullable=true)
-	private Student student;
-	
-//	private Professor professor;
+	@OneToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY, mappedBy = "exam")
+	private java.util.List<ExamRegistration> examRegistrations = new ArrayList<ExamRegistration>();
 	
 	public Exam() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getExamPoints() {
@@ -74,36 +70,12 @@ public class Exam implements Serializable {
 		this.labPoints = labPoints;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public Course getCourse() {
 		return course;
 	}
 
 	public void setCourse(Course course) {
 		this.course = course;
-	}
-//
-//	public Professor getProfessor() {
-//		return professor;
-//	}
-//
-//	public void setProfessor(Professor professor) {
-//		this.professor = professor;
-//	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
 	}
 
 	public int getId() {
@@ -122,14 +94,6 @@ public class Exam implements Serializable {
 		return serialVersionUID;
 	}
 
-	public EExamStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(EExamStatus status) {
-		this.status = status;
-	}
-
 	public ExamPeriod getPeriod() {
 		return period;
 	}
@@ -138,5 +102,28 @@ public class Exam implements Serializable {
 		this.period = period;
 	}
 
-	
+	public Timestamp getExam_date() {
+		return exam_date;
+	}
+
+	public void setExam_date(Timestamp exam_date) {
+		this.exam_date = exam_date;
+	}
+
+	public String getClassRoom() {
+		return classRoom;
+	}
+
+	public void setClassRoom(String classRoom) {
+		this.classRoom = classRoom;
+	}
+
+	public java.util.List<ExamRegistration> getExamRegistrations() {
+		return examRegistrations;
+	}
+
+	public void setExamRegistrations(java.util.List<ExamRegistration> examRegistrations) {
+		this.examRegistrations = examRegistrations;
+	}
+
 }
