@@ -1,43 +1,43 @@
 <div class="content-container">
-  <h2>Izmena podataka</h2>
-  <div>
-    <div class="account-info">
-      <h3>Podaci o nalogu</h3>
+  <div class="info">
+    <h3 class="card-title">Informacije o profesoru</h3>
+    <div class="form">
       <div class="row">
-        <p>Korisnicko ime:</p>
-        <input type = "text" value = {{professor.username}}/>
+        <label>Korisnicko ime:</label>
+        <input type="text" value = {{professor.username}}/>
       </div>
       <div class="row">
-        <p>Lozinka:</p>
-        <input type="password" value = {{professor.password}}/>
+        <label>Lozinka:</label>
+        <input type="text" value = {{professor.password}}/>
       </div>
       <div class="row">
-        <p>Ime:</p>
+        <label>Ime:</label>
         <input type="text" value = {{professor.firstName}}/>
       </div>
       <div class="row">
-        <p>Prezime:</p>
+        <label>Prezime:</label>
         <input type="text" value = {{professor.lastName}}/>
       </div>
       <div class="row">
-        <p>Email:</p>
+        <label>Email:</label>
         <input type="text" value = {{professor.email}}/>
       </div>
       <div class="row">
-        <p>Broj telefona:</p>
+        <label>Broj telefona:</label>
         <input type="text" value = {{professor.phoneNumber}}/>
       </div>
       <div class="row">
-        <p>JMBG:</p>
+        <label>JMBG:</label>
         <input type="text" value = {{professor.JMBG}}/>
       </div>
       <div class="row">
-        <p>Biografija:</p>
-        <input type="text" value = "tra la la"/>
+        <label>Biografija:</label>
+        <input type="text" value = {{professor.biography}}/>
       </div>
-      <div class="btn-container">
-        <button class="filled-btn-dark">Izmeni</button>
+      <div class="button-container">
+        <button class="filled-btn-dark action-btn">Potvrdi</button>
       </div>
     </div>
   </div>
 </div>
+
