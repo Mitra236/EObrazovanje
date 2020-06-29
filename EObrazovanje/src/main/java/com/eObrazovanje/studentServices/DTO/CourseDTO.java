@@ -15,6 +15,7 @@ public class CourseDTO implements Serializable{
 	public int lectures;
 	public int practicalClasses;
 	public StudyProgrammeDTO studyProgramme;
+	public String professorName;
 	
 	public CourseDTO() {
 		super();
@@ -27,5 +28,8 @@ public class CourseDTO implements Serializable{
 		this.lectures = course.getLectures();
 		this.practicalClasses = course.getPracticalCLasses();
 		this.studyProgramme = new StudyProgrammeDTO(course.getStudyProgramme());
+		if(course.getProfessors().size() > 0) {
+			this.professorName = course.getProfessors().get(0).getFirstName() + course.getProfessors().get(0).getLastName();
+		}
 	}
 }

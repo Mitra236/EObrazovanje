@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServiceService } from 'src/app/services/student/student.service';
-import { ExamRegistration } from 'src/app/types/examRegistration';
+import { ExamRegistration } from 'src/app/types/exam-registration';
 
 @Component({
   selector: 'app-student-exam-history',

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ExamRegistration } from 'src/app/types/examRegistration';
+import { Exam } from 'src/app/types/exam';
+import { ExamRegistration } from 'src/app/types/exam-registration';
 import { Student } from 'src/app/types/student';
 import { baseUrl } from '../url';
 
@@ -31,5 +32,9 @@ export class StudentServiceService {
     return this.http.get<ExamRegistration[]>(
       this.studentsUrl + id + '/failed-exams'
     );
+  }
+
+  getCurrentExams(id: number): Observable<Exam[]> {
+    return this.http.get<Exam[]>(baseUrl + 'exams/' + id + '/current');
   }
 }
