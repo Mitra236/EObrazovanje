@@ -27,10 +27,7 @@ public class ExamRegistration implements Serializable{
 	@Column(name = "status", nullable = false)
 	private EExamStatus status;
 	
-	@Column(name = "registered",nullable = false)
-	private boolean registered;
-	
-	@Column(name = "final_grade",nullable = false)
+	@Column(name = "final_grade",nullable = true)
 	private int finalGrade;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
@@ -47,14 +44,6 @@ public class ExamRegistration implements Serializable{
 	
 	public ExamRegistration() {
 		super();
-	}
-	
-	public boolean isRegistered() {
-		return registered;
-	}
-	
-	public void setRegistered(boolean registered) {
-		this.registered = registered;
 	}
 	
 	public int getId() {

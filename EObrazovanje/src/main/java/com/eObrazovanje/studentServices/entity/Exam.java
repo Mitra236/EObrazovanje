@@ -27,10 +27,10 @@ public class Exam implements Serializable {
 	@Column(name = "exam_id", unique = true, nullable = false)
 	private int id;
 	
-	@Column(name = "exam_points", nullable = false)
+	@Column(name = "exam_points", nullable = true)
 	private int examPoints;
 	
-	@Column(name = "lab_points", nullable = false)
+	@Column(name = "lab_points", nullable = true)
 	private int labPoints;
 	
 	@Column(name = "exam_date", nullable = false)

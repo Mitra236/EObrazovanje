@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
 
@@ -15,8 +16,8 @@ public class ExamService implements ExamServiceInterface{
 	ExamRepository examRepo;
 
 	@Override
-	public Exam findOne(int id) {
-		return examRepo.findById(id).orElse(null);
+	public ExamDTO findOne(int id) {
+		return new ExamDTO(examRepo.findById(id).orElse(null));
 	}
 
 	@Override
