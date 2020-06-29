@@ -1,47 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-const mockDataPassed = [
-  {
-    course: {
-      name: 'Matematika',
-      courseCode: 'SIT12',
-      ECTS: '8',
-    },
-    examDate: '12.12.2020.',
-    professor: {
-      name: 'Marko Markovic',
-    },
-    finalGrade: '9',
-  },
-  {
-    course: {
-      name: 'URS',
-      courseCode: 'SIT12',
-      ECTS: '8',
-    },
-    examDate: '12.12.2020.',
-    professor: {
-      name: 'Marko Pantic',
-    },
-    finalGrade: '10',
-  },
-];
-
-const mockDataFailed = [
-  {
-    course: {
-      name: 'Uvod u racunarstvo',
-      courseCode: 'SIT12',
-      ECTS: '8',
-    },
-    examDate: '12.12.2020.',
-    professor: {
-      name: 'Petar Petrovic',
-    },
-    finalGrade: '/',
-  },
-];
+import { StudentServiceService } from 'src/app/services/student/student.service';
+import { ExamRegistration } from 'src/app/types/examRegistration';
 
 @Component({
   selector: 'app-student-exam-history',
@@ -52,7 +12,10 @@ export class StudentExamHistoryComponent implements OnInit {
   title;
   exams;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private studentService: StudentServiceService
+  ) {}
 
   ngOnInit(): void {
     const route = this.router.url.split('/');
@@ -65,15 +28,28 @@ export class StudentExamHistoryComponent implements OnInit {
     switch (route) {
       case 'passed':
         this.title = 'Polozeni ispiti';
-        this.exams = mockDataPassed;
+        this.studentService
+          .getPassedExams(1)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+            console.log(exams);
+          });
         return;
       case 'failed':
         this.title = 'Nepolozeni ispiti';
-        this.exams = mockDataFailed;
+        this.studentService
+          .getFailedExams(1)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+          });
         return;
       default:
         this.title = 'Istorija polaganja';
-        this.exams = [...mockDataFailed, ...mockDataPassed];
+        this.studentService
+          .getTakenExams(1)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+          });
     }
   }
 }
