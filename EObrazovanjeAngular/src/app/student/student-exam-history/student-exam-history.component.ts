@@ -32,7 +32,6 @@ export class StudentExamHistoryComponent implements OnInit {
           .getPassedExams(1)
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
-            console.log(exams);
           });
         return;
       case 'failed':

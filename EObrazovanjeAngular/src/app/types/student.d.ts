@@ -1,5 +1,6 @@
 export interface Student {
   id: number;
+  index: string;
   username: string;
   password?: string;
   firstName: string;
@@ -8,11 +9,11 @@ export interface Student {
   phone: string;
   JMBG: string;
   giroAccountNumber?: string;
-  yearOfEnrollemnt?: number;
+  yearOfEnrollment?: number;
   methodOfFinancing?: string;
   yearOfStudy?: number;
   timeEnrolled?: number;
   modelNumber?: string;
-  personalRefernceNUmber?: string;
+  personalReferenceNumber?: string;
   accountBalance?: number;
 }
