@@ -1,36 +1,29 @@
 package com.eObrazovanje.studentServices.DTO;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
-import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 
 public class ExamDTO {
 
 	public int id;
-	public Date date;
 	public int examPoints;
 	public int labPoints;
-	public EExamStatus status;
-	public String courseName;
-	public String courseProfessor;
-	public int studentId;
+	public CourseDTO course;
+	public Timestamp date;
+	public double paymentAmount;
 	
-//	public ExamDTO(Exam exam) {
-//		super();
-//		this.id=exam.getId();
-//		this.date = exam.getDate();
-//		this.examPoints = exam.getExamPoints();
-//		this.labPoints = exam.getLabPoints();
-//		this.status=exam.getStatus();
-//		this.courseName=exam.getCourse().getName();
-//		if(exam.getCourse().getProfessors().size()>0) {
-//			this.courseProfessor=exam.getCourse().getProfessors().get(0).getFirstName() + exam.getCourse().getProfessors().get(0).getLastName();
-//		}
-//		else {
-//			this.courseProfessor = "";
-//		}
-//		this.studentId=exam.getStudent().getId();
-//	}
-	
+	public ExamDTO(Exam exam) {
+		this.id=exam.getId();
+		this.examPoints = exam.getExamPoints();
+		this.labPoints = exam.getLabPoints();
+		this.course = new CourseDTO(exam.getCourse());
+		this.date = exam.getExam_date();
+		this.paymentAmount = exam.getExamPeriod().getPaymentAmount();
+	}
+
+	public ExamDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }

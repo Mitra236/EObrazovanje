@@ -1,12 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
 import { CourseInsertScreenComponent } from './professor/course-insert-screen/course-insert-screen.component';
 import { CoursesScreenComponent } from './professor/courses-screen/courses-screen.component';
-import { LoginComponent } from './login/login.component';
 import { ProfessorDataEditComponent } from './professor/professor-data-edit/professor-data-edit.component';
 import { ProfessorProfileDetailsComponent } from './professor/professor-profile-details/professor-profile-details.component';
 import { ProfessorScreenComponent } from './professor/professor-screen/professor-screen.component';
@@ -50,7 +51,12 @@ import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2
     AdminPeriodsListComponent,
     AdminPeriods2ListComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

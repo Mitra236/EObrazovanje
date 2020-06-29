@@ -13,6 +13,5 @@ export class AdminAddUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.student = this.router.url.toString().includes('student');
-    console.log(this.student);
   }
 }

@@ -2,6 +2,7 @@ package com.eObrazovanje.studentServices.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
+import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
 import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
 @RestController
@@ -28,6 +31,9 @@ public class CourseController {
 	
 	@Autowired
 	CourseServiceInterface courseServiceInterface;
+	
+	@Autowired
+	EnrollmentServiceInterface enrollmentServiceInterface;
 	
 	@Autowired
 	StudyProgrammeServiceInterface studyProgrammeServiceInterface;
@@ -47,6 +53,14 @@ public class CourseController {
 		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<CourseDTO>(new CourseDTO(course), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/studentCourse")
+	private ResponseEntity<List<EnrollmentDTO>> getStudentCourse(@RequestParam ("id") int id) {
+		Course course = courseServiceInterface.findOne(id);
+		if (course == null) return new ResponseEntity<List<EnrollmentDTO>>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
 	}
 	
 	@PutMapping(consumes = "application/json")
@@ -79,6 +93,15 @@ public class CourseController {
 		courseServiceInterface.save(newCourse);
 		
 		return new ResponseEntity<Integer>(newCourse.getId(), HttpStatus.CREATED);
+	}
+	
+	@PostMapping(value = "/courseStudent", consumes = "application/json")
+	private ResponseEntity<Integer> addCourseStudent(@RequestBody CourseDTO course) {
+		if (course == null) return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
+		
+		courseServiceInterface.saveCourseStudents(course);
+		
+		return new ResponseEntity<Integer>(course.id, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping(value = "/{id}")
