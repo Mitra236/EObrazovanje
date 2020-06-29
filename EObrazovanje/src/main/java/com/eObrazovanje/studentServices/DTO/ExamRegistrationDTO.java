@@ -17,6 +17,8 @@ public class ExamRegistrationDTO {
 	public String courseName;
 	public String courseProfessor;
 	public int studentId;
+	public int ECTS;
+	public int finalGrade;
 	
 	public ExamRegistrationDTO(ExamRegistration examReg) {
 		super();
@@ -33,6 +35,8 @@ public class ExamRegistrationDTO {
 			this.courseProfessor = "";
 		}
 		this.studentId=examReg.getStudent().getId();
+		this.ECTS = examReg.getExam().getCourse().getECTS();
+		this.finalGrade = examReg.getFinalGrade();
 	}
 
 }
