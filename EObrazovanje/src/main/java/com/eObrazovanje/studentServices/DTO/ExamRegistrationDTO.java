@@ -1,14 +1,15 @@
 package com.eObrazovanje.studentServices.DTO;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.eObrazovanje.studentServices.entity.EExamStatus;
-import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
 
-public class ExamRegistrationDTO {
+public class ExamRegistrationDTO implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	public int id;
 	public Timestamp date;
 	public int examPoints;

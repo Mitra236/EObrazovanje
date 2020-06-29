@@ -7,7 +7,6 @@ INSERT INTO auth_user (user_id, username, password) VALUES (2, "marko", "$2a$10$
 INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (2, 2);
 
-
 INSERT INTO admins(admin_username, admin_password) VALUES ("admin", "admin");
 INSERT INTO admins(admin_username, admin_password) VALUES ("marko", "markovic");
 

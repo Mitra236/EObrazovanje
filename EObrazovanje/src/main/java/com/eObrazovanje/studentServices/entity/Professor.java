@@ -189,4 +189,12 @@ public class Professor implements Serializable {
 		this.employeeFunctionFrom = employeeFunctionFrom;
 	}
 
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 }

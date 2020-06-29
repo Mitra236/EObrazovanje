@@ -8,7 +8,7 @@ import com.eObrazovanje.studentServices.entity.Course;
 public interface CourseServiceInterface {
 
 	Course findOne(int id);
-	List<Course> findAll();
+	List<CourseDTO> findAll();
 	int save(Course course);
 	boolean remove(int id);
 	void update(Course course);

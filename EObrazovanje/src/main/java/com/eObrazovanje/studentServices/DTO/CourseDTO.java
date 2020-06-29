@@ -18,6 +18,7 @@ public class CourseDTO implements Serializable{
 	public int practicalClasses;
 	public StudyProgrammeDTO studyProgramme;
 	public List<EnrollmentDTO> enrollmentDTOs;
+	public List<ProfessorDTO> professors;
 	public String professorName;
 	
 	public CourseDTO() {
@@ -32,8 +33,10 @@ public class CourseDTO implements Serializable{
 		this.practicalClasses = course.getPracticalCLasses();
 		this.studyProgramme = new StudyProgrammeDTO(course.getStudyProgramme());
 		this.enrollmentDTOs = new ArrayList<EnrollmentDTO>();
+		this.professors = new ArrayList<ProfessorDTO>();
 		if(course.getProfessors().size() > 0) {
 			this.professorName = course.getProfessors().get(0).getFirstName() + course.getProfessors().get(0).getLastName();
 		}
+		
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/courses")
+@CrossOrigin(value = "*")
 public class CourseController {
 	
 	@Autowired
@@ -41,8 +43,8 @@ public class CourseController {
 	@GetMapping
 	private ResponseEntity<List<CourseDTO>> getAll() {	
 		List<CourseDTO> courses = new ArrayList<>();
-		for(Course c: courseServiceInterface.findAll()) {
-			courses.add(new CourseDTO(c));
+		for(CourseDTO c: courseServiceInterface.findAll()) {
+			courses.add(c);
 		}
 		return new ResponseEntity<List<CourseDTO>>(courses, HttpStatus.OK);
 	}

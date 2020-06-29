@@ -1,5 +1,6 @@
 package com.eObrazovanje.studentServices.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,12 @@ public class CourseService implements CourseServiceInterface{
 	}
 
 	@Override
-	public List<Course> findAll() {
-		return courseRepo.findAll();
+	public List<CourseDTO> findAll() {
+		List<CourseDTO> courseDTOs = new ArrayList<CourseDTO>();
+		for (Course c: courseRepo.findAll()) {
+			courseDTOs.add(new CourseDTO(c));
+		}
+		return courseDTOs;
 	}
 
 	@Override
