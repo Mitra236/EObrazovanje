@@ -51,9 +51,6 @@ public class Student implements Serializable{
 	@Column(name = "student_JMBG", unique = true, nullable = false, length = 13)
 	private String JMBG;
 
-//	@Column(name = "student_programme", unique = false, nullable = false)
-//	private StudyProgramme studyProgramme;
-
 	@Column(name = "student_enrollment_year", unique = false, nullable = false)
 	private int yearOfEnrollment;
 

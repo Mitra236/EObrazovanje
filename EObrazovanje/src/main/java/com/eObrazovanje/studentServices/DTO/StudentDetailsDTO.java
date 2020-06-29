@@ -22,6 +22,7 @@ public class StudentDetailsDTO {
 	public String modelNumber;
 	public String personalReferenceNumber;
 	public double accountBalance;
+	public int studyProgrammeId;
 	
 	public StudentDetailsDTO(Student student) {
 		super();
@@ -42,5 +43,6 @@ public class StudentDetailsDTO {
 		this.modelNumber = student.getModelNumber();
 		this.personalReferenceNumber = student.getPersonalReferenceNumber();
 		this.accountBalance = student.getAccountBalance();
+		this.studyProgrammeId = student.getStudyProgramme().getId();
 	}
 }
