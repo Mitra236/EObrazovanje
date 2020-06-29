@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.service.StudentServiceInterface;
@@ -29,7 +30,7 @@ public class StudentController {
 	}
 	
 	@GetMapping(value="/{studentId}")
-	private StudentDTO getStudentInfo(@PathVariable("studentId") int id) {
+	private StudentDetailsDTO getStudentInfo(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findOne(id);
 	}
 	

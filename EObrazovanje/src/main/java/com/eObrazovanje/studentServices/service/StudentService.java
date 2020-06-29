@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
@@ -22,11 +23,11 @@ public class StudentService implements StudentServiceInterface {
 	StudentRepository studentRepository;
 
 	@Override
-	public StudentDTO findOne(int id) {
+	public StudentDetailsDTO findOne(int id) {
 		// TODO Auto-generated method stub
 		Student student = studentRepository.findById(id).orElse(null);
 		
-		return new StudentDTO(student);
+		return new StudentDetailsDTO(student);
 	}
 
 	@Override
