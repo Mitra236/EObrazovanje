@@ -1,36 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StudentServiceService } from 'src/app/services/student/student.service';
+import { Exam } from 'src/app/types/exam';
 
-const mockDataRegistration = [
-  {
-    id: 1,
-    course: {
-      name: 'Objektno',
-      courseCode: '12SIT',
-    },
-    examDate: '12.12.2020.',
-    examRegistration: {
-      paymentAmount: 200,
-    },
-    professor: {
-      name: 'Sinisa Nikolic',
-    },
-  },
-  {
-    id: 2,
-    course: {
-      name: 'Matematika 2',
-      courseCode: '13SIT',
-    },
-    examDate: '12.10.2020.',
-    examRegistration: {
-      paymentAmount: 200,
-    },
-    professor: {
-      name: 'Marko Nikolic',
-    },
-  },
-];
 const mockDataUnregistration = [
   {
     id: 3,
@@ -61,12 +33,24 @@ export class StudentExamsActiveComponent implements OnInit {
   selectedExamsCost = 0;
   newUserAccountBalance = 1000;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private studentService: StudentServiceService
+  ) {}
 
   ngOnInit(): void {
     const registration = !this.router.url.toString().includes('unregister');
     this.registration = registration;
-    this.exams = registration ? mockDataRegistration : mockDataUnregistration;
+    this.getExams(registration);
+  }
+
+  getExams(registration: boolean) {
+    registration
+      ? this.studentService.getCurrentExams(1).subscribe((exams: Exam[]) => {
+          this.exams = exams;
+          console.log(exams);
+        })
+      : mockDataUnregistration;
   }
 
   selectExam(exam: any) {
@@ -74,13 +58,13 @@ export class StudentExamsActiveComponent implements OnInit {
 
     if (alreadySelected === undefined) {
       this.selectedExams.push(exam);
-      this.selectedExamsCost += exam.examRegistration.paymentAmount;
+      this.selectedExamsCost += exam.paymentAmount;
     } else {
       const filteredSelectedExams = this.selectedExams.filter(
         (e) => e.id !== alreadySelected.id
       );
       this.selectedExams = filteredSelectedExams;
-      this.selectedExamsCost -= exam.examRegistration.paymentAmount;
+      this.selectedExamsCost -= exam.paymentAmount;
     }
 
     this.calculateAccountBalance();
