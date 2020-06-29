@@ -6,6 +6,7 @@ import com.eObrazovanje.studentServices.entity.Student;
 public class StudentDetailsDTO {
 
 	public int id;
+	public String index;
 	public String username;
 	public String password;
 	public String firstName;
@@ -25,6 +26,7 @@ public class StudentDetailsDTO {
 	public StudentDetailsDTO(Student student) {
 		super();
 		this.id = student.getId();
+		this.index= student.getIndex();
 		this.username = student.getUsername();
 		this.password = student.getPassword();
 		this.firstName = student.getFirstName();
