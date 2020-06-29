@@ -18,6 +18,8 @@ import { StudentProfileDetailsComponent } from './student/student-profile-detail
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
 import { AdminCoursesListComponent } from './admin-courses-list/admin-courses-list.component';
 import { AdminExamsListComponent } from './admin-exams-list/admin-exams-list.component';
+import { AdminPeriodsListComponent } from './admin-periods-list/admin-periods-list.component';
+import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -58,6 +60,8 @@ const routes: Routes = [
       { path: 'users/add/professor', component: AdminAddUserComponent },
       { path: 'courses', component: AdminCoursesListComponent },
       { path: 'exams', component: AdminExamsListComponent },
+      { path: 'periods', component: AdminPeriodsListComponent },
+      { path: 'examPeriod', component: AdminPeriods2ListComponent }
     ],
   },
 ];

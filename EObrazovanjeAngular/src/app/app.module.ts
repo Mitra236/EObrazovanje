@@ -22,6 +22,8 @@ import { AdminProfessorsListComponent } from './admin-professors-list/admin-prof
 import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
 import { AdminCoursesListComponent } from './admin-courses-list/admin-courses-list.component';
 import { AdminExamsListComponent } from './admin-exams-list/admin-exams-list.component';
+import { AdminPeriodsListComponent } from './admin-periods-list/admin-periods-list.component';
+import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { AdminExamsListComponent } from './admin-exams-list/admin-exams-list.com
     AdminProfessorsListComponent,
     AdminAddUserComponent,
     AdminCoursesListComponent,
-    AdminExamsListComponent
+    AdminExamsListComponent,
+    AdminPeriodsListComponent,
+    AdminPeriods2ListComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

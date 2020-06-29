@@ -1,0 +1,31 @@
+<div class="content-container">
+    <h2>Lista ispita po roku</h2>
+    <button class="filled-btn-dark">Dodaj</button> 
+    <div class="examPeriods-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Naziv</th>
+            <th>Broj bodova</th>
+            <th>Predispitne obaveze</th>
+            <th>Datum</th>
+            <th>Ucionica</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let period of examPeriod">
+            <td>{{ period.name }}</td>
+            <td>{{ period.exam_points }}</td>
+            <td>{{ period.lab_points }}</td>
+            <td>{{ period.exam_date }}</td>
+            <td>{{ period.class_room }}</td>
+            <td>
+              <button class="filled-btn-dark">Ukloni</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>    
+    </div>
+  </div>
+  
