@@ -1,20 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-const mockData = {
-  username: 'Tina',
-  password: '****',
-  index: 'SF25/2017',
-  firstName: 'Valentina',
-  lastName: 'Mackovic',
-  email: 'mail@gmail.com',
-  phoneNumber: '086172829',
-  JMBG: '07119972828',
-  yearOfEnrollment: '2017',
-  methodOfFinancing: 'budget',
-  yearOfStudy: '2',
-  timeEnrolled: '1',
-};
+import { StudentServiceService } from 'src/app/services/student/student-service.service';
+import { Student } from 'src/app/types/student';
 
 @Component({
   selector: 'app-student-profile-details',
@@ -22,11 +9,20 @@ const mockData = {
   styleUrls: ['./student-profile-details.component.css'],
 })
 export class StudentProfileDetailsComponent implements OnInit {
-  student;
+  student: Student;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private studentService: StudentServiceService
+  ) {}
 
   ngOnInit(): void {
-    this.student = mockData;
+    this.getStudentDetails();
+  }
+
+  getStudentDetails(): void {
+    this.studentService.getStudenById(1).subscribe((student: Student) => {
+      this.student = student;
+    });
   }
 }
