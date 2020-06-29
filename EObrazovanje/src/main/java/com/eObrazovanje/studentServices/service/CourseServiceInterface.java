@@ -11,5 +11,4 @@ public interface CourseServiceInterface {
 	int save(Course course);
 	boolean remove(int id);
 	void update(Course course);
-
 }

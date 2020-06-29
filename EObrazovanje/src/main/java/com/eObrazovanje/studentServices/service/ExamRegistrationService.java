@@ -1,5 +1,6 @@
 package com.eObrazovanje.studentServices.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -7,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
+import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
-import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
 public class ExamRegistrationService implements ExamRegistrationSServiceInterface{
@@ -21,23 +22,26 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 	ExamRegistrationRepository examRegRepo;
 	
 	@Autowired
-	StudentRepository registeredStudentRepo;
-	
-	@Autowired
 	ExamRepository examRepo;
 
 	@Override
-	public ExamRegistration findOne(int id) {
-		return examRegRepo.findById(id).orElse(null);
+	public ExamRegistrationDTO findOne(int id) {
+		return new ExamRegistrationDTO(examRegRepo.findById(id).orElse(null));
 	}
 
 	@Override
-	public List<ExamRegistration> findAll() {
-		return examRegRepo.findAll();
+	public List<ExamRegistrationDTO> findAll() {
+		List<ExamRegistrationDTO> examRegDTOs = new ArrayList<ExamRegistrationDTO>();
+		for (ExamRegistration e: examRegRepo.findAll()) {
+			examRegDTOs.add(new ExamRegistrationDTO(e));
+		}
+		return examRegDTOs;
 	}
 
 	@Override
-	public int save(ExamRegistration examRegistration) {
+	public int save(ExamRegistrationDTO examRegistrationDTO) {
+		
+		ExamRegistration examRegistration = new ExamRegistration();
 		return examRegRepo.save(examRegistration).getId();
 	}
 

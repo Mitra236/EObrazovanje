@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
-import com.eObrazovanje.studentServices.entity.ExamRegistration;
+import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.service.ExamRegistrationSServiceInterface;
 import com.eObrazovanje.studentServices.service.ExamServiceInterface;
 
@@ -27,14 +27,14 @@ public class ExamRegistrationController {
 	ExamServiceInterface examService;
 	
 	@GetMapping
-	private List<ExamRegistration> getExamRegistrations() {
+	private List<ExamRegistrationDTO> getExamRegistrations() {
 		return examRegistrationSServiceInterface.findAll();
 	}
 	
 	@PutMapping(consumes = "application/json")
 	private ResponseEntity<ExamPointsDTO> addExamPoints(@RequestBody
 			ExamPointsDTO examPointsDTO) {
-		ExamRegistration exam = examRegistrationSServiceInterface.findOne(examPointsDTO.id);
+		ExamRegistrationDTO exam = examRegistrationSServiceInterface.findOne(examPointsDTO.id);
 		if (exam == null) {
 			return new ResponseEntity<ExamPointsDTO>(HttpStatus.NOT_FOUND);
 		}
