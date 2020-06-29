@@ -38,7 +38,7 @@ public class ExamRegistration implements Serializable{
 	private ExamPeriod exam_period;
 	
 	@ManyToOne
-	@JoinColumn(name = "student", referencedColumnName = "student_id", nullable=true)
+	@JoinColumn(name = "student", referencedColumnName = "student_id", nullable=false)
 	private Student student;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
+import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
+import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 
@@ -46,69 +48,69 @@ public class StudentService implements StudentServiceInterface {
 		return studentRepository.save(student).getId();
 	}
 
-//	@Override
-//	public List<ExamDTO> findPassedExams(int id) {
-//		// TODO Auto-generated method stub
-//		Student student = studentRepository.findById(id).orElse(null);
-//		List<ExamDTO> passedExams = new ArrayList<ExamDTO>();
-//		
-//		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
-//			passedExams = filterExams(EExamStatus.Passed,student.getExamsTaken() );
-//		}
-//		
-//		return passedExams;
-//	}
-//
-//	@Override
-//	public List<ExamDTO> findFailedExams(int id) {
-//		// TODO Auto-generated method stub
-//		Student student = studentRepository.findById(id).orElse(null);
-//		List<ExamDTO> failedExams = new ArrayList<ExamDTO>();
-//		
-//		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
-//			failedExams = filterExams(EExamStatus.Failed,student.getExamsTaken() );
-//		}
-//		
-//		return failedExams;
-//	}
-//	
-//	public List<ExamDTO> filterExams(EExamStatus status, List<Exam> exams){
-//		List<Exam> filteredExams = new ArrayList<Exam>();
-//		
-//		for(Exam e : exams) {
-//			if(e.getStatus().equals(status)) {
-//				filteredExams.add(e);
-//			}
-//		}
-//
-//		List<ExamDTO> examsDTO = new ArrayList<>();
-//		if(exams.size()>0) {
-//			for(Exam e : filteredExams) {
-//				examsDTO.add(new ExamDTO(e));
-//			}
-//		}
-//		
-//		return examsDTO;
-//	}
-//
-//	@Override
-//	public List<ExamDTO> findTakenExams(int id) {
-//		// TODO Auto-generated method stub
-//		Student student = studentRepository.findById(id).orElse(null);
-//		
-//		List<Exam> exams = new ArrayList<>();
-//		if(student != null) {
-//			exams = student.getExamsTaken();
-//		}
-//		
-//		List<ExamDTO> examsDTO = new ArrayList<>();
-//		if(exams.size() > 0) {
-//			for(Exam e : exams) {
-//				examsDTO.add(new ExamDTO(e));
-//			}
-//		}
-//
-//		return examsDTO;
-//	}
+	@Override
+	public List<ExamRegistrationDTO> findPassedExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<ExamRegistrationDTO> passedExams = new ArrayList<ExamRegistrationDTO>();
+		
+		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
+			passedExams = filterExams(EExamStatus.Passed,student.getExamsTaken() );
+		}
+		
+		return passedExams;
+	}
+
+	@Override
+	public List<ExamRegistrationDTO> findFailedExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<ExamRegistrationDTO> failedExams = new ArrayList<ExamRegistrationDTO>();
+		
+		if(student != null && student.getExamsTaken() != null && student.getExamsTaken().size() > 0 ) {
+			failedExams = filterExams(EExamStatus.Failed,student.getExamsTaken() );
+		}
+		
+		return failedExams;
+	}
+	
+	public List<ExamRegistrationDTO> filterExams(EExamStatus status, List<ExamRegistration> exams){
+		List<ExamRegistration> filteredExams = new ArrayList<ExamRegistration>();
+		
+		for(ExamRegistration e : exams) {
+			if(e.getStatus().equals(status)) {
+				filteredExams.add(e);
+			}
+		}
+
+		List<ExamRegistrationDTO> examsDTO = new ArrayList<ExamRegistrationDTO>();
+		if(exams.size()>0) {
+			for(ExamRegistration e : filteredExams) {
+				examsDTO.add(new ExamRegistrationDTO(e));
+			}
+		}
+		
+		return examsDTO;
+	}
+
+	@Override
+	public List<ExamRegistrationDTO> findTakenExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		
+		List<ExamRegistration> exams = new ArrayList<ExamRegistration>();
+		if(student != null) {
+			exams = student.getExamsTaken();
+		}
+		
+		List<ExamRegistrationDTO> examsDTO = new ArrayList<ExamRegistrationDTO>();
+		if(exams.size() > 0) {
+			for(ExamRegistration e : exams) {
+				examsDTO.add(new ExamRegistrationDTO(e));
+			}
+		}
+
+		return examsDTO;
+	}
 
 }
