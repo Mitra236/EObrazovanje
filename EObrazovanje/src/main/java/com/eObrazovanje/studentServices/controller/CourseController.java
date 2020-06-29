@@ -94,6 +94,15 @@ public class CourseController {
 		
 		return new ResponseEntity<Integer>(newCourse.getId(), HttpStatus.CREATED);
 	}
+	
+	@PostMapping(value = "/courseStudent", consumes = "application/json")
+	private ResponseEntity<Integer> addCourseStudent(@RequestBody CourseDTO course) {
+		if (course == null) return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
+		
+		courseServiceInterface.saveCourseStudents(course);
+		
+		return new ResponseEntity<Integer>(course.id, HttpStatus.CREATED);
+	}
 
 	@DeleteMapping(value = "/{id}")
 	private ResponseEntity<Boolean> deleteCourse(@PathVariable("id") int id) {

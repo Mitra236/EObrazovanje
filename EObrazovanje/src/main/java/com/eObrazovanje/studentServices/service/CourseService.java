@@ -5,14 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
+import com.eObrazovanje.studentServices.entity.Enrollment;
+import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
+import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
+import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
 public class CourseService implements CourseServiceInterface{
 	
 	@Autowired
 	CourseRepository courseRepo;
+	
+	@Autowired
+	StudentRepository studentRepo;
+	
+	@Autowired
+	EnrollmentRepository enrollmentRepo;
 
 	@Override
 	public Course findOne(int id) {
@@ -48,6 +60,25 @@ public class CourseService implements CourseServiceInterface{
 		updatedCourse.setPracticalCLasses(course.getPracticalCLasses());
 		updatedCourse.setStudyProgramme(course.getStudyProgramme());
 		courseRepo.save(updatedCourse);
+	}
+
+	@Override
+	public int saveCourseStudents(CourseDTO courseDTO) {
+		Course course = courseRepo.findById(courseDTO.id).orElse(null);
+		List<EnrollmentDTO> enrollmentsDTO = courseDTO.enrollmentDTOs;
+		Enrollment enrollment = new Enrollment();
+		
+		for (EnrollmentDTO e: enrollmentsDTO) {
+			Student student = studentRepo.findById(e.student.id).orElse(null);
+			enrollment.setCourse(course);
+			enrollment.setStartDate(e.startDate);
+			enrollment.setEndDate(e.endDate);
+			enrollment.setStudent(student);
+			enrollmentRepo.save(enrollment);
+			course.getEnrollment().add(enrollment);
+		}
+
+		return enrollment.getId();
 	}
 
 }

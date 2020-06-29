@@ -10,6 +10,7 @@ public class EnrollmentDTO {
 	public Date startDate;
 	public Date endDate;
 	public StudentDTO student;
+
 	
 	public EnrollmentDTO() {
 		super();
