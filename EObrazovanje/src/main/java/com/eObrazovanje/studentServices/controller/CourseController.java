@@ -65,6 +65,15 @@ public class CourseController {
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/professorCourses")
+	private ResponseEntity<List<CourseDTO>> getProfessorCourses(@RequestParam("id") int id) {
+		List<CourseDTO> coursesDTO = courseServiceInterface.findProfessorCourses(id);
+		if (coursesDTO.size() <= 0) {
+			return new ResponseEntity<List<CourseDTO>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<CourseDTO>>(coursesDTO, HttpStatus.OK);
+	}
+	
 	@PutMapping(consumes = "application/json")
 	private ResponseEntity<Void> editCourse(@RequestBody CourseDTO editedCourse) {
 		Course course = courseServiceInterface.findOne(editedCourse.id);

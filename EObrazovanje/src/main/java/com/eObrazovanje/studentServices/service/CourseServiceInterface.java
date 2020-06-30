@@ -13,4 +13,5 @@ public interface CourseServiceInterface {
 	boolean remove(int id);
 	void update(Course course);
 	int saveCourseStudents(CourseDTO course);
+	List<CourseDTO> findProfessorCourses(int id);
 }
