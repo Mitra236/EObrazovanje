@@ -1,0 +1,27 @@
+<div class="content-container">
+    <h2>Knjizenje ispita</h2>
+    <div class="examBooking-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Status</th>
+            <th>Ocena</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let examBooking of examBooking">
+            <td>{{ examBooking.firstName }}</td>
+            <td>{{ examBooking.lastName }}</td>
+            <td>{{ examBooking.status }}</td>
+            <td>{{ examBooking.finalGrade }}</td>
+            <td>
+              <button class="filled-btn-dark">Proknjizi</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

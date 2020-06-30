@@ -1,0 +1,129 @@
+<div class="content-container">
+    <h2>Lista ispitnih rokova</h2>
+    <div class="periodsBooking-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Januarski</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let period of bookings">
+            <td>{{ period.name }}</td>
+            <td>
+              <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Februarski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Aprilski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Junski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Julski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Septembarski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="periodsBooking-info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Oktobarski</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let period of bookings">
+              <td>{{ period.name }}</td>
+              <td>
+                <button class="filled-btn-dark" [routerLink]="['../courseBooking']">Dalje</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>

@@ -75,7 +75,7 @@ public class CourseController {
 		course.setLectures(editedCourse.lectures);
 		course.setECTS(editedCourse.ECTS);
 		course.setPracticalCLasses(editedCourse.practicalClasses);
-		course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
+		//course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
 		courseServiceInterface.update(course);
 		
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -91,7 +91,7 @@ public class CourseController {
 		newCourse.setCourseCode(course.courseCode);
 		newCourse.setLectures(course.lectures);
 		newCourse.setPracticalCLasses(course.practicalClasses);
-		newCourse.setStudyProgramme(studyProgrammeServiceInterface.findOne(course.studyProgramme.id));	
+		//newCourse.setStudyProgramme(studyProgrammeServiceInterface.findOne(course.studyProgramme.id));	
 		courseServiceInterface.save(newCourse);
 		
 		return new ResponseEntity<Integer>(newCourse.getId(), HttpStatus.CREATED);

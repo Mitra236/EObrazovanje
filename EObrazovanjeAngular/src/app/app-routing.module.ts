@@ -20,6 +20,9 @@ import { AdminCoursesListComponent } from './admin-courses-list/admin-courses-li
 import { AdminExamsListComponent } from './admin-exams-list/admin-exams-list.component';
 import { AdminPeriodsListComponent } from './admin-periods-list/admin-periods-list.component';
 import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2-list.component';
+import { AdminBookingListComponent } from './admin-booking-list/admin-booking-list.component';
+import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2-list.component';
+import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,7 +64,10 @@ const routes: Routes = [
       { path: 'courses', component: AdminCoursesListComponent },
       { path: 'exams', component: AdminExamsListComponent },
       { path: 'periods', component: AdminPeriodsListComponent },
-      { path: 'examPeriod', component: AdminPeriods2ListComponent }
+      { path: 'examPeriod', component: AdminPeriods2ListComponent },
+      { path: 'bookings', component: AdminBookingListComponent },
+      { path: 'courseBooking', component: AdminBooking2ListComponent },
+      { path: 'examBooking', component: AdminBooking3ListComponent }
     ],
   },
 ];
