@@ -47,6 +47,10 @@ INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) 
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 6, 1, 1, 2);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 8, 2, 2, 3);
 
+INSERT INTO professors_courses(course_id, professor_id) VALUES (1, 1)
+INSERT INTO professors_courses(course_id, professor_id) VALUES (2, 1)
+INSERT INTO professors_courses(course_id, professor_id) VALUES (3, 2)
+
 INSERT INTO student_docs(student_docs_name, student_docs_mime_type, student_docs_path, student_docs_date, student_docs) VALUES ("dokument 1", "tip dokumenta 1", "putanja dokumenta 1", "2017-07-04", 1);
 INSERT INTO student_docs(student_docs_name, student_docs_mime_type, student_docs_path, student_docs_date, student_docs) VALUES ("dokument 2", "tip dokumenta 2", "putanja dokumenta 2", "2017-07-05", 1);
 INSERT INTO student_docs(student_docs_name, student_docs_mime_type, student_docs_path, student_docs_date, student_docs) VALUES ("dokument 3", "tip dokumenta 3", "putanja dokumenta 3", "2017-07-06", 2);

@@ -1,7 +1,7 @@
 package com.eObrazovanje.studentServices.service;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
+import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Exam;
+import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
+import com.eObrazovanje.studentServices.repository.ProfessorRepository;
 
 @Service
 public class ExamService implements ExamServiceInterface{
 	
 	@Autowired
 	ExamRepository examRepo;
+	
+	@Autowired
+	ProfessorRepository professorRepo;
+	
+	@Autowired
+	CourseRepository courseRepo;
 
 	@Override
 	public ExamDTO findOne(int id) {
@@ -64,5 +73,18 @@ public class ExamService implements ExamServiceInterface{
 		}
 		
 		return currentExams;
+	}
+
+	@Override
+	public List<ExamDTO> getExamsByExamPeriod(int id, String period) {
+		List<ExamDTO> examDTOs = new ArrayList<>();
+		for (Course c: courseRepo.findProfessorCourses(id)) {
+			for (Exam e: c.getExams()) {
+				if(e.getExamPeriod().getExamName().toString().equalsIgnoreCase(period)) {
+					examDTOs.add(new ExamDTO(e));
+				}
+			}	
+		}
+		return examDTOs;
 	}
 }

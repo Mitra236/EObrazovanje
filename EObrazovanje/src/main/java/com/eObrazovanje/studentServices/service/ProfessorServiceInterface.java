@@ -1,15 +1,13 @@
 package com.eObrazovanje.studentServices.service;
 
 import java.util.List;
-
-import com.eObrazovanje.studentServices.DTO.CourseDTO;
-import com.eObrazovanje.studentServices.entity.Admin;
-import com.eObrazovanje.studentServices.entity.Professor;
+import com.eObrazovanje.studentServices.DTO.ProfessorDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorDataEditDTO;
 
 public interface ProfessorServiceInterface {
 
-	Professor findOne(int id);
-	List<Professor> findAll();
-	int save(Professor valuta);
-	List<CourseDTO> findProfessorCourses(int id);
+	ProfessorDTO findOne(int id);
+	List<ProfessorDTO> findAll();
+	int save(ProfessorDTO professorDTO);
+	void update(ProfessorDataEditDTO professorDataEditDTO);
 }

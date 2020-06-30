@@ -53,4 +53,5 @@ public class ProfessorDTO implements Serializable{
 		this.phoneNumber = professor.getPhoneNumber();
 		this.courseDTOs = new ArrayList<CourseDTO>();
 	}
+	
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorCourseDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
 import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
@@ -63,6 +64,24 @@ public class CourseController {
 		if (course == null) return new ResponseEntity<List<EnrollmentDTO>>(HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/professorCourses")
+	private ResponseEntity<List<CourseDTO>> getProfessorCourses(@RequestParam("id") int id) {
+		List<CourseDTO> coursesDTO = courseServiceInterface.findProfessorCourses(id);
+		if (coursesDTO.size() <= 0) {
+			return new ResponseEntity<List<CourseDTO>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<CourseDTO>>(coursesDTO, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/courseStudent")
+	private ResponseEntity<ProfessorCourseDetailsDTO> findCourseStudents(@RequestParam("id") int id) {
+		ProfessorCourseDetailsDTO courseDTO = courseServiceInterface.findCourseStudents(id);
+		if(courseDTO == null) {
+			return new ResponseEntity<ProfessorCourseDetailsDTO>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ProfessorCourseDetailsDTO>(courseDTO, HttpStatus.OK);
 	}
 	
 	@PutMapping(consumes = "application/json")
