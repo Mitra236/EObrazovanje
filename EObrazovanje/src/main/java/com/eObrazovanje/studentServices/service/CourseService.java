@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorCourseDetailsDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Enrollment;
 import com.eObrazovanje.studentServices.entity.Student;
@@ -94,6 +96,30 @@ public class CourseService implements CourseServiceInterface{
 			coursesDTO.add(new CourseDTO(c));
 		}
 		return coursesDTO;
+	}
+
+	@Override
+	public ProfessorCourseDetailsDTO findCourseStudents(int id) {
+		ProfessorCourseDetailsDTO courseDTO = new ProfessorCourseDetailsDTO();
+		Course course = courseRepo.findById(id).orElse(null);
+		System.out.println(course);
+		List<Enrollment> enrollments = course.getEnrollment();
+		List<EnrollmentDTO> enrollmentsDTO = new ArrayList<EnrollmentDTO>();
+		for(Enrollment e: enrollments) {
+			EnrollmentDTO enrollmentDTO = new EnrollmentDTO();
+			enrollmentDTO.id = e.getId();
+			enrollmentDTO.startDate = e.getStartDate();
+			enrollmentDTO.endDate = e.getEndDate();
+			enrollmentDTO.student = new StudentDTO(e.getStudent());
+			enrollmentsDTO.add(enrollmentDTO);
+		}
+		
+		courseDTO = new ProfessorCourseDetailsDTO(course);
+		for (EnrollmentDTO e: enrollmentsDTO) {
+			courseDTO.enrollmentDTOs.add(e);
+		}
+		
+		return courseDTO ;
 	}
 
 }

@@ -1,14 +1,14 @@
 package com.eObrazovanje.studentServices.service;
 
 import java.util.List;
-
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
-import com.eObrazovanje.studentServices.entity.Enrollment;
 
 public interface EnrollmentServiceInterface {
 	
-	Enrollment findOne(int id);
-	List<Enrollment> findAll();
-	int save(Enrollment enrollment);
+	EnrollmentDTO findOne(int id);
+	List<EnrollmentDTO> findAll();
+	int save(EnrollmentDTO enrollment);
 	List<EnrollmentDTO> getEnrolledStudents(int id);
+	void update(EnrollmentDTO enrollmentDTO);
+	boolean remove(int id);
 }

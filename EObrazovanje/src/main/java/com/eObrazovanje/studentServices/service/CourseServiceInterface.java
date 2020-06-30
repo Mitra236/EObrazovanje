@@ -3,6 +3,7 @@ package com.eObrazovanje.studentServices.service;
 import java.util.List;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorCourseDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 
 public interface CourseServiceInterface {
@@ -14,4 +15,5 @@ public interface CourseServiceInterface {
 	void update(Course course);
 	int saveCourseStudents(CourseDTO course);
 	List<CourseDTO> findProfessorCourses(int id);
+	ProfessorCourseDetailsDTO findCourseStudents(int id);
 }

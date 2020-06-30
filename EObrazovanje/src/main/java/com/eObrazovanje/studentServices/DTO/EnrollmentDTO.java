@@ -10,7 +10,7 @@ public class EnrollmentDTO {
 	public Date startDate;
 	public Date endDate;
 	public StudentDTO student;
-
+	public CourseDTO course;
 	
 	public EnrollmentDTO() {
 		super();
@@ -21,6 +21,7 @@ public class EnrollmentDTO {
 		this.startDate = enrollment.getStartDate();
 		this.endDate = enrollment.getEndDate();
 		this.student = new StudentDTO(enrollment.getStudent());
+		this.course = new CourseDTO(enrollment.getCourse());
 	}
 
 }

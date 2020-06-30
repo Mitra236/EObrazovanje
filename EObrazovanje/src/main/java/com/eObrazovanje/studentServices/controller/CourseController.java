@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorCourseDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
 import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
@@ -72,6 +73,15 @@ public class CourseController {
 			return new ResponseEntity<List<CourseDTO>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<CourseDTO>>(coursesDTO, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/courseStudent")
+	private ResponseEntity<ProfessorCourseDetailsDTO> findCourseStudents(@RequestParam("id") int id) {
+		ProfessorCourseDetailsDTO courseDTO = courseServiceInterface.findCourseStudents(id);
+		if(courseDTO == null) {
+			return new ResponseEntity<ProfessorCourseDetailsDTO>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ProfessorCourseDetailsDTO>(courseDTO, HttpStatus.OK);
 	}
 	
 	@PutMapping(consumes = "application/json")

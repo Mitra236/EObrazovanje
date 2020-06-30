@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorDTO;
+import com.eObrazovanje.studentServices.DTO.ProfessorDataEditDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Professor;
 import com.eObrazovanje.studentServices.repository.ProfessorRepository;
@@ -56,6 +57,19 @@ public class ProfessorService implements ProfessorServiceInterface {
 		professor.setPosition(professorDTO.position);
 		professor.setPositionFrom(professorDTO.positionFrom);
 		return professorRepository.save(professor).getId();
+	}
+
+	@Override
+	public void update(ProfessorDataEditDTO professorDataEditDTO) {
+		Professor professor = professorRepository.findById(professorDataEditDTO.id).orElse(null);
+		professor.setFirstName(professorDataEditDTO.firstName);
+		professor.setLastName(professorDataEditDTO.lastName);
+		professor.setEmail(professorDataEditDTO.email);
+		professor.setUsername(professorDataEditDTO.username);
+		professor.setPhoneNumber(professorDataEditDTO.phoneNumber);
+		professor.setJMBG(professorDataEditDTO.JMBG);
+		professor.setBiography(professorDataEditDTO.biography);
+		professorRepository.save(professor);
 	}
 
 }

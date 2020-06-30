@@ -12,6 +12,7 @@ import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Enrollment;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
+import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
 public class EnrollmentService implements EnrollmentServiceInterface {
@@ -21,22 +22,31 @@ public class EnrollmentService implements EnrollmentServiceInterface {
 	
 	@Autowired
 	CourseRepository courseRepo;
+	
+	@Autowired
+	StudentRepository studentRepo;
 
 	@Override
-	public Enrollment findOne(int id) {
-		// TODO Auto-generated method stub
-		return enrollmentRepository.findById(id).orElse(null);
+	public EnrollmentDTO findOne(int id) {
+		return new EnrollmentDTO(enrollmentRepository.findById(id).orElse(null));
 	}
 
 	@Override
-	public List<Enrollment> findAll() {
-		// TODO Auto-generated method stub
-		return enrollmentRepository.findAll();
+	public List<EnrollmentDTO> findAll() {
+		List<EnrollmentDTO> enrollmentDTOs = new ArrayList<>();
+		for (Enrollment e: enrollmentRepository.findAll()) {
+			enrollmentDTOs.add(new EnrollmentDTO(e));
+		}
+		return enrollmentDTOs;
 	}
 
 	@Override
-	public int save(Enrollment enrollment) {
-		// TODO Auto-generated method stub
+	public int save(EnrollmentDTO enrollmentDTO) {
+		Enrollment enrollment = new Enrollment();
+		enrollment.setCourse(courseRepo.findById(enrollmentDTO.course.id).orElse(null));
+		enrollment.setStudent(studentRepo.findById(enrollmentDTO.student.id).orElse(null));
+		enrollment.setStartDate(enrollmentDTO.startDate);
+		enrollment.setEndDate(enrollmentDTO.endDate);
 		return enrollmentRepository.save(enrollment).getId();
 	}
 
@@ -55,6 +65,22 @@ public class EnrollmentService implements EnrollmentServiceInterface {
 		}
 		
 		return enrollmentsDTO;
+	}
+
+	@Override
+	public void update(EnrollmentDTO enrollmentDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean remove(int id) {
+		Enrollment enrollment = enrollmentRepository.findById(id).orElse(null);
+		if(enrollment == null) {
+			return false;
+		}
+		enrollmentRepository.deleteById(id);;
+		return true;
 	}
 
 }
