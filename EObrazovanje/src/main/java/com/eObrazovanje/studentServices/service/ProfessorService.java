@@ -20,9 +20,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	ProfessorRepository professorRepository;
 
 	@Override
-	public Professor findOne(int id) {
-		// TODO Auto-generated method stub
-		return professorRepository.findById(id).orElse(null);
+	public ProfessorDTO findOne(int id) {
+		return new ProfessorDTO(professorRepository.findById(id).orElse(null));
 	}
 
 	@Override
@@ -41,9 +40,22 @@ public class ProfessorService implements ProfessorServiceInterface {
 	}
 
 	@Override
-	public int save(Professor valuta) {
-		// TODO Auto-generated method stub
-		return professorRepository.save(valuta).getId();
+	public int save(ProfessorDTO professorDTO) {
+		Professor professor = new Professor();
+		professor.setFirstName(professorDTO.firstName);
+		professor.setLastName(professorDTO.lastName);
+		professor.setUsername(professorDTO.username);
+		professor.setBiography(professorDTO.biography);
+		professor.setAcademicTitle(professorDTO.academicTitle);
+		professor.setCourseRole(professorDTO.eCourseRole);
+		professor.setEmail(professorDTO.email);
+		professor.setPassword(professorDTO.password);
+		professor.setEmployeeFunction(professorDTO.emplyeeFunction);
+		professor.setEmployeeFunctionFrom(professorDTO.employeeFunctionFrom);
+		professor.setPhoneNumber(professorDTO.phoneNumber);
+		professor.setPosition(professorDTO.position);
+		professor.setPositionFrom(professorDTO.positionFrom);
+		return professorRepository.save(professor).getId();
 	}
 
 }
