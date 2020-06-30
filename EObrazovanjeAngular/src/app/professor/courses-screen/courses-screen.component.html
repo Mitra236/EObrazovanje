@@ -1,1 +1,29 @@
-<p>courses-screen works!</p>
+<div class="content-container">
+  <h2>Lista kurseva</h2>
+  <div class="course-info">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Naziv</th>
+          <th>Sifra</th>
+          <th>ESPB</th>
+          <th>Predavanja</th>
+          <th>Vezbe</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{ course.name }}</td>
+          <td>{{ course.courseCode }}</td>
+          <td>{{ course.ECTS }}</td>
+          <td>{{ course.lectures }}</td>
+          <td>{{ course.practicalClasses}}</td>
+          <td>
+            <button class="filled-btn-dark">Ukloni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

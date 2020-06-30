@@ -1,0 +1,41 @@
+h2 {
+  padding-top: 0;
+  padding-left: 5px;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.content-container {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.course-info {
+  background-color: #e0e6eb;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding-bottom: 30px;
+}
+
+.card-title {
+  padding: 15px 20px;
+}
+
+.table {
+  margin-top: 10px;
+}
+
+.table td,
+.table th {
+  border-bottom: 1px solid #2d3b45;
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.table tr:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+}
