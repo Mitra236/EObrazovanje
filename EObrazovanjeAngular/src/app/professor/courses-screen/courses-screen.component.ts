@@ -3,6 +3,7 @@ import { ProfessorService } from 'src/app/services/professor/professor.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Course } from 'src/app/types/course';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-courses-screen',
@@ -10,23 +11,23 @@ import { Course } from 'src/app/types/course';
   styleUrls: ['./courses-screen.component.css']
 })
 export class CoursesScreenComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   courses: Course[]
 
-  constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private professorService: ProfessorService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.route.snapshot.params['id']) {
-      this.route.params
+    this.route.snapshot.params['id'] ?
+      this.subscription = this.route.params
         .pipe(switchMap((params: Params) =>
           this.professorService.getProfessorsCourses(+params["id"])))
           .subscribe(course => {
             this.courses = course
-            console.log(course)
         })
-    }
+    : this.courses
   }
 
   ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    this.subscription.unsubscribe();
   }
 }

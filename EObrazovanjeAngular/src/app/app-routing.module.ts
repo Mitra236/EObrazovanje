@@ -44,7 +44,7 @@ const routes: Routes = [
     component: ProfessorScreenComponent,
     children: [
       { path: '', component: ProfessorProfileDetailsComponent },
-      { path: 'edit', component: ProfessorDataEditComponent },
+      { path: 'edit/:id', component: ProfessorDataEditComponent },
       { path: 'courses/:id', component: CoursesScreenComponent },
       { path: 'addCourse', component: CourseInsertScreenComponent },
       {

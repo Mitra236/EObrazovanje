@@ -1,41 +1,37 @@
 <div class="content-container">
   <div class="info">
     <h3 class="card-title">Informacije o profesoru</h3>
-    <div class="form">
+    <div class="form" *ngIf="professor">
       <div class="row">
         <label>Korisnicko ime:</label>
-        <input type="text" value = {{professor.username}}/>
-      </div>
-      <div class="row">
-        <label>Lozinka:</label>
-        <input type="text" value = {{professor.password}}/>
+        <input type="text" [(ngModel)]="professor.username"/>
       </div>
       <div class="row">
         <label>Ime:</label>
-        <input type="text" value = {{professor.firstName}}/>
+        <input type="text" [(ngModel)]="professor.firstName"/>
       </div>
       <div class="row">
         <label>Prezime:</label>
-        <input type="text" value = {{professor.lastName}}/>
+        <input type="text" [(ngModel)]="professor.lastName"/>
       </div>
       <div class="row">
         <label>Email:</label>
-        <input type="text" value = {{professor.email}}/>
+        <input type="text" [(ngModel)]="professor.email"/>
       </div>
       <div class="row">
         <label>Broj telefona:</label>
-        <input type="text" value = {{professor.phoneNumber}}/>
+        <input type="text" [(ngModel)]="professor.phoneNumber"/>
       </div>
       <div class="row">
         <label>JMBG:</label>
-        <input type="text" value = {{professor.JMBG}}/>
+        <input type="text" [(ngModel)]="professor.JMBG"/>
       </div>
       <div class="row">
         <label>Biografija:</label>
-        <input type="text" value = {{professor.biography}}/>
+        <input type="text" [(ngModel)]="professor.biography"/>
       </div>
       <div class="button-container">
-        <button class="filled-btn-dark action-btn">Potvrdi</button>
+        <button class="filled-btn-dark action-btn" (click) = "edit()">Potvrdi</button>
       </div>
     </div>
   </div>

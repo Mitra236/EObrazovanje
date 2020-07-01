@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ProfessorDataEdit } from 'src/app/types/professor-data-edit';
+import { ProfessorService } from 'src/app/services/professor/professor.service';
+import { ActivatedRoute } from '@angular/router';
+import { Professor } from 'src/app/types/professor';
+import { Subscription } from 'rxjs';
 
 const professorMockData = {
   username: 'markic',
@@ -22,13 +27,28 @@ const professorMockData = {
   templateUrl: './professor-data-edit.component.html',
   styleUrls: ['./professor-data-edit.component.css']
 })
-export class ProfessorDataEditComponent implements OnInit {
-  professor: any;
+export class ProfessorDataEditComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  professor: ProfessorDataEdit;
 
-  constructor() { }
+  constructor(private professorService: ProfessorService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.professor = professorMockData;
+     this.getProfessor(+this.route.snapshot.paramMap.get("id"));
   }
 
+  getProfessor(id: number) {
+    this.subscription = this.professorService.getProfessorEdit(id)
+      .subscribe(data => {
+        this.professor = data
+      })
+  }
+
+  public edit(): void {
+    this.professorService.editProfessorData(this.professor).subscribe()
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
 }
