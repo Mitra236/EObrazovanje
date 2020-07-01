@@ -10,6 +10,7 @@ public class StudentDTO {
 	public String firstName;
 	public String lastName;
 	public String email;
+	public StudyProgrammeDTO studyProgramme;
 	
 	public StudentDTO(Student student) {
 		this.id = student.getId();
@@ -18,6 +19,7 @@ public class StudentDTO {
 		this.firstName = student.getFirstName();
 		this.lastName = student.getLastName();
 		this.email = student.getEmail();
+		this.studyProgramme = new StudyProgrammeDTO(student.getStudyProgramme());
 	}
 
 	public StudentDTO() {

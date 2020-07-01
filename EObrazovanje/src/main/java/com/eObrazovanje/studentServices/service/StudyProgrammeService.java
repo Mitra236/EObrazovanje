@@ -22,6 +22,7 @@ import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
+import com.eObrazovanje.studentServices.repository.StudentRepository;
 import com.eObrazovanje.studentServices.repository.StudyProgrammeRepository;
 
 @Service
@@ -35,6 +36,9 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 	
 	@Autowired
 	ExamRepository examRepository;
+	
+	@Autowired
+	StudentRepository studentRepository;
 
 	@Override
 	public StudyProgrammeDTO findOne(int id) {
@@ -111,20 +115,49 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 	}
 
 	@Override
-	public int saveStudentToProgramme(StudyProgramme studyProgramme) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int saveStudentToProgramme(StudyProgrammeDTO studyProgramme, StudentDTO s) {
+		StudyProgramme program = studyProgrammeRepository.findById(studyProgramme.id).orElse(null);
+		Student student = studentRepository.getOne(s.id);
+		if(student == null)
+			return 0;
+		
+		student.setStudyProgramme(program);
+		program.getStudents().add(student);
+		
+		return student.getId();
 	}
 
 	@Override
-	public boolean removeStudentFromProgramme(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeStudentFromProgramme(int id, int programmeId) {
+		StudyProgramme prog = studyProgrammeRepository.getOne(programmeId);
+		if(prog == null)
+			return false;
+		
+		Student s = studentRepository.getOne(id);
+		if(s == null)
+			return false;
+		
+		List<Student> studentsToRemove= new ArrayList<Student>();
+		for(Student stud: prog.getStudents()) {
+			if(stud.getId() == id)
+				studentsToRemove.add(stud);
+		}
+		
+		for(Student student : studentsToRemove) {
+			prog.getStudents().remove(student);
+			student.setStudyProgramme(null);
+		}
+		
+		return true;
 	}
 
 	@Override
 	public List<StudentDTO> findStudentsByProgramme(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		StudyProgramme prog = studyProgrammeRepository.findById(id).orElse(null);
+		List<StudentDTO> studentsByProgramme = new ArrayList<StudentDTO>();
+		for(Student s : prog.getStudents()) {
+			studentsByProgramme.add(new StudentDTO(s));
+		}
+		return studentsByProgramme;
 	}
 }

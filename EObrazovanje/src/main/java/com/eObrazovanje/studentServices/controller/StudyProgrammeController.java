@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
 import com.eObrazovanje.studentServices.entity.Course;
@@ -80,5 +81,31 @@ public class StudyProgrammeController {
 			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<Integer>(HttpStatus.OK);
 	}
+	
+	@PostMapping(value = "/programmeStudents", consumes = "application/json")
+	private ResponseEntity<Integer> addStudentToProgramme(@RequestBody StudentDTO student){
+		if(student == null)
+			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
+		
+		StudyProgrammeDTO prog = studyProgrammeServiceInterface.findOne(student.studyProgramme.id);
+		if(prog == null)
+			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		
+		int progId = studyProgrammeServiceInterface.saveStudentToProgramme(prog, student);
+		if(progId < 1)
+			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<Integer>(prog.id, HttpStatus.CREATED);
+	}
+
+	@DeleteMapping(value="/programmeCourse/delete/{studentId}/{studyProgrammeId}")
+	private ResponseEntity<Integer> deleteStudentFromProgramme(@PathVariable("studentId") int studentId,
+			@PathVariable("studyProgrammeId") int programmeId) {
+		boolean response = studyProgrammeServiceInterface.removeStudentFromProgramme(studentId, programmeId);
+		if(response == false)
+			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Integer>(HttpStatus.OK);
+	}
+	
 	 
 }

@@ -6,6 +6,7 @@ import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
+import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.entity.StudyProgramme;
 
 public interface StudyProgrammeServiceInterface {
@@ -15,10 +16,10 @@ public interface StudyProgrammeServiceInterface {
 	List<CourseDTO> findCoursesByProgramme(int id);
 	List<StudentDTO> findStudentsByProgramme(int id);
 	int saveCourseToProgramme(StudyProgrammeDTO prog, CourseDTO coDTO);
-	int saveStudentToProgramme(StudyProgramme studyProgramme);
+	int saveStudentToProgramme(StudyProgrammeDTO studyProgramme, StudentDTO s);
 	int save(StudyProgramme studyProgramme);
 	boolean remove(int id);
 	boolean removeCourseFromProgramme(int id, int programmeId);
-	boolean removeStudentFromProgramme(int id);
+	boolean removeStudentFromProgramme(int id, int programmeId);
 
 }
