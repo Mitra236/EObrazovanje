@@ -22,14 +22,14 @@ public class StudyProgrammeDTO implements Serializable{
 		this.name = prog.getName();
 		this.coursesDTO= new ArrayList<CourseDTO>();
 		this.studentsDTO = new ArrayList<StudentDTO>();
-		List<Student> students = prog.getStudents();
-		for(Student s: students) {
-			studentsDTO.add(new StudentDTO(s));
-		}
-		List<Course> courses = prog.getCourses();
-		for(Course c:courses) {
-			coursesDTO.add(new CourseDTO(c));
-		}
+//		List<Student> students = prog.getStudents();
+//		for(Student s: students) {
+//			studentsDTO.add(new StudentDTO(s));
+//		}
+//		List<Course> courses = prog.getCourses();
+//		for(Course c:courses) {
+//			coursesDTO.add(new CourseDTO(c));
+//		}
 	}
 	
 	

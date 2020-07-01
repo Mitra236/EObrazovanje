@@ -21,6 +21,11 @@ public class ProfessorService implements ProfessorServiceInterface {
 	ProfessorRepository professorRepository;
 
 	@Override
+	public ProfessorDataEditDTO findOneProfessor(int id) {
+		return new ProfessorDataEditDTO(professorRepository.findById(id).orElse(null));
+	}
+	
+	@Override
 	public ProfessorDTO findOne(int id) {
 		return new ProfessorDTO(professorRepository.findById(id).orElse(null));
 	}

@@ -6,6 +6,7 @@ import com.eObrazovanje.studentServices.DTO.ProfessorDataEditDTO;
 
 public interface ProfessorServiceInterface {
 
+	ProfessorDataEditDTO findOneProfessor(int id);
 	ProfessorDTO findOne(int id);
 	List<ProfessorDTO> findAll();
 	int save(ProfessorDTO professorDTO);
