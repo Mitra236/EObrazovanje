@@ -28,7 +28,6 @@ export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
       this.professorService.getProfessorCourseDetails(+params["id"])))
       .subscribe(course => {
         this.course = course
-        console.log(course)
     })
   }
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { baseUrl } from '../url';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { throwError, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Course } from 'src/app/types/course';
 import { ProfessorDataEdit } from 'src/app/types/professor-data-edit';
 import { Professor } from 'src/app/types/professor';
 import { ProfessorCourseDetails } from 'src/app/types/professor-course-details';
+import { Exam } from 'src/app/types/exam';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ProfessorService {
   professorsUrl = baseUrl + 'professors/';
   courseUrl = baseUrl + 'courses/';
   enrollmentUrl = baseUrl + 'enrollment/'
+  examUrl = baseUrl + 'exams/'
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
@@ -32,6 +34,10 @@ export class ProfessorService {
   getProfessorCourseDetails(id: number) {
     return this.http.get<ProfessorCourseDetails>(this.courseUrl + 'courseStudent?id=' + id)
               .pipe(catchError(this.handleError))
+  }
+
+  getExamsByPeriod(id: number, period: string) {
+    return this.http.get<Exam[]>(this.examUrl + "period/?id=" + id + "&period=" + period)
   }
 
   editProfessorData(professor: ProfessorDataEdit) : Observable<ProfessorDataEdit> {

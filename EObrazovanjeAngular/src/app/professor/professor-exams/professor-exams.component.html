@@ -1,0 +1,144 @@
+<div class="content-container">
+  <h2>Lista ispita po rokovima</h2>
+  <div class="exam-info" *ngIf="examJanuary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Januarski</th>
+          <th>Naziv kursa</th>
+          <th>Šifra kursa</th>
+          <th>Studijski program</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of examJanuary">
+          <td></td>
+          <td>{{ exam.course.name }}</td>
+          <td>{{ exam.course.courseCode }}</td>
+          <td>{{ exam.course.studyProgramme.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="exam-info" *ngIf="examFebruary">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Februarski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examFebruary">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="exam-info" *ngIf="examApril">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Aprilski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examApril">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="exam-info" *ngIf="examJune">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Junski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examJune">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="exam-info" *ngIf="examJuly">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Julski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examJuly">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="exam-info" *ngIf="examSeptember">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Septembarski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examSeptember">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="exam-info" *ngIf="examOctober">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Oktobarski</th>
+            <th>Naziv kursa</th>
+            <th>Šifra kursa</th>
+            <th>Studijski program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examOctober">
+            <td></td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.course.courseCode }}</td>
+            <td>{{ exam.course.studyProgramme.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+

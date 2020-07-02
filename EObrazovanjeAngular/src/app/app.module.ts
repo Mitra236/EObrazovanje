@@ -29,6 +29,7 @@ import { AdminBookingListComponent } from './admin-booking-list/admin-booking-li
 import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2-list.component';
 import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
 import { ProfessorCourseDetailsComponent } from './professor/professor-course-details/professor-course-details.component';
+import { ProfessorExamsComponent } from './professor/professor-exams/professor-exams.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ProfessorCourseDetailsComponent } from './professor/professor-course-de
     AdminBookingListComponent,
     AdminBooking2ListComponent,
     AdminBooking3ListComponent,
-    ProfessorCourseDetailsComponent
+    ProfessorCourseDetailsComponent,
+    ProfessorExamsComponent
   ],
   imports: [
     BrowserModule,
