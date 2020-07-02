@@ -14,7 +14,7 @@ export class CoursesScreenComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   courses: Course[]
 
-  constructor(private professorService: ProfessorService, private route: ActivatedRoute) { }
+  constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.snapshot.params['id'] ?
@@ -25,6 +25,10 @@ export class CoursesScreenComponent implements OnInit, OnDestroy {
             this.courses = course
         })
     : this.courses
+  }
+
+  goToCourse(course: Course) {
+    this.router.navigate(['professor/courseDetails', course.id]);
   }
 
   ngOnDestroy(): void {

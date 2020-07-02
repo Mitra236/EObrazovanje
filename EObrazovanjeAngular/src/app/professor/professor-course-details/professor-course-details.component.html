@@ -1,0 +1,36 @@
+<div class="content-container" *ngIf="course">
+  <h2>Podaci o profesoru</h2>
+  <div>
+    <div class="account-info">
+      <h3>Podaci o kursu</h3>
+      <div class="row">
+        <p>Naziv kursa:</p>
+        <p>{{ course.name }}</p>
+      </div>
+    </div>
+  </div>
+  <h2>Lista studenata</h2>
+  <button class="filled-btn-dark">Dodaj</button>
+  <div class="examPeriods-info">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Studijski program</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enrollment of course.enrollmentDTOs">
+          <td>{{ enrollment.student.firstName }}</td>
+          <td>{{ enrollment.student.lastName }}</td>
+          <td>{{ enrollment.student.studyProgramme.name }}</td>
+          <td>
+            <button class="filled-btn-dark" (click) = "deleteCourseEnrollment(enrollment.id)">Ukloni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

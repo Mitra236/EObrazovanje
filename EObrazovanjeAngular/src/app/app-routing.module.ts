@@ -23,6 +23,7 @@ import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2
 import { AdminBookingListComponent } from './admin-booking-list/admin-booking-list.component';
 import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2-list.component';
 import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
+import { ProfessorCourseDetailsComponent } from './professor/professor-course-details/professor-course-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: '', component: ProfessorProfileDetailsComponent },
       { path: 'edit/:id', component: ProfessorDataEditComponent },
       { path: 'courses/:id', component: CoursesScreenComponent },
+      { path: 'courseDetails/:id', component: ProfessorCourseDetailsComponent },
       { path: 'addCourse', component: CourseInsertScreenComponent },
       {
         path: 'addStudentAtCourse',

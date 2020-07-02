@@ -28,6 +28,7 @@ import { AdminPeriods2ListComponent } from './admin-periods2-list/admin-periods2
 import { AdminBookingListComponent } from './admin-booking-list/admin-booking-list.component';
 import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2-list.component';
 import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
+import { ProfessorCourseDetailsComponent } from './professor/professor-course-details/professor-course-details.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3
     AdminPeriods2ListComponent,
     AdminBookingListComponent,
     AdminBooking2ListComponent,
-    AdminBooking3ListComponent
+    AdminBooking3ListComponent,
+    ProfessorCourseDetailsComponent
   ],
   imports: [
     BrowserModule,

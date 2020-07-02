@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Course } from 'src/app/types/course';
 import { ProfessorDataEdit } from 'src/app/types/professor-data-edit';
 import { Professor } from 'src/app/types/professor';
+import { ProfessorCourseDetails } from 'src/app/types/professor-course-details';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { Professor } from 'src/app/types/professor';
 export class ProfessorService {
   professorsUrl = baseUrl + 'professors/';
   courseUrl = baseUrl + 'courses/';
+  enrollmentUrl = baseUrl + 'enrollment/'
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
@@ -27,9 +29,19 @@ export class ProfessorService {
             .pipe(catchError(this.handleError));
   }
 
+  getProfessorCourseDetails(id: number) {
+    return this.http.get<ProfessorCourseDetails>(this.courseUrl + 'courseStudent?id=' + id)
+              .pipe(catchError(this.handleError))
+  }
+
   editProfessorData(professor: ProfessorDataEdit) : Observable<ProfessorDataEdit> {
     return this.http.put<ProfessorDataEdit>(this.professorsUrl, professor)
             .pipe(catchError(this.handleError));
+  }
+
+  deleteCourseEnrollment(id: number) : Observable<{}> {
+    return this.http.delete(this.enrollmentUrl + id)
+            .pipe(catchError(this.handleError))
   }
 
   handleError(error: HttpErrorResponse) {
