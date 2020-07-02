@@ -26,6 +26,7 @@ public class CourseDTO implements Serializable{
 	}
 
 	public CourseDTO(Course course) {
+		this.id = course.getId();
 		this.name = course.getName();
 		this.courseCode = course.getCourseCode();
 		this.ECTS = course.getECTS();

@@ -26,6 +26,7 @@ public class EnrollmentController {
 		if(enrollment == null) {
 			return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
 		}
+		enrollmentServiceInterface.remove(id);
 		return new ResponseEntity<Boolean>(HttpStatus.OK);
 	}
 
