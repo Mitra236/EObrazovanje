@@ -1,36 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Professor } from '../types/professor';
+import { ProfessorService } from '../services/professor/professor.service';
 
-const mockData = [
-  {
-    username: 'markic',
-    password: 'marko',
-    firstName: 'marko',
-    lastName: 'markovic',
-    email: 'marko@email.com',
-    phoneNumber: '0483294',
-    JMBG: '43895482375849',
-    academicTitle: 'professor',
-    biography: 'tra la la',
-    position: 'professor',
-    employeeFunction: 'professor',
-    courseRole: 'assistant',
-    positionFrom: '2005-08-08',
-    employeeFunctionFrom: '2008-09-23'
-  },
-];
 
 @Component({
   selector: 'app-admin-professors-list',
   templateUrl: './admin-professors-list.component.html',
   styleUrls: ['./admin-professors-list.component.css']
 })
-export class AdminProfessorsListComponent implements OnInit {
-  professors;
-  constructor(private router: ActivatedRoute) { }
+export class AdminProfessorsListComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  professors: Professor[];
+  constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.professors = mockData;
+    this.subscription = this.route.params
+        .pipe(switchMap((params: Params) =>
+          this.professorService.getListOfProfessors()))
+          .subscribe(professor => {
+            this.professors = professor
+        })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

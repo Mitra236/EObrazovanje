@@ -30,6 +30,11 @@ public class ProfessorController {
 		return professorServiceInterface.findAll();
 	}
 	
+	@GetMapping(value = "/professorsForAdmin")
+	private List<ProfessorDTO> getProfessorsForAdmin() {	
+		return professorServiceInterface.findProfessorsForAdmin();
+	}
+	
 	@GetMapping(value = "/professor")
 	private ResponseEntity<ProfessorDTO> getProfessor(@RequestParam("id") int id) {
 		ProfessorDTO professorDTO = professorServiceInterface.findOne(id);
@@ -57,4 +62,5 @@ public class ProfessorController {
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
 }

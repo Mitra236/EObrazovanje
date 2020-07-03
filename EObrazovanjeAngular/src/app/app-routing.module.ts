@@ -62,7 +62,7 @@ const routes: Routes = [
     component: AdminScreenComponent,
     children: [
       { path: 'students', component: AdminStudentsListComponent },
-      { path: 'professors', component: AdminProfessorsListComponent },
+      { path: 'professors/professorsForAdmin', component: AdminProfessorsListComponent },
       { path: 'users/add/student', component: AdminAddUserComponent },
       { path: 'users/add/professor', component: AdminAddUserComponent },
       { path: 'courses', component: AdminCoursesListComponent },
