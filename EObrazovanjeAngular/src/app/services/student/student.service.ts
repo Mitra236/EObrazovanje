@@ -17,6 +17,9 @@ export class StudentServiceService {
   getStudenById(id: number): Observable<Student> {
     return this.http.get<Student>(this.studentsUrl + id);
   }
+  getListOfStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(this.studentsUrl.substring(0, this.studentsUrl.length - 1));
+  }
 
   getTakenExams(id: number): Observable<ExamRegistration[]> {
     return this.http.get<ExamRegistration[]>(this.studentsUrl + id + '/exams');
