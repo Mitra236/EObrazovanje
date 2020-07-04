@@ -52,7 +52,7 @@ const routes: Routes = [
       { path: 'exams/:id', component: ProfessorExamsComponent },
       { path: 'addCourse', component: CourseInsertScreenComponent },
       {
-        path: 'addStudentAtCourse',
+        path: 'addStudentAtCourse/:id',
         component: StudentCourseInsertScreenComponent,
       },
     ],

@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProfessorCourseDetails } from 'src/app/types/professor-course-details';
 import { ProfessorService } from 'src/app/services/professor/professor.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Course } from 'src/app/types/course';
 
 @Component({
   selector: 'app-professor-course-details',
@@ -14,7 +15,7 @@ export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   course: ProfessorCourseDetails;
 
-  constructor(private professorService: ProfessorService, private route: ActivatedRoute) { }
+  constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.snapshot.params['id'] ?
@@ -35,6 +36,10 @@ export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
     this.professorService.deleteCourseEnrollment(id).subscribe(() => {
       this.getData();
     })
+  }
+
+  goToEnrollment(course: ProfessorCourseDetails) {
+    this.router.navigate(['professor/addStudentAtCourse', course.id]);
   }
 
   ngOnDestroy(): void {

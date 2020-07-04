@@ -1,1 +1,25 @@
-<p>student-course-insert-screen works!</p>
+<div class="content-container">
+  <div class="info">
+    <h3 class="card-title">Dodavanje studenta na kurs</h3>
+    <div class="form">
+      <div class="row">
+        <label>Student:</label>
+        <select [(ngModel)]="student">
+          <option *ngFor="let student of students; let i = index" [ngValue]="student" [attr.selected] = "i">{{ student.firstName }} {{ student.lastName }}</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>Početak kursa:</label>
+        <input type="date"/>
+      </div>
+      <div class="row">
+        <label>Kraj kursa:</label>
+        <input type="date"/>
+      </div>
+      <div class="button-container">
+        <button class="filled-btn-dark action-btn">Potvrdi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
