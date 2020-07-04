@@ -18,8 +18,9 @@
           <input type="date" formControlName="endDate"/>
         </div>
         <div class="button-container">
-          <button type="submit" class="filled-btn-dark action-btn">Potvrdi</button>
+          <button type="submit" class="filled-btn-dark action-btn" [disabled]="!enrollmentForm.valid">Potvrdi</button>
         </div>
+        <!-- <label *ngIf="enrollmentForm.errors">{{ enrollmentForm.errors?.dates | json }}</label> -->
       </div>
     </form>
   </div>

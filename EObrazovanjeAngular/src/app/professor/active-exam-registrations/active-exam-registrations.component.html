@@ -1,0 +1,31 @@
+<div class="content-container" *ngFor="let exam of examRegistration">
+  <h2>{{ exam.courseName }}</h2>
+  <div class="course-info">
+    <table class="table" *ngIf="student">
+      <thead>
+        <tr>
+          <th>Ime i Prezime</th>
+          <th>Broj indeksa</th>
+          <th>Status ispita</th>
+          <th>Ispit</th>
+          <th>Predispitne obaveze</th>
+          <th>Ocena</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ student.firstName }} {{ student.lastName }}</td>
+          <td>{{ student.index }}</td>
+          <td>{{ exam.status }}</td>
+          <td>{{ exam.examPoints }}</td>
+          <td>{{ exam.labPoints }}</td>
+          <td>{{ exam.finalGrade }}</td>
+          <td>
+            <button class="filled-btn-dark" (click) = "goToInsertPointsScreen(exam.id)">Unesi bodove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

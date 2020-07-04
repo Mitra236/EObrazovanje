@@ -30,11 +30,11 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
     this.getStudents(+this.route.snapshot.paramMap.get("id"));
     this.course = +this.route.snapshot.paramMap.get("id")
     this.enrollmentForm = this.fb.group({
-      startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required]),
-      student: new FormControl(0, [Validators.required]),
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      student: [0, Validators.required],
       course: this.course
-    })
+    }, { validator: this.dateLessThan('startDate', 'endDate') })
   }
 
   getStudents(id: number) {
@@ -48,6 +48,19 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
     this.professorService.addEnrollment(this.enrollmentForm.value).subscribe(res => {
       this.router.navigate(['professor/courseDetails', this.course]);
     })
+  }
+
+  dateLessThan(startDate: string, endDate: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let s = group.controls[startDate];
+      let e = group.controls[endDate];
+      if (s.value > e.value) {
+        return {
+          dates: "End date shouldn't be before start date"
+        };
+      }
+      return {};
+    }
   }
 
   ngOnDestroy(): void {

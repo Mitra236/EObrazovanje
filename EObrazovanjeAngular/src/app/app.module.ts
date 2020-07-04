@@ -30,6 +30,8 @@ import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2
 import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
 import { ProfessorCourseDetailsComponent } from './professor/professor-course-details/professor-course-details.component';
 import { ProfessorExamsComponent } from './professor/professor-exams/professor-exams.component';
+import { ActiveExamRegistrationsComponent } from './professor/active-exam-registrations/active-exam-registrations.component';
+import { InsertExamPointsComponent } from './professor/insert-exam-points/insert-exam-points.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { ProfessorExamsComponent } from './professor/professor-exams/professor-e
     AdminBooking2ListComponent,
     AdminBooking3ListComponent,
     ProfessorCourseDetailsComponent,
-    ProfessorExamsComponent
+    ProfessorExamsComponent,
+    ActiveExamRegistrationsComponent,
+    InsertExamPointsComponent
   ],
   imports: [
     BrowserModule,

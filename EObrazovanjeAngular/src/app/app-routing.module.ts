@@ -25,6 +25,8 @@ import { AdminBooking2ListComponent } from './admin-booking2-list/admin-booking2
 import { AdminBooking3ListComponent } from './admin-booking3-list/admin-booking3-list.component';
 import { ProfessorCourseDetailsComponent } from './professor/professor-course-details/professor-course-details.component';
 import { ProfessorExamsComponent } from './professor/professor-exams/professor-exams.component';
+import { ActiveExamRegistrationsComponent } from './professor/active-exam-registrations/active-exam-registrations.component';
+import { InsertExamPointsComponent } from './professor/insert-exam-points/insert-exam-points.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -50,11 +52,15 @@ const routes: Routes = [
       { path: 'courses/:id', component: CoursesScreenComponent },
       { path: 'courseDetails/:id', component: ProfessorCourseDetailsComponent },
       { path: 'exams/:id', component: ProfessorExamsComponent },
-      { path: 'addCourse', component: CourseInsertScreenComponent },
+      { path: 'activeExams/:id', component: ActiveExamRegistrationsComponent },
       {
         path: 'addStudentAtCourse/:id',
         component: StudentCourseInsertScreenComponent,
       },
+      {
+        path: 'insertPoints/:id',
+        component: InsertExamPointsComponent,
+      }
     ],
   },
   {

@@ -12,6 +12,8 @@ import { Student } from 'src/app/types/student';
 import { StudentBasicInfo } from 'src/app/types/student-basic-info';
 import { Enrollment } from 'src/app/types/enrollment';
 import { EnrollmentAdd } from 'src/app/types/enrollment-add';
+import { ExamRegistration } from 'src/app/types/exam-registration';
+import { ExamPoints } from 'src/app/types/exam-points';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,7 @@ export class ProfessorService {
   enrollmentUrl = baseUrl + 'enrollment/'
   examUrl = baseUrl + 'exams/'
   studentsUrl = baseUrl + 'students/'
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  examRegistrationUrl = baseUrl + 'examRegistration/'
 
   constructor(private http: HttpClient) { }
 
@@ -56,9 +58,23 @@ export class ProfessorService {
               .pipe(catchError(this.handleError));
   }
 
+  getStudent(id: number) : Promise<Student> {
+    return this.http.get<Student>(this.studentsUrl + "student?id=" + id).toPromise()
+  }
+
+  getActiveExamRegistrations(id: number) : Observable<ExamRegistration[]> {
+    return this.http.get<ExamRegistration[]>(this.examRegistrationUrl + "activeExams?id=" + id)
+              .pipe(catchError(this.handleError));
+  }
+
   addEnrollment(enrollment: EnrollmentAdd) : Observable<EnrollmentAdd> {
     return this.http.post<EnrollmentAdd>(this.enrollmentUrl, enrollment)
               .pipe(catchError(this.handleError));
+  }
+
+  addPoints(examPoint: ExamPoints) : Observable<ExamPoints> {
+    return this.http.put<ExamPoints>(this.examRegistrationUrl, examPoint)
+            .pipe(catchError(this.handleError));
   }
 
   editProfessorData(professor: ProfessorDataEdit) : Observable<ProfessorDataEdit> {

@@ -1,0 +1,21 @@
+<div class="content-container">
+  <div class="info">
+    <h3 class="card-title">Dodavanje studenta na kurs</h3>
+    <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+      <div class="form">
+        <div class="row">
+          <label>Bodovi na ispitu:</label>
+          <input type="text" formControlName="examPoints"/>
+        </div>
+        <div class="row">
+          <label>Bodovi na predispitnim obavezama:</label>
+          <input type="text" formControlName="labPoints"/>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="filled-btn-dark action-btn" [disabled]="!examForm.valid">Unesi</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

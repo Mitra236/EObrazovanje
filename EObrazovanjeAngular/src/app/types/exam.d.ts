@@ -17,4 +17,5 @@ export interface Exam {
   };
   date: string;
   paymentAmount?: number;
+  examRegistrationDTOs: [];
 }
