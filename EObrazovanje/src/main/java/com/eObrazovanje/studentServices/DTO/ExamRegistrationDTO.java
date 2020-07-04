@@ -21,8 +21,11 @@ public class ExamRegistrationDTO implements Serializable{
 	public int ECTS;
 	public int finalGrade;
 	
-	public ExamRegistrationDTO(ExamRegistration examReg) {
+	public ExamRegistrationDTO() {
 		super();
+	}
+
+	public ExamRegistrationDTO(ExamRegistration examReg) {
 		this.id=examReg.getId();
 		this.date = examReg.getExam().getExam_date();
 		this.examPoints = examReg.getExam().getExamPoints();

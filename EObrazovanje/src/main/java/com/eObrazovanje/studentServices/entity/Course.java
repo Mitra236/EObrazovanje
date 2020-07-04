@@ -26,7 +26,7 @@ public class Course implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "course_id", unique = true, nullable = false)
+	@Column(name = "course_id", nullable = false)
 	private int id;
 	
 	@Column(name = "course_name", unique = true, nullable = false)

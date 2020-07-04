@@ -39,6 +39,11 @@ public class StudentController {
 		return studentServiceInterface.findOne(id);
 	}
 	
+	@GetMapping(value="/student")
+	private StudentDetailsDTO getStudent(@RequestParam("id") int id) {
+		return studentServiceInterface.findOne(id);
+	}
+	
 	@GetMapping(value="/{studentId}/exams")
 	private List<ExamRegistrationDTO> getTakenExams(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findTakenExams(id);

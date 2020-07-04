@@ -6,7 +6,8 @@ public class ExamPointsDTO {
 
 	public int id;
 	public int finalGrade;
-	public ExamDTO exam;
+	public int examPoints;
+	public int labPoints;
 	
 	public ExamPointsDTO() {
 		super();
@@ -15,6 +16,7 @@ public class ExamPointsDTO {
 	public ExamPointsDTO(ExamRegistration examReg) {
 		this.id = examReg.getId();
 		this.finalGrade = examReg.getFinalGrade();
-		this.exam = new ExamDTO(examReg.getExam());
+		this.examPoints = examReg.getExam().getExamPoints();
+		this.labPoints = examReg.getExam().getLabPoints();
 	}
 }

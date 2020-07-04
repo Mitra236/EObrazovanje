@@ -24,20 +24,32 @@ INSERT INTO professors(professor_email,professor_username, professor_password, p
 INSERT INTO professors(professor_email,professor_username, professor_password, professor_first_name,professor_last_name, professor_JMBG) VALUES ("dunja@gmail.com","dunja", "dunjic", "Dunja", "Dunjic", "0231889825199");
 
 INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Matematika 1", "SF89", 180, 30, 10, 1);
-INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Osnove web programiranja", "EE99", 240, 40, 20, 1);
-INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Bonita", "RA77", 240, 40, 30, 2);
+INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Osnove web programiranja", "SF99", 240, 40, 20, 1);
+INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Bonita", "EE77", 240, 40, 30, 2);
+INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Osnove Elektronike", "RA89", 180, 30, 10, 3);
+INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Programski jezici i strukture podataka", "RA99", 240, 40, 20, 3);
+INSERT INTO courses(course_name, course_code, ECTS, lectures, practical_classes, study_programme_courses) VALUES ("Fizika", "EE51", 240, 40, 30, 2);
 
 INSERT INTO enrollments(enrollment_start_date, enrollment_end_date, student, course) VALUES ("2017-08-24", "2019-08-24", 1, 1);
-INSERT INTO enrollments(enrollment_start_date, enrollment_end_date, student, course) VALUES ("2017-09-24", "2019-09-24", 1, 1);
+INSERT INTO enrollments(enrollment_start_date, enrollment_end_date, student, course) VALUES ("2017-09-24", "2019-09-24", 3, 1);
 INSERT INTO enrollments(enrollment_start_date, enrollment_end_date, student, course) VALUES ("2017-07-24", "2019-07-24", 2, 2);
 
-INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (0, "2019-08-24", "2019-08-24", 200);
-INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (1, "2019-08-24", "2019-08-24", 200);
-INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (2, "2019-08-24", "2019-08-24", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (0, "2020-01-20", "2020-01-30", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (1, "2020-02-01", "2020-02-13", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (2, "2020-04-15", "2020-04-20", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (3, "2020-06-20", "2020-06-30", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (4, "2020-07-01", "2020-07-15", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (5, "2020-09-01", "2020-08-15", 200);
+INSERT INTO exam_periods(exam_name, start_date, end_date, payment_amount) VALUES (6, "2020-10-05", "2020-10-10", 200);
 
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (80, 20, "2020-04-04 12:30:00", 0, 1, 1);
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (50, 50, "2020-06-23 12:30:00", 0, 2, 3);
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (70, 30, "2020-05-07 12:30:00", 0, 3, 2);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (80, 20, "2020-01-22 12:30:00", 0, 1, 1);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (50, 50, "2020-04-16 12:30:00", 0, 2, 3);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (70, 30, "2020-02-10 12:30:00", 0, 3, 2);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-06-23 12:30:00", 0, 1, 4);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 4, 5);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 1, 5);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-09-07 12:30:00", 0, 5, 6);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-10-07 12:30:00", 0, 6, 2);
 
 INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_description, financial_card_payment_amount, financial_card_payment_exception, financial_card_initial_state, financial_card_total_payment, financial_card_total_cost, student_financial_card) VALUES ("2019-04-26", "opis uplate 1", 2000.00, 50.00, 1000.00, 2000.00, 1000.00, 1);
 INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_description, financial_card_payment_amount, financial_card_payment_exception, financial_card_initial_state, financial_card_total_payment, financial_card_total_cost, student_financial_card) VALUES ("2020-01-22", "opis uplate 2", 2000.00, 50.00, 1000.00, 2000.00, 1000.00, 1);
@@ -46,6 +58,7 @@ INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (0, 10, 1, 1, 1);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 6, 1, 1, 2);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 8, 2, 2, 3);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 6, 2, 6);
 
 INSERT INTO professors_courses(course_id, professor_id) VALUES (1, 1)
 INSERT INTO professors_courses(course_id, professor_id) VALUES (2, 1)

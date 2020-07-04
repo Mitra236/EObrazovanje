@@ -1,6 +1,8 @@
 package com.eObrazovanje.studentServices.DTO;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.eObrazovanje.studentServices.entity.Exam;
 
@@ -12,6 +14,7 @@ public class ExamDTO {
 	public CourseDTO course;
 	public Timestamp date;
 	public double paymentAmount;
+	public List<ExamRegistrationDTO> examRegistrationDTOs;
 	
 	public ExamDTO(Exam exam) {
 		this.id=exam.getId();
@@ -20,6 +23,7 @@ public class ExamDTO {
 		this.course = new CourseDTO(exam.getCourse());
 		this.date = exam.getExam_date();
 		this.paymentAmount = exam.getExamPeriod().getPaymentAmount();
+		this.examRegistrationDTOs = new ArrayList<ExamRegistrationDTO>();
 	}
 
 	public ExamDTO() {

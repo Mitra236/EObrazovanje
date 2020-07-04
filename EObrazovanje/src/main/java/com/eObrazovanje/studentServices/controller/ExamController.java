@@ -49,4 +49,6 @@ public class ExamController {
 		}
 		return new ResponseEntity<List<ExamDTO>>(examDTOs, HttpStatus.OK);
 	}
+	
+
 }

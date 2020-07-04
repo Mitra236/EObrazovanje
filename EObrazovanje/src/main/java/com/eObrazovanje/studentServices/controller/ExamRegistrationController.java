@@ -2,6 +2,7 @@ package com.eObrazovanje.studentServices.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.service.ExamRegistrationSServiceInterface;
@@ -44,5 +45,13 @@ public class ExamRegistrationController {
 		examRegistrationSServiceInterface.addFinalPoints(examPointsDTO);
 		
 		return new ResponseEntity<ExamPointsDTO>(examPointsDTO, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(value="/activeExams")
+	private ResponseEntity<List<ExamRegistrationDTO>> getActiveExams(@RequestParam("id") int id) {
+		List<ExamRegistrationDTO> examRegistrationDTOs = examRegistrationSServiceInterface.getActiveProfessorExams(id);
+		if(examRegistrationDTOs.size() <= 0) return new ResponseEntity<List<ExamRegistrationDTO>>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<List<ExamRegistrationDTO>>(examRegistrationDTOs, HttpStatus.OK);
 	}
 }

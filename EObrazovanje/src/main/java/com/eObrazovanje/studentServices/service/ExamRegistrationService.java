@@ -1,6 +1,7 @@
 package com.eObrazovanje.studentServices.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
+import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
 
@@ -23,6 +26,9 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 	
 	@Autowired
 	ExamRepository examRepo;
+	
+	@Autowired
+	CourseRepository courseRepo;
 
 	@Override
 	public ExamRegistrationDTO findOne(int id) {
@@ -58,8 +64,8 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 		Exam exam = examReg.getExam();
 
 		int finalPoints;
-		exam.setExamPoints(examRegistration.exam.examPoints);
-		exam.setLabPoints(examRegistration.exam.labPoints);
+		exam.setExamPoints(examRegistration.examPoints);
+		exam.setLabPoints(examRegistration.labPoints);
 		finalPoints = examReg.getExam().getExamPoints() + examReg.getExam().getLabPoints();	
 		
 		if (finalPoints >= 51 && finalPoints < 61) {
@@ -87,5 +93,41 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 		examRepo.save(exam);
 		examRegRepo.save(examReg);
 	}
+	
+	@Override
+	public List<ExamRegistrationDTO> getActiveProfessorExams(int id) {
+		List<ExamRegistrationDTO> examRegistrationDTOs = new ArrayList<>();
 
+		java.util.Date date = new java.util.Date();
+		Calendar calCurrent = Calendar.getInstance();
+		Calendar calExam = Calendar.getInstance();
+		calCurrent.setTime(date);
+		int month = calCurrent.get(Calendar.MONTH);
+		int examMonth;
+		
+		for (Course c: courseRepo.findProfessorCourses(id)) {
+			for(Exam e: c.getExams()) {
+				for (ExamRegistration er: e.getExamRegistrations()) {
+					calExam.setTime(e.getPeriod().getStartDate());
+					examMonth = calExam.get(Calendar.MONTH);
+					if(month == examMonth) {
+						ExamRegistrationDTO examRegistrationDTO = new ExamRegistrationDTO();
+						examRegistrationDTO.id = er.getId();
+						examRegistrationDTO.examPoints = er.getExam().getExamPoints();
+						examRegistrationDTO.labPoints = er.getExam().getLabPoints();
+						examRegistrationDTO.finalGrade = er.getFinalGrade();
+						examRegistrationDTO.courseName = er.getExam().getCourse().getName();
+						examRegistrationDTO.status = er.getStatus();
+						examRegistrationDTO.ECTS = er.getExam().getCourse().getECTS();
+						examRegistrationDTO.studentId = er.getStudent().getId();
+						examRegistrationDTO.date = er.getExam().getExam_date();
+						examRegistrationDTOs.add(examRegistrationDTO);
+					}
+				}		
+			}		
+		}
+		return examRegistrationDTOs;
+	}
+
+	
 }
