@@ -11,6 +11,7 @@ import { Exam } from 'src/app/types/exam';
 import { Student } from 'src/app/types/student';
 import { StudentBasicInfo } from 'src/app/types/student-basic-info';
 import { Enrollment } from 'src/app/types/enrollment';
+import { EnrollmentAdd } from 'src/app/types/enrollment-add';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +56,8 @@ export class ProfessorService {
               .pipe(catchError(this.handleError));
   }
 
-  addEnrollment(enrollment: Enrollment) : Observable<Enrollment> {
-    return this.http.post<Enrollment>(this.enrollmentUrl, enrollment)
+  addEnrollment(enrollment: EnrollmentAdd) : Observable<EnrollmentAdd> {
+    return this.http.post<EnrollmentAdd>(this.enrollmentUrl, enrollment)
               .pipe(catchError(this.handleError));
   }
 
