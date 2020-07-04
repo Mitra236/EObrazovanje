@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentToAddDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
@@ -49,7 +50,7 @@ public class EnrollmentController {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	private ResponseEntity<Integer> addEnrollment(@RequestBody EnrollmentDTO enrollmentDTO) {
+	private ResponseEntity<Integer> addEnrollment(@RequestBody EnrollmentToAddDTO enrollmentDTO) {
 		if (enrollmentDTO == null) return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
 		
 		enrollmentServiceInterface.save(enrollmentDTO);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentToAddDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Enrollment;
@@ -42,10 +43,10 @@ public class EnrollmentService implements EnrollmentServiceInterface {
 	}
 
 	@Override
-	public int save(EnrollmentDTO enrollmentDTO) {
+	public int save(EnrollmentToAddDTO enrollmentDTO) {
 		Enrollment enrollment = new Enrollment();
-		enrollment.setCourse(courseRepo.findById(enrollmentDTO.course.id).orElse(null));
-		enrollment.setStudent(studentRepo.findById(enrollmentDTO.student.id).orElse(null));
+		enrollment.setCourse(courseRepo.findById(enrollmentDTO.course).orElse(null));
+		enrollment.setStudent(studentRepo.findById(enrollmentDTO.student).orElse(null));
 		enrollment.setStartDate(enrollmentDTO.startDate);
 		enrollment.setEndDate(enrollmentDTO.endDate);
 		return enrollmentRepository.save(enrollment).getId();
