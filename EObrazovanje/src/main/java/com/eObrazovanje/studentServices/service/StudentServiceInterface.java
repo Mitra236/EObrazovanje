@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Admin;
@@ -18,4 +19,5 @@ public interface StudentServiceInterface {
 	List<ExamRegistrationDTO> findPassedExams(int id);
 	List<ExamRegistrationDTO> findFailedExams(int id);
 	List<ExamRegistrationDTO> findTakenExams(int id);
+	List<StudentBasicInfoDTO> getNotEnrolledStudents(int id);
 }

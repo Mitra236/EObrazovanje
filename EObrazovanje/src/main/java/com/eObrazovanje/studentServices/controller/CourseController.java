@@ -52,15 +52,15 @@ public class CourseController {
 	
 	@GetMapping(value="/course")
 	private ResponseEntity<CourseDTO> getCourse(@RequestParam("id") int id) {
-		Course course = courseServiceInterface.findOne(id);
+		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
 		
-		return new ResponseEntity<CourseDTO>(new CourseDTO(course), HttpStatus.OK);
+		return new ResponseEntity<CourseDTO>(course, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/studentCourse")
 	private ResponseEntity<List<EnrollmentDTO>> getStudentCourse(@RequestParam ("id") int id) {
-		Course course = courseServiceInterface.findOne(id);
+		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<List<EnrollmentDTO>>(HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
@@ -86,16 +86,16 @@ public class CourseController {
 	
 	@PutMapping(consumes = "application/json")
 	private ResponseEntity<Void> editCourse(@RequestBody CourseDTO editedCourse) {
-		Course course = courseServiceInterface.findOne(editedCourse.id);
+		CourseDTO course = courseServiceInterface.findOne(editedCourse.id);
 		if (course == null) return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); 
 		
-		course.setName(editedCourse.name);
-		course.setCourseCode(editedCourse.courseCode);
-		course.setLectures(editedCourse.lectures);
-		course.setECTS(editedCourse.ECTS);
-		course.setPracticalCLasses(editedCourse.practicalClasses);
-		//course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
-		courseServiceInterface.update(course);
+//		course.setName(editedCourse.name);
+//		course.setCourseCode(editedCourse.courseCode);
+//		course.setLectures(editedCourse.lectures);
+//		course.setECTS(editedCourse.ECTS);
+//		course.setPracticalCLasses(editedCourse.practicalClasses);
+//		//course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
+//		courseServiceInterface.update(course);
 		
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
@@ -127,7 +127,7 @@ public class CourseController {
 
 	@DeleteMapping(value = "/{id}")
 	private ResponseEntity<Boolean> deleteCourse(@PathVariable("id") int id) {
-		Course course = courseServiceInterface.findOne(id);
+		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND); 
 		
 		courseServiceInterface.remove(id);	

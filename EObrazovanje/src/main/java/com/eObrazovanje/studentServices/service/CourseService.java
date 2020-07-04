@@ -31,8 +31,8 @@ public class CourseService implements CourseServiceInterface{
 	EnrollmentRepository enrollmentRepo;
 
 	@Override
-	public Course findOne(int id) {
-		return courseRepo.findById(id).orElse(null);
+	public CourseDTO findOne(int id) {
+		return new CourseDTO(courseRepo.findById(id).orElse(null));
 	}
 
 	@Override

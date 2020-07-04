@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
@@ -114,4 +115,15 @@ public class StudentService implements StudentServiceInterface {
 		return examsDTO;
 	}
 
+	@Override
+	public List<StudentBasicInfoDTO> getNotEnrolledStudents(int id) {
+		List<StudentBasicInfoDTO> studentsDTO = new ArrayList<>();
+		List<Student> students = studentRepository.getNotEnrolledStudents(id);
+		
+		for (Student s: students) {
+			studentsDTO.add(new StudentBasicInfoDTO(s));
+		}
+		
+		return studentsDTO;
+	}
 }
