@@ -25,7 +25,7 @@ import com.eObrazovanje.studentServices.service.CourseServiceInterface;
 import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
 @RestController
-@RequestMapping(value = "api/studyProgramme")
+@RequestMapping(value = "api/studyProgrammes")
 @CrossOrigin(value = "*")
 public class StudyProgrammeController {
 	
@@ -43,6 +43,16 @@ public class StudyProgrammeController {
 	@GetMapping(value="/{studyProgrammeId}")
 	private StudyProgrammeDTO getStudyProgramme(@PathVariable("studyProgrammeId") int id) {
 		return studyProgrammeServiceInterface.findOne(id);
+	}
+	
+	@GetMapping(value="/{studyProgrammeId}/studentsByProgramme")
+	private List<StudentDTO> getStudentsByProgramme(@PathVariable("studyProgrammeId") int id){
+		return studyProgrammeServiceInterface.findStudentsByProgramme(id);
+	}
+	
+	@GetMapping(value="/{studyProgrammeId}/coursesByProgramme")
+	private List<CourseDTO> getCoursesByProgramme(@PathVariable("studyProgrammeId") int id){
+		return studyProgrammeServiceInterface.findCoursesByProgramme(id);
 	}
 	
 	@PostMapping(consumes = "application/json")

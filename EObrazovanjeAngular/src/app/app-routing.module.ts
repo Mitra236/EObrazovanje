@@ -27,6 +27,7 @@ import { ProfessorCourseDetailsComponent } from './professor/professor-course-de
 import { ProfessorExamsComponent } from './professor/professor-exams/professor-exams.component';
 import { ActiveExamRegistrationsComponent } from './professor/active-exam-registrations/active-exam-registrations.component';
 import { InsertExamPointsComponent } from './professor/insert-exam-points/insert-exam-points.component';
+import { AdminProgrammeListComponent } from './admin-programme-list/admin-programme-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -71,7 +72,8 @@ const routes: Routes = [
       { path: 'professors/professorsForAdmin', component: AdminProfessorsListComponent },
       { path: 'users/add/student', component: AdminAddUserComponent },
       { path: 'users/add/professor', component: AdminAddUserComponent },
-      { path: 'courses', component: AdminCoursesListComponent },
+      { path: 'studyProgrammes', component: AdminCoursesListComponent },
+      { path: 'studyProgrammes/programme/:id', component: AdminProgrammeListComponent },
       { path: 'exams', component: AdminExamsListComponent },
       { path: 'periods', component: AdminPeriodsListComponent },
       { path: 'examPeriod', component: AdminPeriods2ListComponent },

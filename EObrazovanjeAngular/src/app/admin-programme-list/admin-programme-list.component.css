@@ -13,7 +13,7 @@ h2 {
     padding-left: 50px;
   }
   
-  .studyProgramme-info {
+  .programme-info {
     background-color: #e0e6eb;
     border-radius: 10px;
     margin: 10px 0;
@@ -39,3 +39,4 @@ h2 {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.1);
   }
+  

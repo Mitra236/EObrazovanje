@@ -1,0 +1,54 @@
+<div class="content-container">
+    <div class="programme-info">
+      <h2>Lista studenata za odabrani program</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <td>{{ student.index }}</td>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>
+              <button class="filled-btn-dark">Ukloni</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button class="filled-btn-dark">Dodaj</button>
+      </div>
+    </div>
+      <div class="programme-info">
+        <h2>Lista predmeta za odabrani program</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Naziv</th>
+              <th>Sifra</th>
+              <th>Profesor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses">
+              <td>{{ course.name }}</td>
+              <td>{{ course.courseCode }}</td>
+              <td>{{ course.professorName }}</td>
+              <td>
+                <button class="filled-btn-dark">Ukloni</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button class="filled-btn-dark">Dodaj</button>
+        </div>
+  </div>
+  

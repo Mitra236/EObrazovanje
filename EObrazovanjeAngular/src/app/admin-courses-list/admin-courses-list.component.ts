@@ -1,22 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { StudyProgramme } from '../types/study.programme';
+import { StudyProgrammeService } from '../services/study.programme.service'
 
-const mockData = [
-  {
-    name: 'Softverske i informacione tehnologije',
-    courseCode: 'SF',
-    ECTS: 180,
-    lectures: 30,
-    practicalCLasses: 10
-  },
-  {
-    name: 'Energetika i elektronika', 
-    courseCode: 'EE',
-    ECTS: 240,
-    lectures: 40,
-    practicalCLasses: 20
-  }
-];
 
 @Component({
   selector: 'app-admin-courses-list',
@@ -25,12 +13,22 @@ const mockData = [
 })
 
 
-export class AdminCoursesListComponent implements OnInit {
-  courses;
-  constructor(private router: ActivatedRoute) { }
+export class AdminCoursesListComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  studyProgrammes: StudyProgramme[];
+  constructor(private studyProgrammeService: StudyProgrammeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.courses = mockData;
+    this.subscription = this.route.params
+    .pipe(switchMap((params: Params) =>
+      this.studyProgrammeService.getListOfStudyProgrammes()))
+      .subscribe(studyProgramme => {
+        this.studyProgrammes = studyProgramme
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
