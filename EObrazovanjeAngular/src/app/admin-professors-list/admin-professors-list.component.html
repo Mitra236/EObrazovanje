@@ -7,8 +7,8 @@
           <th>Ime</th>
           <th>Prezime</th>
           <th>Korisnicko ime</th>
-          <th>Zvanje</th>
           <th>Email</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -17,10 +17,12 @@
           <td>{{ professor.firstName }}</td>
           <td>{{ professor.lastName }}</td>
           <td>{{ professor.username }}</td>
-          <td>{{ professor.academicTitle }}</td>
           <td>{{ professor.email }}</td>
           <td>
             <button class="filled-btn-dark">Ukloni</button>
+          </td>
+          <td>
+            <button class="filled-btn-dark">Izmeni</button>
           </td>
         </tr>
       </tbody>

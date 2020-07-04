@@ -8,6 +8,10 @@ import com.eObrazovanje.studentServices.entity.Professor;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
 
+	@Query(value = "SELECT * FROM professors", nativeQuery = true)
+	List<Professor> findProfessorsForAdmin();
+	
 	@Query(value = "SELECT * FROM professors p INNER JOIN professors_courses pc ON p.professor_id = pc.professor_id INNER JOIN courses c ON pc.course_id = c.course_id", nativeQuery = true)
 	List<Professor> findAll();
+
 }

@@ -44,7 +44,7 @@ public class Course implements Serializable{
 	@Column(name = "practical_classes", nullable = false)
 	private int practicalCLasses;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "course")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "course")
 	private List<Exam> exams = new ArrayList<Exam>();
 	
 	@ManyToMany(cascade = { CascadeType.ALL })

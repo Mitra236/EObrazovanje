@@ -17,6 +17,7 @@ import { Enrollment } from 'src/app/types/enrollment';
 })
 export class ProfessorService {
   professorsUrl = baseUrl + 'professors/';
+  professorsForAdminUrl = baseUrl + 'professors/professorsForAdmin/';
   courseUrl = baseUrl + 'courses/';
   enrollmentUrl = baseUrl + 'enrollment/'
   examUrl = baseUrl + 'exams/'
@@ -78,5 +79,9 @@ export class ProfessorService {
 
     window.alert(errorMessage)
     return throwError(errorMessage)
+  }
+
+  getListOfProfessors(): Observable<Professor[]> {
+    return this.http.get<Professor[]>(this.professorsForAdminUrl);
   }
 }

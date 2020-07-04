@@ -9,6 +9,7 @@ public interface ProfessorServiceInterface {
 	ProfessorDataEditDTO findOneProfessor(int id);
 	ProfessorDTO findOne(int id);
 	List<ProfessorDTO> findAll();
+	List<ProfessorDTO> findProfessorsForAdmin();
 	int save(ProfessorDTO professorDTO);
 	void update(ProfessorDataEditDTO professorDataEditDTO);
 }

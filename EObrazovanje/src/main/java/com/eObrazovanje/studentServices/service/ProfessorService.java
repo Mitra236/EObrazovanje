@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorDataEditDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDTO;
+import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Professor;
+import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.ProfessorRepository;
 
 @Service
@@ -77,4 +81,13 @@ public class ProfessorService implements ProfessorServiceInterface {
 		professorRepository.save(professor);
 	}
 
+	@Override
+	public List<ProfessorDTO> findProfessorsForAdmin() {
+		List<Professor> profs = professorRepository.findProfessorsForAdmin();
+		List<ProfessorDTO> DTO = new ArrayList<>();
+		for(Professor p : profs) {
+			DTO.add(new ProfessorDTO(p));
+		}
+		return DTO;
+	}
 }
