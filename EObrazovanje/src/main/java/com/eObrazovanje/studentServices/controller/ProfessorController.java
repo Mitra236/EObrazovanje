@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +56,24 @@ public class ProfessorController {
 		return new ResponseEntity<ProfessorDataEditDTO>(professorDTO, HttpStatus.OK);
 	}
 	
+	@PostMapping(consumes = "application/json")
+	private ResponseEntity<Integer> addProfessor(@RequestBody ProfessorDTO professorDTO) {
+		if (professorDTO == null) return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		
+		professorServiceInterface.save(professorDTO);
+		
+		return new ResponseEntity<Integer>(professorDTO.id, HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "all-data", consumes = "application/json")
+	private ResponseEntity<Void> updateAllData(@RequestBody ProfessorDTO professorDTO) {
+		if (professorDTO == null) return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		
+		professorServiceInterface.updateAllData(professorDTO);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 	@PutMapping(consumes = "application/json")
 	private ResponseEntity<Void> updateProfessorData(@RequestBody ProfessorDataEditDTO professorDataEditDTO) {
 		if (professorDataEditDTO == null) {
@@ -61,6 +82,15 @@ public class ProfessorController {
 		professorServiceInterface.update(professorDataEditDTO);
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	private ResponseEntity<Boolean> delete(@PathVariable int id) {
+		ProfessorDTO professorDTO = professorServiceInterface.findOne(id);
+		if(professorDTO == null) return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+		
+		professorServiceInterface.remove(id);
+		return new ResponseEntity<Boolean>(HttpStatus.OK);
 	}
 	
 }

@@ -1,109 +1,148 @@
 <div class="content-container">
   <div class="info">
     <h3 class="card-title">Informacije o studentu</h3>
-    <div class="form">
-      <div class="row">
-        <label>Korisnicko ime:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>Lozinka:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>Ime:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>Prezime:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>Email:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>Broj telefona:</label>
-        <input type="text" />
-      </div>
-      <div class="row">
-        <label>JMBG:</label>
-        <input type="text" />
-      </div>
-
-      <div *ngIf="!student">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="this.userForm">
+      <div class="form">
+        <div *ngIf="!professor">
         <div class="row">
-          <label>Titula:</label>
-          <input type="text" />
+          <label>Korisnicko ime:</label>
+          <input type="text" formControlName="username"/>
         </div>
         <div class="row">
-          <label>Biografija:</label>
-          <input type="text" />
+          <label>Lozinka:</label>
+          <input type="text" formControlName="password"/>
         </div>
         <div class="row">
-          <label>Pozicija:</label>
-          <input type="text" />
+          <label>Ime:</label>
+          <input type="text" formControlName="firstName"/>
         </div>
         <div class="row">
-          <label>Funkcija:</label>
-          <input type="text" />
+          <label>Prezime:</label>
+          <input type="text" formControlName="lastName"/>
         </div>
         <div class="row">
-          <label>Uloga:</label>
-          <input type="text" />
+          <label>Email:</label>
+          <input type="text" formControlName="email"/>
         </div>
         <div class="row">
-          <label>datum sticanja pozicije:</label>
-          <input type="date" />
+          <label>Broj telefona:</label>
+          <input type="text" formControlName="phoneNumber"/>
         </div>
         <div class="row">
-          <label>Datum sticanja uloge:</label>
-          <input type="date" />
+          <label>JMBG:</label>
+          <input type="text" formControlName="JMBG"/>
         </div>
       </div>
 
-      <div *ngIf="student">
-        <div class="row">
-          <label>Indeks:</label>
-          <input type="text" />
+        <div *ngIf="!student && !professor">
+          <div class="row">
+            <label>Titula:</label>
+            <input type="text" formControlName="academicTitle"/>
+          </div>
+          <div class="row">
+            <label>Biografija:</label>
+            <input type="text" formControlName="biography"/>
+          </div>
+          <div class="row">
+            <label>Pozicija:</label>
+            <select formControlName="position">
+              <option *ngFor="let item of positions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
+            </select>
+          </div>
+          <div class="row">
+            <label>Funkcija:</label>
+            <select formControlName="emplyeeFunction">
+              <option *ngFor="let item of functions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
+            </select>
+          </div>
+          <div class="row">
+            <label>Datum sticanja pozicije:</label>
+            <input type="date" formControlName="positionFrom"/>
+          </div>
+          <div class="row">
+            <label>Datum sticanja uloge:</label>
+            <input type="date" formControlName="employeeFunctionFrom"/>
+          </div>
         </div>
-        <div class="row">
-          <label>Godina upisa:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Godina studija:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Redni broj upisa godine:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Nacin finansiranja:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Broj ziro racuna:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Broj modela:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Poziv na broj:</label>
-          <input type="text" />
-        </div>
-        <div class="row">
-          <label>Stanje na racunu:</label>
-          <input type="number" disabled />
-        </div>
-      </div>
 
-      <div class="button-container">
-        <button class="filled-btn-dark action-btn">Potvrdi</button>
+        <div *ngIf="student">
+          <div class="row">
+            <label>Indeks:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Godina upisa:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Godina studija:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Redni broj upisa godine:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Nacin finansiranja:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Broj ziro racuna:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Broj modela:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Poziv na broj:</label>
+            <input type="text" />
+          </div>
+          <div class="row">
+            <label>Stanje na racunu:</label>
+            <input type="number" disabled />
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button type="submit" class="filled-btn-dark action-btn">Potvrdi</button>
+        </div>
       </div>
-    </div>
+    </form>
+
+    <form [formGroup]="userEditForm" (ngSubmit)="onSubmit()" *ngIf="this.userEditForm">
+      <div class="form">
+        <div *ngIf="!student && professor" >
+          <div class="row">
+            <label>Titula:</label>
+            <input type="text" formControlName="academicTitle"/>
+          </div>
+          <div class="row">
+            <label>Pozicija:</label>
+            <select formControlName="position">
+              <option *ngFor="let item of positions | keyvalue; let i = index" [ngValue] = "item.key" [attr.selected] = "i">{{ item.value }}</option>
+            </select>
+          </div>
+          <div class="row">
+            <label>Funkcija:</label>
+            <select formControlName="emplyeeFunction">
+              <option *ngFor="let item of functions | keyvalue; let i = index" [ngValue] = "item.key" [attr.selected] = "i">{{ item.value }}</option>
+            </select>
+          </div>
+          <div class="row">
+            <label>Datum sticanja pozicije:</label>
+            <input type="date" formControlName="positionFrom"/>
+          </div>
+          <div class="row">
+            <label>Datum sticanja uloge:</label>
+            <input type="date" formControlName="employeeFunctionFrom"/>
+          </div>
+          <div class="button-container">
+            <button type="submit" class="filled-btn-dark action-btn" [disabled] = "!userEditForm.valid">Potvrdi</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
   </div>
 </div>

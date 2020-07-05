@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProfessorService } from '../../services/professor/professor.service';
 import { Professor } from '../../types/professor';
+import { AdminProfessorService } from 'src/app/services/admin/admin-professor.service';
 
 @Component({
   selector: 'app-admin-professors-list',
@@ -16,7 +17,8 @@ export class AdminProfessorsListComponent implements OnInit, OnDestroy {
   constructor(
     private professorService: ProfessorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private adminProfessorService: AdminProfessorService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,16 @@ export class AdminProfessorsListComponent implements OnInit, OnDestroy {
       .subscribe((professor) => {
         this.professors = professor;
       });
+  }
+
+  deleteProfessor(id: number, index: number) {
+    this.adminProfessorService.deleteProfessor(id).subscribe(() => {
+      this.professors.splice(index, 1)
+    })
+  }
+
+  goToEdit(id: number) {
+    this.router.navigate(['admin/users/edit/professor/', id])
   }
 
   ngOnDestroy(): void {

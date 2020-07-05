@@ -75,6 +75,7 @@ const routes: Routes = [
       },
       { path: 'users/add/student', component: AdminAddUserComponent },
       { path: 'users/add/professor', component: AdminAddUserComponent },
+      { path: 'users/edit/professor/:id', component: AdminAddUserComponent },
       { path: 'studyProgrammes', component: AdminCoursesListComponent },
       {
         path: 'studyProgrammes/programme/:id',
