@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.service.ExamRegistrationSServiceInterface;
 import com.eObrazovanje.studentServices.service.StudentServiceInterface;
 
 @RestController
@@ -29,6 +31,8 @@ public class StudentController {
 
 	@Autowired
 	StudentServiceInterface studentServiceInterface;
+	@Autowired
+	ExamRegistrationSServiceInterface examRegistrationServiceInterface;
 	
 	@GetMapping
 	private List<StudentDTO> getStudents() {
@@ -67,6 +71,13 @@ public class StudentController {
 	
 	@GetMapping(value="/{studentId}/registered-exam")
 	private List<ExamRegistrationDTO> getCurrentExamRegistrations(@PathVariable("studentId") int id) {
+		return studentServiceInterface.findActiveExams(id);
+	}
+	
+	@PutMapping(value="/{studentId}/unregistered-exam/{examRegistrationId}")
+	private List<ExamRegistrationDTO> unregisterExam(@PathVariable("studentId") int id, @PathVariable("examRegistrationId") int examRegistrationId) {
+		examRegistrationServiceInterface.remove(examRegistrationId);
+		
 		return studentServiceInterface.findActiveExams(id);
 	}
 	

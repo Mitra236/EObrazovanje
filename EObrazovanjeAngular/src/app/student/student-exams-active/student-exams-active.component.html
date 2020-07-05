@@ -72,49 +72,8 @@
           <td></td>
         </tr>
       </tbody>
-      <!-- <ng-template #elseBlock2>
-        <tbody>
-          <tr
-            *ngFor="let exam of exams"
-            (click)="selectExam(exam)"
-            [class.selected-exam]="isExamSelected(exam.id)"
-          >
-            <td><p *ngIf="isExamSelected(exam.id)">+</p></td>
-            <td>{{ exam?.courseName }}</td>
-            <td>{{ exam?.courseName }}</td>
-            <td>{{ exam?.date }}</td>
-            <td class="align-right">{{ exam?.paymentAmount }}</td>
-            <td>{{ exam?.courseProfessor }}</td>
-          </tr>
-
-          <tr class="info-rows">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Ukupno:</td>
-            <td class="align-right">{{ selectedExamsCost }}</td>
-            <td></td>
-          </tr>
-          <tr class="info-rows">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Trenutno stanje:</td>
-            <td class="align-right">{{ userAccountBalance }}</td>
-            <td></td>
-          </tr>
-          <tr class="info-rows">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Stanje nakon transakcije:</td>
-            <td class="line align-right">{{ newUserAccountBalance }}</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </ng-template> -->
     </table>
-    <div class="btn-container">
+    <div class="btn-container" (click)="handleSubmit()">
       <button class="filled-btn-dark">Potvrdi</button>
     </div>
   </div>

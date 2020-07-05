@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Exam } from 'src/app/types/exam';
 import { ExamRegistration } from 'src/app/types/exam-registration';
 import { Student } from 'src/app/types/student';
@@ -39,6 +40,18 @@ export class StudentServiceService {
     return this.http.get<ExamRegistration[]>(
       this.studentsUrl + id + '/registered-exam'
     );
+  }
+
+  unregisterExam(id: number, examId: number): Observable<any> {
+    return this.http
+      .put(this.studentsUrl + id + '/unregistered-exam/' + examId, {})
+      .pipe(
+        tap((data) => console.log(data)),
+        (e) => {
+          console.log(e);
+          return e;
+        }
+      );
   }
 
   getFailedExams(id: number): Observable<ExamRegistration[]> {

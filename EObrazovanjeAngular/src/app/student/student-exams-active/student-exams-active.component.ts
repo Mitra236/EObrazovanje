@@ -49,13 +49,11 @@ export class StudentExamsActiveComponent implements OnInit {
     registration
       ? this.studentService.getCurrentExams(1).subscribe((exams: Exam[]) => {
           this.exams = exams;
-          console.log(exams);
         })
       : this.studentService
           .getCurrentExamRegistrations(1)
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
-            console.log(exams);
           });
   }
 
@@ -86,5 +84,19 @@ export class StudentExamsActiveComponent implements OnInit {
 
   isExamSelected(examId: string) {
     return this.selectedExams.find((e) => examId === e.id);
+  }
+
+  handleSubmit() {
+    if (this.registration) {
+      console.log('register');
+    } else if (!this.registration) {
+      this.selectedExams.forEach((e) => {
+        this.studentService
+          .unregisterExam(1, e.id)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+          });
+      });
+    }
   }
 }
