@@ -43,21 +43,25 @@ export class AdminAddUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.student = this.router.url.toString().includes('student');
-    this.professorId ? this.professorId = this.route.snapshot.params['id'] : 0;
+
     if(!this.student && !this.route.snapshot.params['id']) {
       this.getProfessorAddData()
     } else if (!this.student) {
       this.getProfessor(+this.route.snapshot.params['id'])
-    }
+      }
     }
 
     onSubmit() {
       if(!this.student && !this.route.snapshot.params['id']) {
         this.adminProfessorService.addProfessor(this.userForm.value).subscribe(res => {
           window.alert("Success")
+          this.router.navigate(["admin/students"])
         });
-      }else if(!this.student) {
-        this.adminProfessorService.editProfessorData(this.userEditForm.value).subscribe()
+      } else if(!this.student) {
+        this.adminProfessorService.editProfessorData(this.userEditForm.value).subscribe(res => {
+          window.alert("Success")
+          this.router.navigate(["admin/professors/professorsForAdmin"])
+        })
       }
     }
 
@@ -66,8 +70,8 @@ export class AdminAddUserComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         username: ['', Validators.required],
-        email: ['', Validators.required],
-        JMBG: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        JMBG: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
         password: ['', Validators.required],
         phoneNumber: [''],
         biography: [''],

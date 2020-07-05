@@ -46,13 +46,13 @@
           <div class="row">
             <label>Pozicija:</label>
             <select formControlName="position">
-              <option *ngFor="let item of positions | keyvalue; let i = index" [ngValue] = "item.key" [attr.selected] = "i">{{ item.value }}</option>
+              <option *ngFor="let item of positions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
             </select>
           </div>
           <div class="row">
             <label>Funkcija:</label>
             <select formControlName="emplyeeFunction">
-              <option *ngFor="let item of functions | keyvalue; let i = index" [ngValue] = "item.key" [attr.selected] = "i">{{ item.value }}</option>
+              <option *ngFor="let item of functions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
             </select>
           </div>
           <div class="row">
