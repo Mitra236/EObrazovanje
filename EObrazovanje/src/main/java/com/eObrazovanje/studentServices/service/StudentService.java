@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
+import com.eObrazovanje.studentServices.entity.FinancialCard;
 import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 
@@ -133,5 +135,21 @@ public class StudentService implements StudentServiceInterface {
 		}
 		
 		return studentsDTO;
+	}
+
+	@Override
+	public List<FinancialCardDTO> getFinancialCardInfo(int id) {
+		List<FinancialCardDTO> studentsTransactionsDTO = new ArrayList<>();
+		Student student = studentRepository.findById(id).orElse(null);
+		
+		if(student != null) {
+			if(student.getFinancialCard().size() > 0) {
+				for(FinancialCard fCard : student.getFinancialCard()) {
+					studentsTransactionsDTO.add(new FinancialCardDTO(fCard));
+				}
+			}
+		}
+		// TODO Auto-generated method stub
+		return studentsTransactionsDTO;
 	}
 }

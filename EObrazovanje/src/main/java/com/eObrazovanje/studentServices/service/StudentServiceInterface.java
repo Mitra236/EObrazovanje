@@ -2,8 +2,11 @@ package com.eObrazovanje.studentServices.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
@@ -21,4 +24,5 @@ public interface StudentServiceInterface {
 	List<ExamRegistrationDTO> findFailedExams(int id);
 	List<ExamRegistrationDTO> findTakenExams(int id);
 	List<StudentBasicInfoDTO> getNotEnrolledStudents(int id);
+	List<FinancialCardDTO> getFinancialCardInfo( int id);
 }

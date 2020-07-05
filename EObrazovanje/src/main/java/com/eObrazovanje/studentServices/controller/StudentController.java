@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
@@ -60,8 +61,8 @@ public class StudentController {
 	}
 
 	@GetMapping(value="/{studentId}/financial-card")
-	private List<StudentDTO> getFinancialCardInfo(@PathVariable("studentId") int id) {
-		return studentServiceInterface.findAll();
+	private List<FinancialCardDTO> getFinancialCardInfo(@PathVariable("studentId") int id) {
+		return studentServiceInterface.getFinancialCardInfo(id);
 	}
 	
 	@GetMapping(value="enrollments")
