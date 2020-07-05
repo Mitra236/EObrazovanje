@@ -20,6 +20,7 @@ public class ExamRegistrationDTO implements Serializable{
 	public int studentId;
 	public int ECTS;
 	public int finalGrade;
+	public double paymentAmount;
 	
 	public ExamRegistrationDTO() {
 		super();
@@ -41,6 +42,7 @@ public class ExamRegistrationDTO implements Serializable{
 		this.studentId=examReg.getStudent().getId();
 		this.ECTS = examReg.getExam().getCourse().getECTS();
 		this.finalGrade = examReg.getFinalGrade();
+		this.paymentAmount = examReg.getExam().getExamPeriod().getPaymentAmount();
 	}
 
 }

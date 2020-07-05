@@ -31,11 +31,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>12.12.2020.</td>
-            <td style="text-align: left;">Nesto nesto</td>
-            <td>200</td>
+          <tr *ngFor="let transaction of studentTransactions">
+            <td>{{ transaction?.id }}</td>
+            <td>{{ transaction?.paymentDate }}</td>
+            <td style="width: 60%; text-align: left;">
+              {{ transaction?.paymentDescription }}
+            </td>
+            <td>{{ transaction?.paymentAmount }}</td>
           </tr>
         </tbody>
       </table>

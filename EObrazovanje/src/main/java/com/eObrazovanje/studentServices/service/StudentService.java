@@ -1,5 +1,6 @@
 package com.eObrazovanje.studentServices.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
+import com.eObrazovanje.studentServices.entity.FinancialCard;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
+import com.eObrazovanje.studentServices.repository.ExamRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
@@ -22,6 +27,10 @@ public class StudentService implements StudentServiceInterface {
 
 	@Autowired
 	StudentRepository studentRepository;
+	@Autowired
+	ExamRepository examRepository;
+	@Autowired
+	ExamRegistrationRepository examRegistrationRepository;
 
 	@Override
 	public StudentDetailsDTO findOne(int id) {
@@ -133,5 +142,99 @@ public class StudentService implements StudentServiceInterface {
 		}
 		
 		return studentsDTO;
+	}
+
+	@Override
+	public List<FinancialCardDTO> getFinancialCardInfo(int id) {
+		List<FinancialCardDTO> studentsTransactionsDTO = new ArrayList<>();
+		Student student = studentRepository.findById(id).orElse(null);
+		
+		if(student != null) {
+			if(student.getFinancialCard().size() > 0) {
+				for(FinancialCard fCard : student.getFinancialCard()) {
+					studentsTransactionsDTO.add(new FinancialCardDTO(fCard));
+				}
+			}
+		}
+		// TODO Auto-generated method stub
+		return studentsTransactionsDTO;
+	}
+
+	@Override
+	public List<ExamRegistrationDTO> findActiveExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<ExamRegistrationDTO> currentExams = new ArrayList<ExamRegistrationDTO>();
+
+		Date currentDate = new Date(new java.util.Date().getTime());
+		
+		if(student != null ) {
+			if(student.getExamsTaken().size() > 0) {
+				for(ExamRegistration e : student.getExamsTaken()) {
+					if(currentDate.before(e.getExam().getExam_date())) {
+						currentExams.add(new ExamRegistrationDTO(e));
+					}
+				}
+			}
+		}
+		
+		return currentExams;
+	}
+
+	@Override
+	public int registerExam(int studentId, int examId) {
+		// TODO Auto-generated method stub
+		Exam exam = examRepository.findById(examId).orElse(null);
+		Student student = studentRepository.findById(studentId).orElse(null);
+		
+		if(exam != null && student != null) {
+			ExamRegistration examReg = new ExamRegistration();
+			examReg.setExam(exam);
+			examReg.setStudent(student);
+			examReg.setStatus(EExamStatus.ND);
+			examReg.setExamPeriod(exam.getExamPeriod());
+			examReg.setFinalGrade(5);
+			examRegistrationRepository.save(examReg);
+			return examReg.getId();
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ExamDTO> getCurrentExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<Exam> allExams = examRepository.findAll();
+		List<Exam> currentExams = new ArrayList<>();
+		
+		Date currentDate = new Date(new java.util.Date().getTime());
+		
+		if(student != null) {
+			for (Exam e : allExams) {
+				if(e.getExamPeriod().getEndDate().after(currentDate) && 
+						e.getExamPeriod().getStartDate().before(currentDate) && 
+						e.getCourse().getStudyProgramme().getId() == student.getStudyProgramme().getId()) {
+					
+						currentExams.add(e);
+					
+				}
+			}
+		}
+		
+		if(student.getExamsTaken().size() > 0) {
+			for(ExamRegistration eR : student.getExamsTaken()) {
+				if(currentExams.contains(eR.getExam()) ) {
+					currentExams.remove(eR.getExam());
+				}
+			}
+		}
+		
+		List<ExamDTO> currentExamsDTOs = new ArrayList<>();
+		
+		for( Exam examToDTO : currentExams) {
+			currentExamsDTOs.add(new ExamDTO(examToDTO));
+		}
+		
+		return currentExamsDTOs;
 	}
 }

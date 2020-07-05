@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServiceService } from 'src/app/services/student/student.service';
 import { Exam } from 'src/app/types/exam';
+import { ExamRegistration } from 'src/app/types/exam-registration';
 
 const mockDataUnregistration = [
   {
@@ -48,9 +49,12 @@ export class StudentExamsActiveComponent implements OnInit {
     registration
       ? this.studentService.getCurrentExams(1).subscribe((exams: Exam[]) => {
           this.exams = exams;
-          console.log(exams);
         })
-      : mockDataUnregistration;
+      : this.studentService
+          .getCurrentExamRegistrations(1)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+          });
   }
 
   selectExam(exam: any) {
@@ -80,5 +84,24 @@ export class StudentExamsActiveComponent implements OnInit {
 
   isExamSelected(examId: string) {
     return this.selectedExams.find((e) => examId === e.id);
+  }
+
+  handleSubmit() {
+    if (this.registration) {
+      this.selectedExams.forEach((e) => {
+        this.studentService.registerExam(1, e.id).subscribe((data) => {
+          console.log(data);
+        });
+      });
+      window.location.reload();
+    } else if (!this.registration) {
+      this.selectedExams.forEach((e) => {
+        this.studentService
+          .unregisterExam(1, e.id)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+          });
+      });
+    }
   }
 }

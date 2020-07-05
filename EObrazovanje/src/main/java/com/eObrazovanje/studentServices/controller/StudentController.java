@@ -8,17 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.service.ExamRegistrationSServiceInterface;
 import com.eObrazovanje.studentServices.service.StudentServiceInterface;
 
 @RestController
@@ -28,6 +32,8 @@ public class StudentController {
 
 	@Autowired
 	StudentServiceInterface studentServiceInterface;
+	@Autowired
+	ExamRegistrationSServiceInterface examRegistrationServiceInterface;
 	
 	@GetMapping
 	private List<StudentDTO> getStudents() {
@@ -42,6 +48,11 @@ public class StudentController {
 	@GetMapping(value="/student")
 	private StudentDetailsDTO getStudent(@RequestParam("id") int id) {
 		return studentServiceInterface.findOne(id);
+	}
+	
+	@GetMapping(value="/{studentId}/exams-current")
+	private List<ExamDTO> getCurrentExamsForSTudent(@PathVariable("studentId") int id) {
+		return studentServiceInterface.getCurrentExams(id);
 	}
 	
 	@GetMapping(value="/{studentId}/exams")
@@ -60,8 +71,20 @@ public class StudentController {
 	}
 
 	@GetMapping(value="/{studentId}/financial-card")
-	private List<StudentDTO> getFinancialCardInfo(@PathVariable("studentId") int id) {
-		return studentServiceInterface.findAll();
+	private List<FinancialCardDTO> getFinancialCardInfo(@PathVariable("studentId") int id) {
+		return studentServiceInterface.getFinancialCardInfo(id);
+	}
+	
+	@GetMapping(value="/{studentId}/registered-exam")
+	private List<ExamRegistrationDTO> getCurrentExamRegistrations(@PathVariable("studentId") int id) {
+		return studentServiceInterface.findActiveExams(id);
+	}
+	
+	@PutMapping(value="/{studentId}/unregistered-exam/{examRegistrationId}")
+	private List<ExamRegistrationDTO> unregisterExam(@PathVariable("studentId") int id, @PathVariable("examRegistrationId") int examRegistrationId) {
+		examRegistrationServiceInterface.remove(examRegistrationId);
+		
+		return studentServiceInterface.findActiveExams(id);
 	}
 	
 	@GetMapping(value="enrollments")
@@ -71,5 +94,10 @@ public class StudentController {
 			return new ResponseEntity<List<StudentBasicInfoDTO>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<StudentBasicInfoDTO>>(studentDTOs, HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/{studentId}/register-exam/{examId}")
+	private int registerExam(@PathVariable("studentId") int studentId, @PathVariable("examId") int examId) {
+		return studentServiceInterface.registerExam(studentId, examId);
 	}
 }
