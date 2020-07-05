@@ -31,6 +31,10 @@ export class AdminProfessorsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  goToEdit(id: number) {
+    this.router.navigate(['admin/users/edit/professor/', id])
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

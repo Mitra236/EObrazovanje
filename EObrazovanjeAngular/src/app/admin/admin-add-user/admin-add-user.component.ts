@@ -1,5 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AdminProfessorService } from 'src/app/services/admin/admin-professor.service';
+import { Professor } from 'src/app/types/professor';
+
+enum EPosition {
+  FullTimeProfessor = "Full Time Professor",
+  Docent = "Docent",
+  Assistant = "Assistant",
+  TeachingAssociate = "Teaching Associate",
+  AssociateProfessor = "Associate Professor"
+}
+
+export enum EEmployeeFunction {
+  Dean = "Dean",
+  ViceDean = "Vice Dean",
+  HeadOfDepartment = "Head of Departmant",
+  MemberOfFacultyCouncil = "Member of Faculty Council"
+}
 
 @Component({
   selector: 'app-admin-add-user',
@@ -8,10 +26,76 @@ import { Router } from '@angular/router';
 })
 export class AdminAddUserComponent implements OnInit {
   student;
+  userForm: FormGroup;
+  userEditForm: FormGroup;
+  professorId: number;
+  positions = EPosition;
+  functions = EEmployeeFunction;
+  professor: Professor;
 
-  constructor(private router: Router) {}
+  constructor(
+    private adminProfessorService: AdminProfessorService,
+    private router: Router,
+    private fb: FormBuilder,
+    private route: ActivatedRoute) {
+
+    }
 
   ngOnInit(): void {
     this.student = this.router.url.toString().includes('student');
-  }
+    this.professorId ? this.professorId = this.route.snapshot.params['id'] : 0;
+    if(!this.student && !this.route.snapshot.params['id']) {
+      this.getProfessorAddData()
+    } else if (!this.student) {
+      this.getProfessor(+this.route.snapshot.params['id'])
+    }
+    }
+
+    onSubmit() {
+      if(!this.student && !this.route.snapshot.params['id']) {
+        this.adminProfessorService.addProfessor(this.userForm.value).subscribe(res => {
+          window.alert("Success")
+        });
+      }else if(!this.student) {
+        this.adminProfessorService.editProfessorData(this.userEditForm.value).subscribe()
+      }
+    }
+
+    getProfessorAddData() {
+      this.userForm = this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        username: ['', Validators.required],
+        email: ['', Validators.required],
+        JMBG: ['', Validators.required],
+        password: ['', Validators.required],
+        phoneNumber: [''],
+        biography: [''],
+        academicTitle: ['', Validators.required],
+        position: [''],
+        emplyeeFunction: [''],
+        positionFrom: [''],
+        employeeFunctionFrom: ['']
+      })
+    }
+
+    getProfessorEditData() {
+      this.userEditForm = this.fb.group({
+        id: +this.route.snapshot.params['id'],
+        academicTitle: [this.professor.academicTitle, Validators.required],
+        position: [this.professor.position],
+        emplyeeFunction: [this.professor.emplyeeFunction],
+        positionFrom: [this.professor.positionFrom],
+        employeeFunctionFrom: [this.professor.employeeFunctionFrom]
+      })
+    }
+
+    getProfessor(id: number) {
+      this.adminProfessorService.getProfessor(id)
+      .subscribe(data => {
+        this.professor = data
+        this.getProfessorEditData()
+      })
+    }
 }
+
