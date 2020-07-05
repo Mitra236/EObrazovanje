@@ -28,6 +28,7 @@ import { ProfessorExamsComponent } from './professor/professor-exams/professor-e
 import { ActiveExamRegistrationsComponent } from './professor/active-exam-registrations/active-exam-registrations.component';
 import { InsertExamPointsComponent } from './professor/insert-exam-points/insert-exam-points.component';
 import { AdminProgrammeListComponent } from './admin-programme-list/admin-programme-list.component';
+import { AdminAddProgrammeComponent } from './admin-add-programme/admin-add-programme.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -79,7 +80,8 @@ const routes: Routes = [
       { path: 'examPeriod', component: AdminPeriods2ListComponent },
       { path: 'bookings', component: AdminBookingListComponent },
       { path: 'courseBooking', component: AdminBooking2ListComponent },
-      { path: 'examBooking', component: AdminBooking3ListComponent }
+      { path: 'examBooking', component: AdminBooking3ListComponent },
+      { path: 'addProgramme', component: AdminAddProgrammeComponent }
     ],
   },
 ];

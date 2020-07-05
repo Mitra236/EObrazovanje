@@ -14,6 +14,7 @@ import com.eObrazovanje.studentServices.entity.Student;
 public interface StudentServiceInterface {
 
 	StudentDetailsDTO findOne(int id);
+	StudentDTO findOneForEnrollment(int id);
 	List<StudentDTO> findAll();
 	int save(Student student);
 	List<ExamRegistrationDTO> findPassedExams(int id);

@@ -24,17 +24,28 @@
 
   <div *ngIf="role === 'admin'">
     <div class="group">
-      <p class="group-title">Akcije</p>
+      <p class="group-title">Studenti</p>
       <a class="item" routerLink="/admin/students">Pregled studenata</a>
       <a class="item" routerLink="/admin/users/add/student">Dodaj studenta</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Studijski programi</p>
       <a class="item" routerLink="/admin/studyProgrammes">Pregled programa</a>
+      <a class="item" routerLink="/admin/addProgramme">Dodaj program</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Ispitni rokovi</p>
       <a class="item" routerLink="/admin/periods">Pregled ispitnih rokova</a>
       <a class="item" routerLink="/admin/bookings">Knjizenje</a>
+    </div>
+    <div class="group">
+      <p class="group-title">Profesori</p>
       <a class="item" routerLink="/admin/professors/professorsForAdmin">Pregled profesora</a>
       <a class="item" routerLink="/admin/users/add/professor"
         >Dodaj profesora</a
       >
     </div>
+    
   </div>
 
   <div *ngIf="role === 'professor'">

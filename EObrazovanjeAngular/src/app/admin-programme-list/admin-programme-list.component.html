@@ -22,7 +22,10 @@
         </tbody>
       </table>
       <div>
-        <button class="filled-btn-dark">Dodaj</button>
+        <select [(ngModel)]="selectedStudent" class="select-list">
+          <option *ngFor="let student of availableStudents" [ngValue]="student">{{student.index}} {{student.firstName}} {{student.lastName}}</option>
+        </select>
+        <button class="filled-btn-dark" (click)="addStudentToProgramme()">Dodaj</button>
       </div>
     </div>
       <div class="programme-info">

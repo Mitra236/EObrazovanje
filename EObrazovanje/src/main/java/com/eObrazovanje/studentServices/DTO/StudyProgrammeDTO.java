@@ -24,25 +24,29 @@ public class StudyProgrammeDTO implements Serializable{
 		this.coursesDTO= new ArrayList<StudyProgrammeCourseDetailsDTO>();
 		this.studentsDTO = new ArrayList<StudentDetailsDTO>();
 		List<Student> students = prog.getStudents();
-		for(Student s: students) {
-			studentsDTO.add(new StudentDetailsDTO(s));
+		if(students != null) {
+			for(Student s: students) {
+				studentsDTO.add(new StudentDetailsDTO(s));
+			}
 		}
 		List<Course> courses = prog.getCourses();
-		for(Course c:courses) {
-			List<Professor> profs = c.getProfessors();
-			Professor prof = null;
-			if(profs != null)
-				if(profs.size() > 0)
-					prof = profs.get(0);
-			
-			coursesDTO.add(
-					new StudyProgrammeCourseDetailsDTO(
-							c.getId(), 
-							c.getName(),
-							c.getCourseCode(),
-							(prof != null ? prof.getLastName() : "")
-					)
-			);
+		if(courses != null) {
+			for(Course c:courses) {
+				List<Professor> profs = c.getProfessors();
+				Professor prof = null;
+				if(profs != null)
+					if(profs.size() > 0)
+						prof = profs.get(0);
+				
+				coursesDTO.add(
+						new StudyProgrammeCourseDetailsDTO(
+								c.getId(), 
+								c.getName(),
+								c.getCourseCode(),
+								(prof != null ? prof.getLastName() : "")
+						)
+				);
+			}
 		}
 	}
 	

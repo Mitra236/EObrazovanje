@@ -22,6 +22,7 @@ import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
+import com.eObrazovanje.studentServices.service.StudentServiceInterface;
 import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
 @RestController
@@ -34,6 +35,9 @@ public class StudyProgrammeController {
 	
 	@Autowired
 	CourseServiceInterface courseServiceInterface;
+	
+	@Autowired
+	StudentServiceInterface studentServiceInterface;
 	
 	@GetMapping
 	private List<StudyProgrammeDTO> getAll() {
@@ -92,12 +96,15 @@ public class StudyProgrammeController {
 		return new ResponseEntity<Integer>(HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/programmeStudents", consumes = "application/json")
-	private ResponseEntity<Integer> addStudentToProgramme(@RequestBody StudentDTO student){
+	@PostMapping(value = "/{studyProgrammeId}/addProgrammeStudent/{studentId}", consumes = "application/json")
+	private ResponseEntity<Integer> addStudentToProgramme(@PathVariable("studyProgrammeId") int programmeId,
+			@PathVariable("studentId") int studentId){
+		
+		StudentDTO student = studentServiceInterface.findOneForEnrollment(studentId);
 		if(student == null)
 			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
 		
-		StudyProgrammeDTO prog = studyProgrammeServiceInterface.findOne(student.studyProgramme.id);
+		StudyProgrammeDTO prog = studyProgrammeServiceInterface.findOne(programmeId);
 		if(prog == null)
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		

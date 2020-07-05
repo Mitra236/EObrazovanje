@@ -124,6 +124,9 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 		student.setStudyProgramme(program);
 		program.getStudents().add(student);
 		
+		studentRepository.save(student);
+		studyProgrammeRepository.save(program);
+		
 		return student.getId();
 	}
 

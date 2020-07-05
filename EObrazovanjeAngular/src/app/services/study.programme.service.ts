@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { baseUrl } from './url';
-import { HttpClient, HttpErrorResponse, HttpResponse  } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders  } from '@angular/common/http';
 import { throwError, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { StudyProgramme } from 'src/app/types/study.programme';
 import { Student } from 'src/app/types/student';
 import { Course } from 'src/app/types/course';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class StudyProgrammeService {
   studyProgrammesUrl = baseUrl + 'studyProgrammes';
-
+  name = String;
   constructor(private http: HttpClient) { }
 
   getListOfStudyProgrammes(): Observable<StudyProgramme[]> {
     return this.http.get<StudyProgramme[]>(this.studyProgrammesUrl);
+  }
+
+  getStudyProgramme(id: Number): Observable<StudyProgramme> {
+    return this.http.get<StudyProgramme>(this.studyProgrammesUrl + '/' + id);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -41,4 +44,11 @@ export class StudyProgrammeService {
             .pipe(catchError(this.handleError));
   }
 
+  addStudentToProgramme(programmeId: Number, student: Student) {
+    return this.http.post<Student>(this.studyProgrammesUrl + '/' + programmeId + '/addProgrammeStudent' + '/' + student.id,
+    {}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+  }
 }

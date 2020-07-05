@@ -33,6 +33,7 @@ import { ProfessorExamsComponent } from './professor/professor-exams/professor-e
 import { ActiveExamRegistrationsComponent } from './professor/active-exam-registrations/active-exam-registrations.component';
 import { InsertExamPointsComponent } from './professor/insert-exam-points/insert-exam-points.component';
 import { AdminProgrammeListComponent } from './admin-programme-list/admin-programme-list.component';
+import { AdminAddProgrammeComponent } from './admin-add-programme/admin-add-programme.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AdminProgrammeListComponent } from './admin-programme-list/admin-progra
     ProfessorExamsComponent,
     ActiveExamRegistrationsComponent,
     InsertExamPointsComponent,
-    AdminProgrammeListComponent
+    AdminProgrammeListComponent,
+    AdminAddProgrammeComponent
   ],
   imports: [
     BrowserModule,

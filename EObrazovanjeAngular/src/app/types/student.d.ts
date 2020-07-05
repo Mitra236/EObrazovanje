@@ -1,3 +1,5 @@
+import { StudyProgramme } from "./study.programme";
+
 export interface Student {
   id: number;
   index: string;

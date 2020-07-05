@@ -30,6 +30,14 @@ public class StudentService implements StudentServiceInterface {
 		
 		return new StudentDetailsDTO(student);
 	}
+	
+	@Override
+	public StudentDTO findOneForEnrollment(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		
+		return new StudentDTO(student);
+	}
 
 	@Override
 	public List<StudentDTO> findAll() {
