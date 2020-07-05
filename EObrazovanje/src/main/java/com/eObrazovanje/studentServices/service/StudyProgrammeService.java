@@ -21,6 +21,7 @@ import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.entity.Student;
 import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
+import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 import com.eObrazovanje.studentServices.repository.StudyProgrammeRepository;
@@ -40,6 +41,9 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 	@Autowired
 	StudentRepository studentRepository;
 
+	@Autowired
+	EnrollmentRepository enrollmentRepository;
+	
 	@Override
 	public StudyProgrammeDTO findOne(int id) {
 		StudyProgramme programme = studyProgrammeRepository.findById(id).orElse(null);
@@ -140,17 +144,21 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 		if(s == null)
 			return false;
 		
-		List<Student> studentsToRemove= new ArrayList<Student>();
-		for(Student stud: prog.getStudents()) {
-			if(stud.getId() == id)
-				studentsToRemove.add(stud);
+		for(Student student: prog.getStudents()) {
+			if(student.getId() == id) {
+				prog.getStudents().remove(student);
+				student.setStudyProgramme(null);
+				
+
+				for(Enrollment e: student.getEnrollment()) {
+					enrollmentRepository.delete(e);
+				}
+				
+				studentRepository.save(student);
+			}
 		}
 		
-		for(Student student : studentsToRemove) {
-			prog.getStudents().remove(student);
-			student.setStudyProgramme(null);
-		}
-		
+		studyProgrammeRepository.save(prog);
 		return true;
 	}
 

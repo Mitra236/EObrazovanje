@@ -2,25 +2,36 @@ package com.eObrazovanje.studentServices.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentToAddDTO;
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
+import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
+import com.eObrazovanje.studentServices.entity.Enrollment;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.entity.FinancialCard;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.entity.StudyProgramme;
+import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
 import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
+import com.eObrazovanje.studentServices.repository.StudyProgrammeRepository;
+
+import javassist.NotFoundException;
 
 @Service
 public class StudentService implements StudentServiceInterface {
@@ -31,6 +42,12 @@ public class StudentService implements StudentServiceInterface {
 	ExamRepository examRepository;
 	@Autowired
 	ExamRegistrationRepository examRegistrationRepository;
+	
+	@Autowired
+	StudyProgrammeRepository studyProgrammeRepository;
+	
+	@Autowired
+	EnrollmentRepository enrollmentRepository;
 
 	@Override
 	public StudentDetailsDTO findOne(int id) {
@@ -236,5 +253,36 @@ public class StudentService implements StudentServiceInterface {
 		}
 		
 		return currentExamsDTOs;
+	}
+	
+	@Override
+	public List<EnrollmentDTO> enrollUserToProgrammeCourses(int studentId, int programmeId) {
+		StudyProgramme prog = studyProgrammeRepository.findById(programmeId).orElse(null);
+
+
+		List<EnrollmentDTO> enrollments = new ArrayList<EnrollmentDTO>();
+		
+		Student studentFromDB = studentRepository.findById(studentId).orElse(null);
+		if(studentFromDB == null)
+			return enrollments;
+		
+		for(Course c : prog.getCourses()) {
+			Enrollment enrollment = new Enrollment();
+			enrollment.setCourse(c);
+			enrollment.setStudent(studentFromDB);
+			enrollment.setStartDate(new Date(new java.util.Date().getTime()));
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(enrollment.getStartDate());
+			
+			cal.add(Calendar.YEAR, 1);
+			
+			enrollment.setEndDate(new Date(cal.getTimeInMillis()));
+			enrollmentRepository.save(enrollment);
+			
+			enrollments.add(new EnrollmentDTO(enrollment));
+			
+		}
+		return enrollments;		
 	}
 }

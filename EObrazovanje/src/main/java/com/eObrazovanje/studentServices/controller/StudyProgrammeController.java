@@ -1,6 +1,8 @@
 package com.eObrazovanje.studentServices.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentToAddDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
 import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
+import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
 import com.eObrazovanje.studentServices.service.StudentServiceInterface;
 import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
 
@@ -38,6 +43,9 @@ public class StudyProgrammeController {
 	
 	@Autowired
 	StudentServiceInterface studentServiceInterface;
+	
+	@Autowired
+	EnrollmentServiceInterface enrollmentServiceInterface;
 	
 	@GetMapping
 	private List<StudyProgrammeDTO> getAll() {
@@ -71,12 +79,15 @@ public class StudyProgrammeController {
 		return new ResponseEntity<>(newProg.getId(), HttpStatus.CREATED);
 	}
 	
-	@PostMapping(value = "/programmeCourse", consumes = "application/json")
-	private ResponseEntity<Integer> addCourseToProgramme(@RequestBody CourseDTO course){
+	@PostMapping(value = "/{studyProgrammeId}/addProgrammeCourse/{courseId}", consumes = "application/json")
+	private ResponseEntity<Integer> addCourseToProgramme(@PathVariable("studyProgrammeId") int programmeId,
+			@PathVariable("courseId") int courseId){
+		
+		CourseDTO course = courseServiceInterface.findOne(courseId);
 		if(course == null)
 			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
 		
-		StudyProgrammeDTO prog = studyProgrammeServiceInterface.findOne(course.studyProgramme.id);
+		StudyProgrammeDTO prog = studyProgrammeServiceInterface.findOne(programmeId);
 		if(prog == null)
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		
@@ -87,6 +98,7 @@ public class StudyProgrammeController {
 		return new ResponseEntity<Integer>(prog.id, HttpStatus.CREATED);
 	}
 	
+	
 	@DeleteMapping(value="/programmeCourse/delete/{courseId}/{studyProgrammeId}")
 	private ResponseEntity<Integer> deleteCourseFromProgramme(@PathVariable("courseId") int courseId,
 			@PathVariable("studyProgrammeId") int programmeId) {
@@ -95,6 +107,7 @@ public class StudyProgrammeController {
 			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<Integer>(HttpStatus.OK);
 	}
+		
 	
 	@PostMapping(value = "/{studyProgrammeId}/addProgrammeStudent/{studentId}", consumes = "application/json")
 	private ResponseEntity<Integer> addStudentToProgramme(@PathVariable("studyProgrammeId") int programmeId,
@@ -111,11 +124,14 @@ public class StudyProgrammeController {
 		int progId = studyProgrammeServiceInterface.saveStudentToProgramme(prog, student);
 		if(progId < 1)
 			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
+				
+		
+		List<EnrollmentDTO> enrollments = studentServiceInterface.enrollUserToProgrammeCourses(progId, programmeId);
 		
 		return new ResponseEntity<Integer>(prog.id, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping(value="/programmeCourse/delete/{studentId}/{studyProgrammeId}")
+	@DeleteMapping(value="/programmeStudent/delete/{studentId}/{studyProgrammeId}")
 	private ResponseEntity<Integer> deleteStudentFromProgramme(@PathVariable("studentId") int studentId,
 			@PathVariable("studyProgrammeId") int programmeId) {
 		boolean response = studyProgrammeServiceInterface.removeStudentFromProgramme(studentId, programmeId);

@@ -16,7 +16,7 @@
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
             <td>
-              <button class="filled-btn-dark">Ukloni</button>
+              <button class="filled-btn-dark" (click)="removeStudentFromProgramme(student)">Ukloni</button>
             </td>
           </tr>
         </tbody>
@@ -45,7 +45,7 @@
               <td>{{ course.courseCode }}</td>
               <td>{{ course.professorName }}</td>
               <td>
-                <button class="filled-btn-dark">Ukloni</button>
+                <button class="filled-btn-dark" >Ukloni</button>
               </td>
             </tr>
           </tbody>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
@@ -28,4 +29,6 @@ public interface StudentServiceInterface {
 	List<FinancialCardDTO> getFinancialCardInfo( int id);
 	int registerExam(int studentId, int examId);
 	List<ExamDTO> getCurrentExams(int id);
+	
+	List<EnrollmentDTO> enrollUserToProgrammeCourses(int studentId, int programmeId);
 }

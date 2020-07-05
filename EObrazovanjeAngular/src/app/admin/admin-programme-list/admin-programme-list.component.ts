@@ -36,6 +36,10 @@ export class AdminProgrammeListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.programmeId = this.route.snapshot.paramMap.get('id');
     this.availableStudents = [];
+    this.displayData();
+  }
+
+  displayData() {
     forkJoin(
       this.getCourses(),
       this.getStudents(),
@@ -88,6 +92,17 @@ export class AdminProgrammeListComponent implements OnInit, OnDestroy {
       this.programmeId,
       this.selectedStudent
     );
+
+    this.displayData();
+  }
+
+  removeStudentFromProgramme(student: Student) {
+    this.studyProgrammeService.removeStudentFromProgramme(
+      this.programmeId,
+      student
+    );
+
+    this.displayData();
   }
 
   ngOnDestroy(): void {}

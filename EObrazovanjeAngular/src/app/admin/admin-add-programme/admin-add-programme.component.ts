@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { StudyProgramme } from 'src/app/types/study.programme';
+import { StudyProgrammeService } from '../../services/study.programme.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-admin-add-programme',
@@ -6,10 +9,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-add-programme.component.css']
 })
 export class AdminAddProgrammeComponent implements OnInit {
+  @Output()
+  saveProgramme = new EventEmitter<StudyProgramme>();
 
-  constructor() { }
+  newProgramme:StudyProgramme;
+  name:string;
+  constructor(private studyProgrammeService : StudyProgrammeService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.newProgramme = {
+      name: ''
+    }as StudyProgramme
+  }
+
+  saveStudyProgramme(){
+    if(this.newProgramme.name.length < 3)
+    {
+      alert("Morate uneti naziv programa!");
+      return;
+    }
+    this.studyProgrammeService.saveStudyProgramme(this.newProgramme);
+
+    this.saveProgramme.emit(this.newProgramme);
+    this.newProgramme = {
+      name: ''
+    }as StudyProgramme
   }
 
 }

@@ -51,4 +51,31 @@ export class StudyProgrammeService {
       (error) => console.log(error)
     )
   }
+
+  
+  removeStudentFromProgramme(programmeId: Number, student: Student) {
+    return this.http.delete<Student>(this.studyProgrammesUrl + '/programmeStudent/delete/' + student.id + '/' + programmeId,
+    {}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+  }
+
+  addCourseToProgramme(programmeId: Number, course: Course) {
+    return this.http.post<Course>(this.studyProgrammesUrl + '/' + programmeId + '/addProgrammeCourse' + '/' + course.id,
+    {}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+  }
+
+  saveStudyProgramme(studyProgramme: StudyProgramme){
+    return this.http.post(this.studyProgrammesUrl, studyProgramme)
+      .subscribe((response) => console.log(response),
+      (error) => console.log(error));
+  }
+
+  deleteStudyProgramme(programmeId:any){
+    return this.http.delete(this.studyProgrammesUrl + '/' + programmeId);
+  }
 }

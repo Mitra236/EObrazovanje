@@ -3,6 +3,7 @@ package com.eObrazovanje.studentServices.service;
 import java.util.List;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
@@ -21,5 +22,4 @@ public interface StudyProgrammeServiceInterface {
 	boolean remove(int id);
 	boolean removeCourseFromProgramme(int id, int programmeId);
 	boolean removeStudentFromProgramme(int id, int programmeId);
-
 }
