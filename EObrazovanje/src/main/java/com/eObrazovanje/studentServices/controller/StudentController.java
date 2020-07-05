@@ -65,6 +65,11 @@ public class StudentController {
 		return studentServiceInterface.getFinancialCardInfo(id);
 	}
 	
+	@GetMapping(value="/{studentId}/registered-exam")
+	private List<ExamRegistrationDTO> getCurrentExamRegistrations(@PathVariable("studentId") int id) {
+		return studentServiceInterface.findActiveExams(id);
+	}
+	
 	@GetMapping(value="enrollments")
 	private ResponseEntity<List<StudentBasicInfoDTO>> getNotEnrolledStudents(@RequestParam("id") int id) {
 		List<StudentBasicInfoDTO> studentDTOs = studentServiceInterface.getNotEnrolledStudents(id);

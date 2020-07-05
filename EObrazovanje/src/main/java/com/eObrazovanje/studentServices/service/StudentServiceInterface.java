@@ -23,6 +23,7 @@ public interface StudentServiceInterface {
 	List<ExamRegistrationDTO> findPassedExams(int id);
 	List<ExamRegistrationDTO> findFailedExams(int id);
 	List<ExamRegistrationDTO> findTakenExams(int id);
+	List<ExamRegistrationDTO> findActiveExams(int id);
 	List<StudentBasicInfoDTO> getNotEnrolledStudents(int id);
 	List<FinancialCardDTO> getFinancialCardInfo( int id);
 }

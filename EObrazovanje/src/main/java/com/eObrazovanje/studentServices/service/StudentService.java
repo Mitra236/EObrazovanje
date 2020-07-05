@@ -1,5 +1,6 @@
 package com.eObrazovanje.studentServices.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,5 +152,26 @@ public class StudentService implements StudentServiceInterface {
 		}
 		// TODO Auto-generated method stub
 		return studentsTransactionsDTO;
+	}
+
+	@Override
+	public List<ExamRegistrationDTO> findActiveExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<ExamRegistrationDTO> currentExams = new ArrayList<ExamRegistrationDTO>();
+
+		Date currentDate = new Date(new java.util.Date().getTime());
+		
+		if(student != null ) {
+			if(student.getExamsTaken().size() > 0) {
+				for(ExamRegistration e : student.getExamsTaken()) {
+					if(currentDate.before(e.getExam().getExam_date())) {
+						currentExams.add(new ExamRegistrationDTO(e));
+					}
+				}
+			}
+		}
+		
+		return currentExams;
 	}
 }

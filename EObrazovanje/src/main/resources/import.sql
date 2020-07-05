@@ -57,6 +57,10 @@ INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_
 
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (0, 10, 1, 1, 1);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 6, 1, 1, 2);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 5);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 4);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 6);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 4);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 8, 2, 2, 3);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 6, 2, 6);
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServiceService } from 'src/app/services/student/student.service';
 import { Exam } from 'src/app/types/exam';
+import { ExamRegistration } from 'src/app/types/exam-registration';
 
 const mockDataUnregistration = [
   {
@@ -50,7 +51,12 @@ export class StudentExamsActiveComponent implements OnInit {
           this.exams = exams;
           console.log(exams);
         })
-      : mockDataUnregistration;
+      : this.studentService
+          .getCurrentExamRegistrations(1)
+          .subscribe((exams: ExamRegistration[]) => {
+            this.exams = exams;
+            console.log(exams);
+          });
   }
 
   selectExam(exam: any) {
