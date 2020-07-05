@@ -88,6 +88,11 @@ export class StudentExamsActiveComponent implements OnInit {
 
   handleSubmit() {
     if (this.registration) {
+      this.selectedExams.forEach((e) => {
+        this.studentService.registerExam(1, e.id).subscribe((data) => {
+          console.log(data);
+        });
+      });
       console.log('register');
     } else if (!this.registration) {
       this.selectedExams.forEach((e) => {

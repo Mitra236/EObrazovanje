@@ -54,6 +54,18 @@ export class StudentServiceService {
       );
   }
 
+  registerExam(studentId: number, examId: number): Observable<any> {
+    return this.http
+      .post(this.studentsUrl + studentId + '/register-exam/' + examId, {})
+      .pipe(
+        tap((data) => console.log(data)),
+        (e) => {
+          console.log(e);
+          return e;
+        }
+      );
+  }
+
   getFailedExams(id: number): Observable<ExamRegistration[]> {
     return this.http.get<ExamRegistration[]>(
       this.studentsUrl + id + '/failed-exams'

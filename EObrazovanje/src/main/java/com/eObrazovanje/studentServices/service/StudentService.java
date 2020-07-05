@@ -18,6 +18,8 @@ import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.entity.FinancialCard;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
+import com.eObrazovanje.studentServices.repository.ExamRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
@@ -25,6 +27,10 @@ public class StudentService implements StudentServiceInterface {
 
 	@Autowired
 	StudentRepository studentRepository;
+	@Autowired
+	ExamRepository examRepository;
+	@Autowired
+	ExamRegistrationRepository examRegistrationRepository;
 
 	@Override
 	public StudentDetailsDTO findOne(int id) {
@@ -173,5 +179,24 @@ public class StudentService implements StudentServiceInterface {
 		}
 		
 		return currentExams;
+	}
+
+	@Override
+	public int registerExam(int studentId, int examId) {
+		// TODO Auto-generated method stub
+		Exam exam = examRepository.findById(examId).orElse(null);
+		Student student = studentRepository.findById(studentId).orElse(null);
+		
+		if(exam != null && student != null) {
+			ExamRegistration examReg = new ExamRegistration();
+			examReg.setExam(exam);
+			examReg.setStudent(student);
+			examReg.setStatus(EExamStatus.ND);
+			examReg.setExamPeriod(exam.getExamPeriod());
+			examReg.setFinalGrade(5);
+			examRegistrationRepository.save(examReg);
+			return examReg.getId();
+		}
+		return 0;
 	}
 }
