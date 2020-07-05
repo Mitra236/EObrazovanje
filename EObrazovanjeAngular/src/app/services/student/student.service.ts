@@ -48,7 +48,6 @@ export class StudentServiceService {
       .pipe(
         tap((data) => console.log(data)),
         (e) => {
-          console.log(e);
           return e;
         }
       );
@@ -73,7 +72,7 @@ export class StudentServiceService {
   }
 
   getCurrentExams(id: number): Observable<Exam[]> {
-    return this.http.get<Exam[]>(baseUrl + 'exams/' + id + '/current');
+    return this.http.get<Exam[]>(this.studentsUrl + id + '/exams-current');
   }
 
   getStudentTransactions(id: number): Observable<Transaction[]> {

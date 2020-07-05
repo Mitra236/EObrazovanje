@@ -93,7 +93,7 @@ export class StudentExamsActiveComponent implements OnInit {
           console.log(data);
         });
       });
-      console.log('register');
+      window.location.reload();
     } else if (!this.registration) {
       this.selectedExams.forEach((e) => {
         this.studentService

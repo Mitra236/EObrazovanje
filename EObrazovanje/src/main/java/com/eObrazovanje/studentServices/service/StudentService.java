@@ -199,4 +199,42 @@ public class StudentService implements StudentServiceInterface {
 		}
 		return 0;
 	}
+
+	@Override
+	public List<ExamDTO> getCurrentExams(int id) {
+		// TODO Auto-generated method stub
+		Student student = studentRepository.findById(id).orElse(null);
+		List<Exam> allExams = examRepository.findAll();
+		List<Exam> currentExams = new ArrayList<>();
+		
+		Date currentDate = new Date(new java.util.Date().getTime());
+		
+		if(student != null) {
+			for (Exam e : allExams) {
+				if(e.getExamPeriod().getEndDate().after(currentDate) && 
+						e.getExamPeriod().getStartDate().before(currentDate) && 
+						e.getCourse().getStudyProgramme().getId() == student.getStudyProgramme().getId()) {
+					
+						currentExams.add(e);
+					
+				}
+			}
+		}
+		
+		if(student.getExamsTaken().size() > 0) {
+			for(ExamRegistration eR : student.getExamsTaken()) {
+				if(currentExams.contains(eR.getExam()) ) {
+					currentExams.remove(eR.getExam());
+				}
+			}
+		}
+		
+		List<ExamDTO> currentExamsDTOs = new ArrayList<>();
+		
+		for( Exam examToDTO : currentExams) {
+			currentExamsDTOs.add(new ExamDTO(examToDTO));
+		}
+		
+		return currentExamsDTOs;
+	}
 }

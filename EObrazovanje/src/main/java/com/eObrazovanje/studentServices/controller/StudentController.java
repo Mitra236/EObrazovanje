@@ -50,6 +50,11 @@ public class StudentController {
 		return studentServiceInterface.findOne(id);
 	}
 	
+	@GetMapping(value="/{studentId}/exams-current")
+	private List<ExamDTO> getCurrentExamsForSTudent(@PathVariable("studentId") int id) {
+		return studentServiceInterface.getCurrentExams(id);
+	}
+	
 	@GetMapping(value="/{studentId}/exams")
 	private List<ExamRegistrationDTO> getTakenExams(@PathVariable("studentId") int id) {
 		return studentServiceInterface.findTakenExams(id);
