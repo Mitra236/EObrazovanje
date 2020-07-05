@@ -11,5 +11,7 @@ public interface ProfessorServiceInterface {
 	List<ProfessorDTO> findAll();
 	List<ProfessorDTO> findProfessorsForAdmin();
 	int save(ProfessorDTO professorDTO);
+	void updateAllData(ProfessorDTO professorDTO);
+	boolean remove(int id);
 	void update(ProfessorDataEditDTO professorDataEditDTO);
 }

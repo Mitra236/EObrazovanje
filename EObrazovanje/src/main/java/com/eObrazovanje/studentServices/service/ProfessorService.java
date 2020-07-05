@@ -2,6 +2,7 @@ package com.eObrazovanje.studentServices.service;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,8 @@ import org.springframework.stereotype.Service;
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorDataEditDTO;
-import com.eObrazovanje.studentServices.DTO.StudentDTO;
-import com.eObrazovanje.studentServices.DTO.StudyProgrammeDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Professor;
-import com.eObrazovanje.studentServices.entity.Student;
-import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.ProfessorRepository;
 
 @Service
@@ -57,7 +54,6 @@ public class ProfessorService implements ProfessorServiceInterface {
 		professor.setUsername(professorDTO.username);
 		professor.setBiography(professorDTO.biography);
 		professor.setAcademicTitle(professorDTO.academicTitle);
-		professor.setCourseRole(professorDTO.eCourseRole);
 		professor.setEmail(professorDTO.email);
 		professor.setPassword(professorDTO.password);
 		professor.setEmployeeFunction(professorDTO.emplyeeFunction);
@@ -89,5 +85,25 @@ public class ProfessorService implements ProfessorServiceInterface {
 			DTO.add(new ProfessorDTO(p));
 		}
 		return DTO;
+	}
+
+	@Override
+	public void updateAllData(ProfessorDTO professorDTO) {
+		Professor professor = professorRepository.findById(professorDTO.id).orElse(null);
+		professor.setAcademicTitle(professorDTO.academicTitle);
+		professor.setEmployeeFunction(professorDTO.emplyeeFunction);
+		professor.setEmployeeFunctionFrom(professorDTO.employeeFunctionFrom);
+		professor.setPosition(professorDTO.position);
+		professor.setPositionFrom(professorDTO.positionFrom);
+		professorRepository.save(professor);		
+	}
+
+	@Override
+	public boolean remove(int id) {
+		Professor professor = professorRepository.findById(id).orElse(null);
+		if(professor == null) return false;
+		
+		professorRepository.deleteById(id);
+		return false;
 	}
 }
