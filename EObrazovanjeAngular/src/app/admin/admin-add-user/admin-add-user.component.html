@@ -117,10 +117,10 @@
             <label>Titula:</label>
             <input type="text" formControlName="academicTitle" required/>
           </div>
-          <!-- <span class="text-danger"
-            *ngIf="(userEditForm.academicTitle.touched || submitted) && userEditForm.academicTitle.errors?.required">
-            Name is required
-          </span> -->
+          <span class="text-danger" style="margin-left: 230px; color: red;"
+            *ngIf="(userEditForm.get('academicTitle').touched || submitted) && userEditForm.get('academicTitle').errors?.required">
+            Academic title is required
+          </span>
           <div class="row">
             <label>Pozicija:</label>
             <select formControlName="position">

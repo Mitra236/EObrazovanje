@@ -105,8 +105,8 @@ export class AdminAddUserComponent implements OnInit {
       })
     }
 
-    // get userEditFormControl() {
-    //   return this.userEditFormControl.controls;
-    // }
+    get academicTitle() {
+      return this.userEditForm.get('academicTitle');
+    }
 }
 
