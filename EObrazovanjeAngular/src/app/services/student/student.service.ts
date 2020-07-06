@@ -13,11 +13,14 @@ import { baseUrl } from '../url';
 })
 export class StudentServiceService {
   studentsUrl = baseUrl + 'students/';
+  id;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.id = localStorage.getItem('id');
+  }
 
-  getStudenById(id: number): Observable<Student> {
-    return this.http.get<Student>(this.studentsUrl + id);
+  getStudenById(): Observable<Student> {
+    return this.http.get<Student>(this.studentsUrl + this.id);
   }
 
   getListOfStudents(): Observable<Student[]> {
@@ -26,25 +29,27 @@ export class StudentServiceService {
     );
   }
 
-  getTakenExams(id: number): Observable<ExamRegistration[]> {
-    return this.http.get<ExamRegistration[]>(this.studentsUrl + id + '/exams');
-  }
-
-  getPassedExams(id: number): Observable<ExamRegistration[]> {
+  getTakenExams(): Observable<ExamRegistration[]> {
     return this.http.get<ExamRegistration[]>(
-      this.studentsUrl + id + '/passed-exams'
+      this.studentsUrl + this.id + '/exams'
     );
   }
 
-  getCurrentExamRegistrations(id: number): Observable<ExamRegistration[]> {
+  getPassedExams(): Observable<ExamRegistration[]> {
     return this.http.get<ExamRegistration[]>(
-      this.studentsUrl + id + '/registered-exam'
+      this.studentsUrl + this.id + '/passed-exams'
     );
   }
 
-  unregisterExam(id: number, examId: number): Observable<any> {
+  getCurrentExamRegistrations(): Observable<ExamRegistration[]> {
+    return this.http.get<ExamRegistration[]>(
+      this.studentsUrl + this.id + '/registered-exam'
+    );
+  }
+
+  unregisterExam(examId: number): Observable<any> {
     return this.http
-      .put(this.studentsUrl + id + '/unregistered-exam/' + examId, {})
+      .put(this.studentsUrl + this.id + '/unregistered-exam/' + examId, {})
       .pipe(
         tap((data) => console.log(data)),
         (e) => {
@@ -53,9 +58,9 @@ export class StudentServiceService {
       );
   }
 
-  registerExam(studentId: number, examId: number): Observable<any> {
+  registerExam(examId: number): Observable<any> {
     return this.http
-      .post(this.studentsUrl + studentId + '/register-exam/' + examId, {})
+      .post(this.studentsUrl + this.id + '/register-exam/' + examId, {})
       .pipe(
         tap((data) => console.log(data)),
         (e) => {
@@ -65,19 +70,19 @@ export class StudentServiceService {
       );
   }
 
-  getFailedExams(id: number): Observable<ExamRegistration[]> {
+  getFailedExams(): Observable<ExamRegistration[]> {
     return this.http.get<ExamRegistration[]>(
-      this.studentsUrl + id + '/failed-exams'
+      this.studentsUrl + this.id + '/failed-exams'
     );
   }
 
-  getCurrentExams(id: number): Observable<Exam[]> {
-    return this.http.get<Exam[]>(this.studentsUrl + id + '/exams-current');
+  getCurrentExams(): Observable<Exam[]> {
+    return this.http.get<Exam[]>(this.studentsUrl + this.id + '/exams-current');
   }
 
-  getStudentTransactions(id: number): Observable<Transaction[]> {
+  getStudentTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(
-      this.studentsUrl + id + '/financial-card'
+      this.studentsUrl + this.id + '/financial-card'
     );
   }
 }

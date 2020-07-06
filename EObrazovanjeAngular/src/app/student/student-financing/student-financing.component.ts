@@ -19,11 +19,11 @@ export class StudentFinancingComponent implements OnInit {
   }
 
   getStudentDetails(): void {
-    this.studentService.getStudenById(1).subscribe((student: Student) => {
+    this.studentService.getStudenById().subscribe((student: Student) => {
       this.studentFinancialDetails = student;
     });
     this.studentService
-      .getStudentTransactions(1)
+      .getStudentTransactions()
       .subscribe((exams: Transaction[]) => {
         this.studentTransactions = exams;
       });
