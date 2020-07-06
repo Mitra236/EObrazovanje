@@ -23,6 +23,7 @@ import { ProfessorExamsComponent } from './professor/professor-exams/professor-e
 import { ProfessorProfileDetailsComponent } from './professor/professor-profile-details/professor-profile-details.component';
 import { ProfessorScreenComponent } from './professor/professor-screen/professor-screen.component';
 import { StudentCourseInsertScreenComponent } from './professor/student-course-insert-screen/student-course-insert-screen.component';
+import { AuthService as AuthGuard } from './services/auth.service';
 import { StudentExamHistoryComponent } from './student/student-exam-history/student-exam-history.component';
 import { StudentExamsActiveComponent } from './student/student-exams-active/student-exams-active.component';
 import { StudentFinancingComponent } from './student/student-financing/student-financing.component';
@@ -35,32 +36,86 @@ const routes: Routes = [
     path: 'student',
     component: StudentScreenComponent,
     children: [
-      { path: '', component: StudentProfileDetailsComponent },
-      { path: 'exams/register', component: StudentExamsActiveComponent },
-      { path: 'exams/unregister', component: StudentExamsActiveComponent },
-      { path: 'exams/passed', component: StudentExamHistoryComponent },
-      { path: 'exams/failed', component: StudentExamHistoryComponent },
-      { path: 'exams/history', component: StudentExamHistoryComponent },
-      { path: 'financing', component: StudentFinancingComponent },
+      {
+        path: '',
+        component: StudentProfileDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams/register',
+        component: StudentExamsActiveComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams/unregister',
+        component: StudentExamsActiveComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams/passed',
+        component: StudentExamHistoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams/failed',
+        component: StudentExamHistoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams/history',
+        component: StudentExamHistoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'financing',
+        component: StudentFinancingComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {
     path: 'professor/:id',
     component: ProfessorScreenComponent,
     children: [
-      { path: '', component: ProfessorProfileDetailsComponent },
-      { path: 'edit', component: ProfessorDataEditComponent },
-      { path: 'courses', component: CoursesScreenComponent },
-      { path: 'courseDetails/:id2', component: ProfessorCourseDetailsComponent },
-      { path: 'exams', component: ProfessorExamsComponent },
-      { path: 'activeExams', component: ActiveExamRegistrationsComponent },
+      {
+        path: '',
+        component: ProfessorProfileDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit',
+        component: ProfessorDataEditComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses',
+        component: CoursesScreenComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courseDetails/:id2',
+        component: ProfessorCourseDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exams',
+        component: ProfessorExamsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'activeExams',
+        component: ActiveExamRegistrationsComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'addStudentAtCourse/:id2',
         component: StudentCourseInsertScreenComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'insertPoints/:id2',
         component: InsertExamPointsComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },
@@ -68,26 +123,76 @@ const routes: Routes = [
     path: 'admin',
     component: AdminScreenComponent,
     children: [
-      { path: 'students', component: AdminStudentsListComponent },
+      {
+        path: 'students',
+        component: AdminStudentsListComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'professors/professorsForAdmin',
         component: AdminProfessorsListComponent,
+        canActivate: [AuthGuard],
       },
-      { path: 'users/add/student', component: AdminAddUserComponent },
-      { path: 'users/add/professor', component: AdminAddUserComponent },
-      { path: 'users/edit/professor/:id', component: AdminAddUserComponent },
-      { path: 'studyProgrammes', component: AdminCoursesListComponent },
+      {
+        path: 'users/add/student',
+        component: AdminAddUserComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'users/add/professor',
+        component: AdminAddUserComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'users/edit/professor/:id',
+        component: AdminAddUserComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'studyProgrammes',
+        component: AdminCoursesListComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'studyProgrammes/programme/:id',
         component: AdminProgrammeListComponent,
+        canActivate: [AuthGuard],
       },
-      { path: 'exams', component: AdminExamsListComponent },
-      { path: 'periods', component: AdminPeriodsListComponent },
-      { path: 'examPeriod', component: AdminPeriods2ListComponent },
-      { path: 'bookings', component: AdminBookingListComponent },
-      { path: 'bookings/courseBooking/:id', component: AdminBooking2ListComponent },
-      { path: 'bookings/examBooking/:id', component: AdminBooking3ListComponent },
-      { path: 'addProgramme', component: AdminAddProgrammeComponent },
+      {
+        path: 'exams',
+        component: AdminExamsListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'periods',
+        component: AdminPeriodsListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'examPeriod',
+        component: AdminPeriods2ListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'bookings',
+        component: AdminBookingListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'bookings/courseBooking/:id',
+        component: AdminBooking2ListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'bookings/examBooking/:id',
+        component: AdminBooking3ListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addProgramme',
+        component: AdminAddProgrammeComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];
