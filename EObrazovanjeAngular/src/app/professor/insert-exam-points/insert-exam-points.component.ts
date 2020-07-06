@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InsertExamPointsComponent implements OnInit {
   examForm: FormGroup;
   examReg: number;
+  id: number;
 
   constructor(
     private professorService: ProfessorService,
@@ -19,7 +20,8 @@ export class InsertExamPointsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.examReg = +this.route.snapshot.paramMap.get("id");
+    this.id = +localStorage.getItem("id")
+    this.examReg = +this.route.snapshot.paramMap.get("id2");
     this.examForm = this.fb.group({
       id: this.examReg,
       examPoints: [0, Validators.required],
@@ -29,7 +31,7 @@ export class InsertExamPointsComponent implements OnInit {
 
   onSubmit() {
     this.professorService.addPoints(this.examForm.value).subscribe(res => {
-      this.router.navigate(['professor/activeExams', 1])
+      this.router.navigate(['professor/', this.id, 'activeExams'])
     })
   }
 

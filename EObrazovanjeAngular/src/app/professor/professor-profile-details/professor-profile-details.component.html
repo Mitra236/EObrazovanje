@@ -1,15 +1,11 @@
 <div class="content-container">
   <h2>Podaci o profesoru</h2>
-  <div>
+  <div *ngIf="professor">
     <div class="account-info">
       <h3>Podaci o nalogu</h3>
       <div class="row">
         <p>Korisnicko ime:</p>
         <p>{{ professor.username }}</p>
-      </div>
-      <div class="row">
-        <p>Lozinka:</p>
-        <p>{{ professor.password }}</p>
       </div>
     </div>
 
@@ -49,7 +45,7 @@
       <h3>Radno mesto</h3>
       <div class="row">
         <p>Radno mesto:</p>
-        <p>{{ professor.employeeFunction }}</p>
+        <p>{{ professor.emplyeeFunction }}</p>
       </div>
       <div class="row">
         <p>Od:</p>

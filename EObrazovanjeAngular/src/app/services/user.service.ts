@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { baseUrl } from './url';
+import { Observable } from 'rxjs';
 
 enum EUserRole {
   Student,
@@ -7,6 +10,7 @@ enum EUserRole {
 }
 
 interface User {
+  id: number;
   username: string;
   password: string;
   role: EUserRole;
@@ -18,8 +22,13 @@ interface User {
 export class UserService {
   loggedInUser;
   role;
+  loginUrl = baseUrl + "login/"
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  login(user: User) : Observable<User> {
+    return this.http.post<User>(this.loginUrl, user)
+  }
+
 
   setUser(user: User) {
     this.loggedInUser = user;

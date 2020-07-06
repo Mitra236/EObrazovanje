@@ -34,7 +34,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getJanuaryExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -44,7 +44,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getFebruaryExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -54,7 +54,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getAprilExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -63,7 +63,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getJuneExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -72,7 +72,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getJulyExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -81,7 +81,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getSeptemberExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {
@@ -90,7 +90,7 @@ export class ProfessorExamsComponent implements OnInit, OnDestroy {
   }
 
   getOctoberExams(period: string) {
-    this.subscription = this.route.params
+    this.subscription = this.route.parent.params
     .pipe(switchMap((params: Params) =>
       this.professorService.getExamsByPeriod(+params["id"], period)))
       .subscribe(exam => {

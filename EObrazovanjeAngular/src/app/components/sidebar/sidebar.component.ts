@@ -8,9 +8,11 @@ import { UserService } from '../../services/user.service';
 })
 export class SidebarComponent implements OnInit {
   role: string;
-  constructor(private userService: UserService) {}
+  id: number;
+  constructor() {}
 
   ngOnInit(): void {
-    this.role = this.userService.role;
+    this.role = localStorage.getItem("role");
+    this.id = +localStorage.getItem("id");
   }
 }

@@ -29,6 +29,11 @@ export class ProfessorService {
 
   constructor(private http: HttpClient) { }
 
+  getProfessor(id: number) : Observable<Professor> {
+    return this.http.get<Professor>(this.professorsUrl + "professor?id=" + id)
+            .pipe(catchError(this.handleError))
+  }
+
   getProfessorEdit(id: number) : Observable<ProfessorDataEdit> {
     return this.http.get<ProfessorDataEdit>(this.professorsUrl + 'professorEdit?id=' + id)
             .pipe(catchError(this.handleError))

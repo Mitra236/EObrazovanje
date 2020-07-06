@@ -13,22 +13,25 @@ import { Subscription } from 'rxjs';
 export class CoursesScreenComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   courses: Course[]
+  id: number;
 
   constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.snapshot.params['id'] ?
-      this.subscription = this.route.params
+    this.id = +localStorage.getItem("id")
+    this.route.parent.snapshot.params['id'] ?
+      this.subscription = this.route.parent.params
         .pipe(switchMap((params: Params) =>
           this.professorService.getProfessorsCourses(+params["id"])))
           .subscribe(course => {
+            console.log(course)
             this.courses = course
         })
     : this.courses
   }
 
   goToCourse(course: Course) {
-    this.router.navigate(['professor/courseDetails', course.id]);
+    this.router.navigate(['professor/', this.id, 'courseDetails', course.id]);
   }
 
   ngOnDestroy(): void {

@@ -45,20 +45,20 @@
         >Dodaj profesora</a
       >
     </div>
-    
+
   </div>
 
   <div *ngIf="role === 'professor'">
     <div class="group">
       <p class="group-title">Profil</p>
-      <a class="item" routerLink="/professor">Pregled podataka</a>
-      <a class="item" routerLink="/professor/edit/:id">Izmena podataka</a>
+      <a class="item" [routerLink]="['/professor/', id]">Pregled podataka</a>
+      <a class="item" [routerLink]="['/professor/', id ,'edit']">Izmena podataka</a>
     </div>
     <div class="group">
       <p class="group-title">Akcije</p>
-      <a class="item" routerLink="/professor/courses/:id">Pregled kurseva</a>
-      <a class="item" routerLink="/professor/exams/:id">Pregled ispita po rokovima</a>
-      <a class="item" routerLink="/professor/activeExams/:id">Aktivne prijave</a>
+      <a class="item" [routerLink]="['/professor/', id ,'courses']">Pregled kurseva</a>
+      <a class="item" [routerLink]="['/professor/', id ,'exams']">Pregled ispita po rokovima</a>
+      <a class="item" [routerLink]="['/professor/', id ,'activeExams']">Aktivne prijave</a>
     </div>
   </div>
 </div>
