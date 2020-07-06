@@ -13,6 +13,15 @@ select {
   height: 28px;
 }
 
+span {
+  margin-left: 230px;
+  color: red;
+}
+
+.ng-invalid:not(form) {
+  border-color: lightcoral;
+}
+
 input {
   margin: 0;
 }

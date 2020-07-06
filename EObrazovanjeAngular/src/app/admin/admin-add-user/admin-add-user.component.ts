@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AdminProfessorService } from 'src/app/services/admin/admin-professor.service';
 import { Professor } from 'src/app/types/professor';
 
@@ -76,11 +76,11 @@ export class AdminAddUserComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         JMBG: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
         password: ['', Validators.required],
-        phoneNumber: [''],
+        phoneNumber: ['', this.numberValidator],
         biography: [''],
         academicTitle: ['', Validators.required],
-        position: [''],
-        emplyeeFunction: [''],
+        position: ['', Validators.required],
+        emplyeeFunction: ['', Validators.required],
         positionFrom: [''],
         employeeFunctionFrom: ['']
       })
@@ -105,8 +105,13 @@ export class AdminAddUserComponent implements OnInit {
       })
     }
 
-    get academicTitle() {
-      return this.userEditForm.get('academicTitle');
+    numberValidator(
+      control: AbstractControl
+    ): { [key: string]: any } | null {
+      const valid = /^\d+$/.test(control.value)
+      return valid
+        ? null
+        : { invalidNumber: { valid: false, value: control.value } }
     }
 }
 

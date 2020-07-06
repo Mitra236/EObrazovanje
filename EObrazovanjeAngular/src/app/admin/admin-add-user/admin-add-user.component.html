@@ -8,30 +8,66 @@
           <label>Korisnicko ime:</label>
           <input type="text" formControlName="username"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('username').touched || submitted) && userForm.get('username').errors?.required">
+          Username is required
+        </span>
         <div class="row">
           <label>Lozinka:</label>
           <input type="text" formControlName="password"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('password').touched || submitted) && userForm.get('password').errors?.required">
+          Password is required
+        </span>
         <div class="row">
           <label>Ime:</label>
           <input type="text" formControlName="firstName"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('firstName').touched || submitted) && userForm.get('firstName').errors?.required">
+          First name is required
+        </span>
         <div class="row">
           <label>Prezime:</label>
           <input type="text" formControlName="lastName"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('lastName').touched || submitted) && userForm.get('lastName').errors?.required">
+          Last name is required
+        </span>
         <div class="row">
           <label>Email:</label>
           <input type="text" formControlName="email"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('email').touched || submitted) && userForm.get('email').errors?.required">
+          Email is required
+        </span>
+        <span class="text-danger"
+          *ngIf="(userForm.get('email').touched || submitted) && userForm.get('email').invalid">
+          Mail format is invalid
+        </span>
         <div class="row">
           <label>Broj telefona:</label>
           <input type="text" formControlName="phoneNumber"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('phoneNumber').touched || submitted) && userForm.get('phoneNumber').invalid && userForm.get('phoneNumber').errors.invalidNumber">
+          Phone number must be a number
+        </span>
         <div class="row">
           <label>JMBG:</label>
           <input type="text" formControlName="JMBG"/>
         </div>
+        <span class="text-danger"
+          *ngIf="(userForm.get('JMBG').touched || submitted) && userForm.get('JMBG').errors?.required">
+          JMBG is required
+        </span>
+        <span class="text-danger"
+          *ngIf="(userForm.get('JMBG').touched || submitted) && userForm.get('JMBG').invalid">
+          JMBG must be 13 characters long and must be a number
+        </span>
       </div>
 
         <div *ngIf="!student && !professor">
@@ -39,6 +75,10 @@
             <label>Titula:</label>
             <input type="text" id = "academicTitle" formControlName="academicTitle"/>
           </div>
+          <span class="text-danger"
+            *ngIf="(userForm.get('academicTitle').touched || submitted) && userForm.get('academicTitle').errors?.required">
+            Academic title is required
+          </span>
           <div class="row">
             <label>Biografija:</label>
             <input type="text" formControlName="biography"/>
@@ -49,12 +89,20 @@
               <option *ngFor="let item of positions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
             </select>
           </div>
+          <span class="text-danger"
+            *ngIf="(userForm.get('position').touched || submitted) && userForm.get('position').errors?.required">
+            Position is required
+          </span>
           <div class="row">
             <label>Funkcija:</label>
             <select formControlName="emplyeeFunction">
               <option *ngFor="let item of functions | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
             </select>
           </div>
+          <span class="text-danger"
+            *ngIf="(userForm.get('emplyeeFunction').touched || submitted) && userForm.get('emplyeeFunction').errors?.required">
+            Employee function is required
+          </span>
           <div class="row">
             <label>Datum sticanja pozicije:</label>
             <input type="date" formControlName="positionFrom"/>
@@ -117,7 +165,7 @@
             <label>Titula:</label>
             <input type="text" formControlName="academicTitle" required/>
           </div>
-          <span class="text-danger" style="margin-left: 230px; color: red;"
+          <span class="text-danger"
             *ngIf="(userEditForm.get('academicTitle').touched || submitted) && userEditForm.get('academicTitle').errors?.required">
             Academic title is required
           </span>
