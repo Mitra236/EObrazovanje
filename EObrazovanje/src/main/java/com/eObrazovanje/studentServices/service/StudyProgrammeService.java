@@ -85,6 +85,10 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 		co.setStudyProgramme(program);
 		
 		program.getCourses().add(co);
+		
+		courseRepository.save(co);
+		studyProgrammeRepository.save(program);
+		
 		return co.getId();
 	}
 	
@@ -105,15 +109,19 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 		if(course == null)
 			return false;
 		
-		List<Course> coursesToRemove = new ArrayList<Course>();
-		for(Course c : prog.getCourses()) {
-			if(c.getId() == id)
-				coursesToRemove.add(c);
+		StudyProgramme pausedStudies = studyProgrammeRepository.findById(-1).orElse(null);
+		
+		for(Course c: prog.getCourses()) {
+			if(c.getId() == id) {
+				c.setStudyProgramme(pausedStudies);
+				pausedStudies.getCourses().add(c);
+				
+				courseRepository.save(c);
+			}
 		}
-		for(Course c : coursesToRemove) {
-			prog.getCourses().remove(c);
-			c.setStudyProgramme(null);
-		}
+		
+		studyProgrammeRepository.save(prog);
+		studyProgrammeRepository.save(pausedStudies);
 		
 		return true;
 	}
@@ -136,20 +144,23 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 
 	@Override
 	public boolean removeStudentFromProgramme(int id, int programmeId) {
-		StudyProgramme prog = studyProgrammeRepository.getOne(programmeId);
+		StudyProgramme prog = studyProgrammeRepository.findById(programmeId).orElse(null);		
+		
 		if(prog == null)
 			return false;
 		
-		Student s = studentRepository.getOne(id);
+		Student s = studentRepository.findById(id).orElse(null);
 		if(s == null)
 			return false;
 		
+		StudyProgramme pausedStudies = studyProgrammeRepository.findById(-1).orElse(null);
+		
 		for(Student student: prog.getStudents()) {
 			if(student.getId() == id) {
-				prog.getStudents().remove(student);
-				student.setStudyProgramme(null);
+				//prog.getStudents().remove(student);
+				student.setStudyProgramme(pausedStudies);
+				pausedStudies.getStudents().add(student);
 				
-
 				for(Enrollment e: student.getEnrollment()) {
 					enrollmentRepository.delete(e);
 				}
@@ -159,6 +170,7 @@ public class StudyProgrammeService implements StudyProgrammeServiceInterface{
 		}
 		
 		studyProgrammeRepository.save(prog);
+		studyProgrammeRepository.save(pausedStudies);
 		return true;
 	}
 

@@ -36,6 +36,7 @@ export class AdminProgrammeListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.programmeId = this.route.snapshot.paramMap.get('id');
     this.availableStudents = [];
+    this.availableCourses = [];
     this.displayData();
   }
 
@@ -44,21 +45,30 @@ export class AdminProgrammeListComponent implements OnInit, OnDestroy {
       this.getCourses(),
       this.getStudents(),
       this.getAvailableStudents(),
+      this.getAvailableCourses(),
       this.getCurrentStudyProgramme()
     ).subscribe(
-      ([courses, students, availableStudentsRead, studyProgramme]) => {
+      ([courses, students, availableStudentsRead, availableCoursesRead, studyProgramme]) => {
         this.courses = courses;
         this.students = students;
         this.currentStudyProgramme = studyProgramme;
 
-        console.log(availableStudentsRead);
+        
         availableStudentsRead.forEach((student) => {
-          if (this.students.findIndex((y) => y.index == student.index) == -1) {
+          if (this.students.findIndex((y) => y.index == student.index) == -1 &&
+            this.availableStudents.findIndex((y) => y.index == student.index) == -1) {
             this.availableStudents.push(student);
+          }
+        });
+        availableCoursesRead.forEach((course) => {
+          if (this.courses.findIndex((y) => y.courseCode == course.courseCode) == -1 &&
+            this.availableCourses.findIndex((y) => y.courseCode == course.courseCode) == -1) {
+            this.availableCourses.push(course);
           }
         });
 
         console.log(this.availableStudents);
+        console.log(this.availableCourses);
       }
     );
   }
@@ -81,28 +91,50 @@ export class AdminProgrammeListComponent implements OnInit, OnDestroy {
   getAvailableStudents() {
     return this.studentService.getListOfStudents();
   }
-  // getAvailableCourses() {
-  //   return this.coursesService.getCourses();
-  // }
+  getAvailableCourses() {
+    return this.coursesService.getListOfCourses();
+  }
 
-  addCourse() {}
+  addCourseToProgramme() {
+    this.studyProgrammeService.addCourseToProgramme(
+      this.programmeId,
+      this.selectedCourse
+    );
+    this.courses.push(this.selectedCourse);
+    this.availableCourses
+      .splice(this.availableCourses
+      .findIndex(x => x.courseCode == this.selectedCourse.courseCode), 1);
+    this.selectedCourse = null;
+  }
+
+  removeCourseFromProgramme(course: Course) {
+    this.courses.splice(this.courses.findIndex(x => x.courseCode == course.courseCode), 1);
+    this.studyProgrammeService.removeCourseFromProgramme(
+      this.programmeId,
+      course
+    );
+    this.availableCourses.push(course);
+  }
 
   addStudentToProgramme() {
     this.studyProgrammeService.addStudentToProgramme(
       this.programmeId,
       this.selectedStudent
     );
-
-    this.displayData();
+    this.students.push(this.selectedStudent);
+    this.availableStudents
+      .splice(this.availableStudents
+      .findIndex(x => x.index == this.selectedStudent.index), 1);
+    this.selectedStudent = null;
   }
 
   removeStudentFromProgramme(student: Student) {
+    this.students.splice(this.students.findIndex(x => x.index == student.index), 1);
     this.studyProgrammeService.removeStudentFromProgramme(
       this.programmeId,
       student
     );
-
-    this.displayData();
+    this.availableStudents.push(student);
   }
 
   ngOnDestroy(): void {}

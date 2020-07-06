@@ -28,6 +28,8 @@ import { StudentExamsActiveComponent } from './student/student-exams-active/stud
 import { StudentFinancingComponent } from './student/student-financing/student-financing.component';
 import { StudentProfileDetailsComponent } from './student/student-profile-details/student-profile-details.component';
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
+import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
+import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -81,6 +83,9 @@ const routes: Routes = [
         path: 'studyProgrammes/programme/:id',
         component: AdminProgrammeListComponent,
       },
+      { path: 'courses', component: AdminAllCoursesListComponent },
+      { path: 'addCourse', component: AdminAddCourseComponent },
+      { path: 'addCourse/:id', component: AdminAddCourseComponent },
       { path: 'exams', component: AdminExamsListComponent },
       { path: 'periods', component: AdminPeriodsListComponent },
       { path: 'examPeriod', component: AdminPeriods2ListComponent },

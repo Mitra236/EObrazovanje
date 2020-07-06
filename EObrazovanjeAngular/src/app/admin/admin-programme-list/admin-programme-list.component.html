@@ -45,13 +45,16 @@
               <td>{{ course.courseCode }}</td>
               <td>{{ course.professorName }}</td>
               <td>
-                <button class="filled-btn-dark" >Ukloni</button>
+                <button class="filled-btn-dark" (click)="removeCourseFromProgramme(course)" >Ukloni</button>
               </td>
             </tr>
           </tbody>
         </table>
         <div>
-          <button class="filled-btn-dark">Dodaj</button>
+          <select [(ngModel)]="selectedCourse" class="select-list">
+            <option *ngFor="let course of availableCourses" [ngValue]="course">{{course.name}}, {{course.courseCode}}</option>
+          </select>
+          <button class="filled-btn-dark" (click)="addCourseToProgramme()">Dodaj</button>
         </div>
   </div>
   

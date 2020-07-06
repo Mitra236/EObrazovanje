@@ -13,6 +13,7 @@ public interface CourseServiceInterface {
 	int save(Course course);
 	boolean remove(int id);
 	void update(Course course);
+	int updateDTO(CourseDTO course);
 	int saveCourseStudents(CourseDTO course);
 	List<CourseDTO> findProfessorCourses(int id);
 	ProfessorCourseDetailsDTO findCourseStudents(int id);

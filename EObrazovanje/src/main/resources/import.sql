@@ -13,6 +13,7 @@ INSERT INTO admins(admin_username, admin_password) VALUES ("marko", "markovic");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Softverske i informacione tehnologije");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Energetika i elektronika");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Racunarstvo i automatika");
+INSERT INTO study_programmes(study_programme_id, study_programme_name) VALUES (-1, "Zamrznute studije");
 
 INSERT INTO students(student_username, student_password, student_index,student_first_name,student_last_name, student_JMBG, student_enrollment_year, student_financing, student_year_of_study,student_time_enrolled, student_giro, student_personal_refernce_number, student_balance, study_programme) VALUES ("tina", "tinic", "sf25/2017", "Valentina", "Mackovic", "0711997825199", 2017, 0, 3, 1, "01929201", "718281299", 0, 1);
 INSERT INTO students(student_username, student_password, student_index,student_first_name,student_last_name, student_JMBG, student_enrollment_year, student_financing, student_year_of_study,student_time_enrolled, student_giro, student_personal_refernce_number, student_balance, study_programme) VALUES ("marko", "markovic", "sf26/2017", "Marko", "Markovic", "0712497825199", 2017, 0, 3, 1, "012459201", "24454281299", 2, 1);

@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.CourseToAddDTO;
 import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.DTO.ProfessorCourseDetailsDTO;
 import com.eObrazovanje.studentServices.entity.Course;
+import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.service.CourseServiceInterface;
 import com.eObrazovanje.studentServices.service.EnrollmentServiceInterface;
 import com.eObrazovanje.studentServices.service.StudyProgrammeServiceInterface;
@@ -50,8 +52,8 @@ public class CourseController {
 		return new ResponseEntity<List<CourseDTO>>(courses, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/course")
-	private ResponseEntity<CourseDTO> getCourse(@RequestParam("id") int id) {
+	@GetMapping(value="/getCourse/{courseId}")
+	private ResponseEntity<CourseDTO> getCourse(@PathVariable("courseId") int id) {
 		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
 		
@@ -85,23 +87,17 @@ public class CourseController {
 	}
 	
 	@PutMapping(consumes = "application/json")
-	private ResponseEntity<Void> editCourse(@RequestBody CourseDTO editedCourse) {
+	private ResponseEntity<Integer> editCourse(@RequestBody CourseDTO editedCourse) {
 		CourseDTO course = courseServiceInterface.findOne(editedCourse.id);
-		if (course == null) return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); 
+		if (course == null) return new ResponseEntity<Integer>(0, HttpStatus.NOT_FOUND); 
 		
-//		course.setName(editedCourse.name);
-//		course.setCourseCode(editedCourse.courseCode);
-//		course.setLectures(editedCourse.lectures);
-//		course.setECTS(editedCourse.ECTS);
-//		course.setPracticalCLasses(editedCourse.practicalClasses);
-//		//course.setStudyProgramme(studyProgrammeServiceInterface.findOne(editedCourse.studyProgramme.id));
-//		courseServiceInterface.update(course);
+		int updatedId = courseServiceInterface.updateDTO(editedCourse);
 		
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<Integer>(updatedId, HttpStatus.CREATED);
 	}
 	
-	@PostMapping(consumes = "application/json")
-	private ResponseEntity<Integer> addCourse(@RequestBody CourseDTO course) {
+	@PostMapping(value = "/addCourse", consumes = "application/json")
+	private ResponseEntity<Integer> saveCourse(@RequestBody CourseToAddDTO course) {
 		if (course == null) return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
 		
 		Course newCourse = new Course();
@@ -125,12 +121,12 @@ public class CourseController {
 		return new ResponseEntity<Integer>(course.id, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping(value = "/{id}")
-	private ResponseEntity<Boolean> deleteCourse(@PathVariable("id") int id) {
+	@DeleteMapping(value = "/{courseId}")
+	private ResponseEntity<Boolean> deleteCourse(@PathVariable("courseId") int id) {
 		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND); 
 		
-		courseServiceInterface.remove(id);	
+		courseServiceInterface.remove(course.id);	
 		return new ResponseEntity<Boolean>(HttpStatus.OK);
 	}
 }

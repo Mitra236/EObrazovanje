@@ -34,6 +34,9 @@ import { StudentExamsActiveComponent } from './student/student-exams-active/stud
 import { StudentFinancingComponent } from './student/student-financing/student-financing.component';
 import { StudentProfileDetailsComponent } from './student/student-profile-details/student-profile-details.component';
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
+import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
+import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
+import { AdminCourseListComponent } from './admin/admin-course-list/admin-course-list.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +71,9 @@ import { StudentScreenComponent } from './student/student-screen/student-screen.
     InsertExamPointsComponent,
     AdminProgrammeListComponent,
     AdminAddProgrammeComponent,
+    AdminAllCoursesListComponent,
+    AdminAddCourseComponent,
+    AdminCourseListComponent
   ],
   imports: [
     BrowserModule,
