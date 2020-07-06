@@ -45,7 +45,7 @@ public class ExamController {
 	private ResponseEntity<List<ExamDTO>> getExamsByExamPeriod(@RequestParam("id") int id, @RequestParam("period") String period) {
 		List<ExamDTO> examDTOs = examServiceInterface.getExamsByExamPeriod(id,  period);
 		if(examDTOs.size() <= 0) {
-			return new ResponseEntity<List<ExamDTO>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<ExamDTO>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<ExamDTO>>(examDTOs, HttpStatus.OK);
 	}
