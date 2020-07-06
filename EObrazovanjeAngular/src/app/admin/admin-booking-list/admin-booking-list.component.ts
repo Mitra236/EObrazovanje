@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudyProgramme } from 'src/app/types/study.programme';
+import { Subscription } from 'rxjs';
+import { AdminStudyProgrammeService } from 'src/app/services/admin/admin-study-programme.service';
 
-const mockData = [
-  {
-    name: 'SIT'
-  },
-  {
-    name: 'EE'
-  },
-  {
-    name: 'RA'
-  }
-];
+// const mockData = [
+//   {
+//     name: 'SIT'
+//   },
+//   {
+//     name: 'EE'
+//   },
+//   {
+//     name: 'RA'
+//   }
+// ];
 
 @Component({
   selector: 'app-admin-booking-list',
@@ -19,11 +22,20 @@ const mockData = [
   styleUrls: ['./admin-booking-list.component.css']
 })
 export class AdminBookingListComponent implements OnInit {
-  bookings;
-  constructor(private route: ActivatedRoute) { }
+  subscription: Subscription;
+  bookings: StudyProgramme[];
+
+  constructor(private adminStudyProgrammeService: AdminStudyProgrammeService, private router: Router) { }
 
   ngOnInit(): void {
-    this.bookings = mockData;
+    this.subscription = this.adminStudyProgrammeService.getStudyProgrammes()
+      .subscribe(booking => {
+          this.bookings = booking
+      })
+  }
+
+  goToCourses(id: number) {
+    this.router.navigate(["admin/bookings/courseBooking", id])
   }
 
 }

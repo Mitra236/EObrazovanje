@@ -32,6 +32,7 @@ export class AdminAddUserComponent implements OnInit {
   positions = EPosition;
   functions = EEmployeeFunction;
   professor: Professor;
+  submitted = false;
 
   constructor(
     private adminProfessorService: AdminProfessorService,
@@ -53,11 +54,13 @@ export class AdminAddUserComponent implements OnInit {
 
     onSubmit() {
       if(!this.student && !this.route.snapshot.params['id']) {
+        this.submitted = true;
         this.adminProfessorService.addProfessor(this.userForm.value).subscribe(res => {
           window.alert("Success")
           this.router.navigate(["admin/students"])
         });
       } else if(!this.student) {
+        this.submitted = true;
         this.adminProfessorService.editProfessorData(this.userEditForm.value).subscribe(res => {
           window.alert("Success")
           this.router.navigate(["admin/professors/professorsForAdmin"])
@@ -101,5 +104,9 @@ export class AdminAddUserComponent implements OnInit {
         this.getProfessorEditData()
       })
     }
+
+    // get userEditFormControl() {
+    //   return this.userEditFormControl.controls;
+    // }
 }
 

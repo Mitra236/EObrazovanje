@@ -12,13 +12,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let examBooking of examBooking">
-            <td>{{ examBooking.firstName }}</td>
-            <td>{{ examBooking.lastName }}</td>
+          <tr *ngFor="let examBooking of examBooking; let i = index">
+            <td>{{ examBooking.student.firstName }}</td>
+            <td>{{ examBooking.student.lastName }}</td>
             <td>{{ examBooking.status }}</td>
             <td>{{ examBooking.finalGrade }}</td>
             <td>
-              <button class="filled-btn-dark">Proknjizi</button>
+              <button class="filled-btn-dark" (click) = "onCheck(examBooking.id, i)">Proknjizi</button>
             </td>
           </tr>
         </tbody>

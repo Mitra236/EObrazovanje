@@ -37,7 +37,7 @@
         <div *ngIf="!student && !professor">
           <div class="row">
             <label>Titula:</label>
-            <input type="text" formControlName="academicTitle"/>
+            <input type="text" id = "academicTitle" formControlName="academicTitle"/>
           </div>
           <div class="row">
             <label>Biografija:</label>
@@ -105,7 +105,7 @@
         </div>
 
         <div class="button-container">
-          <button type="submit" class="filled-btn-dark action-btn">Potvrdi</button>
+          <button type="submit" class="filled-btn-dark action-btn" [disabled] = "userForm.invalid">Potvrdi</button>
         </div>
       </div>
     </form>
@@ -115,8 +115,12 @@
         <div *ngIf="!student && professor" >
           <div class="row">
             <label>Titula:</label>
-            <input type="text" formControlName="academicTitle"/>
+            <input type="text" formControlName="academicTitle" required/>
           </div>
+          <!-- <span class="text-danger"
+            *ngIf="(userEditForm.academicTitle.touched || submitted) && userEditForm.academicTitle.errors?.required">
+            Name is required
+          </span> -->
           <div class="row">
             <label>Pozicija:</label>
             <select formControlName="position">
@@ -138,7 +142,7 @@
             <input type="date" formControlName="employeeFunctionFrom"/>
           </div>
           <div class="button-container">
-            <button type="submit" class="filled-btn-dark action-btn" [disabled] = "!userEditForm.valid">Potvrdi</button>
+            <button type="submit" class="filled-btn-dark action-btn" [disabled] = "userEditForm.invalid">Potvrdi</button>
           </div>
         </div>
       </div>
