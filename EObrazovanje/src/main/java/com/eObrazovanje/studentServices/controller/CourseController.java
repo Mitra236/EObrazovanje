@@ -51,9 +51,16 @@ public class CourseController {
 		}
 		return new ResponseEntity<List<CourseDTO>>(courses, HttpStatus.OK);
 	}
+	@GetMapping(value="/course")
+	private ResponseEntity<CourseDTO> getCourse(@RequestParam("id") int id) {
+		CourseDTO course = courseServiceInterface.findOne(id);
+		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<CourseDTO>(course, HttpStatus.OK);
+	}
 	
 	@GetMapping(value="/getCourse/{courseId}")
-	private ResponseEntity<CourseDTO> getCourse(@PathVariable("courseId") int id) {
+	private ResponseEntity<CourseDTO> getCourseForForm(@PathVariable("courseId") int id) {
 		CourseDTO course = courseServiceInterface.findOne(id);
 		if (course == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
 		
