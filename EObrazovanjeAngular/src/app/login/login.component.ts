@@ -40,13 +40,12 @@ export class LoginComponent implements OnInit {
     // const user = this.users.find(
     //   (u) => u.username === data.username && u.password === data.password
     // );
-    this.userService.login(data).subscribe(res => {
-       this.user = res;
-       localStorage.setItem("id", this.user.id)
-       localStorage.setItem("role", this.user.role)
+    this.userService.login(data).subscribe((res) => {
+      this.user = res;
+      localStorage.setItem('id', this.user.id);
+      localStorage.setItem('role', this.user.role);
 
-       if (this.user !== undefined) {
-        console.log(this.user)
+      if (this.user !== undefined) {
         this.userService.setUser(this.user);
 
         if (this.user.role === 'student') {
@@ -61,7 +60,6 @@ export class LoginComponent implements OnInit {
       }
 
       this.loginForm.reset();
-    })
-
+    });
   }
 }
