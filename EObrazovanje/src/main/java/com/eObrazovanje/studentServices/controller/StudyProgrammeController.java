@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eObrazovanje.studentServices.DTO.CourseDTO;
@@ -64,6 +65,11 @@ public class StudyProgrammeController {
 	
 	@GetMapping(value="/{studyProgrammeId}/coursesByProgramme")
 	private List<CourseDTO> getCoursesByProgramme(@PathVariable("studyProgrammeId") int id){
+		return studyProgrammeServiceInterface.findCoursesByProgramme(id);
+	}
+	
+	@GetMapping(value="/courses")
+	private List<CourseDTO> getCoursesByProgrammeForBooking(@RequestParam("id") int id){
 		return studyProgrammeServiceInterface.findCoursesByProgramme(id);
 	}
 	

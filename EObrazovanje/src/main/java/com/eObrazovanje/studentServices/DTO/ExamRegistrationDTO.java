@@ -1,7 +1,6 @@
 package com.eObrazovanje.studentServices.DTO;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.eObrazovanje.studentServices.entity.EExamStatus;
