@@ -14,11 +14,13 @@ import { Course } from 'src/app/types/course';
 export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   course: ProfessorCourseDetails;
+  id: number;
 
   constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.snapshot.params['id'] ?
+    this.id = +localStorage.getItem('id')
+    this.route.snapshot.params['id2'] ?
       this.getData()
     : this.course;
   }
@@ -26,7 +28,7 @@ export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
   getData() {
     this.subscription = this.route.params
     .pipe(switchMap((params: Params) =>
-      this.professorService.getProfessorCourseDetails(+params["id"])))
+      this.professorService.getProfessorCourseDetails(+params["id2"])))
       .subscribe(course => {
         this.course = course
     })
@@ -39,7 +41,7 @@ export class ProfessorCourseDetailsComponent implements OnInit, OnDestroy {
   }
 
   goToEnrollment(course: ProfessorCourseDetails) {
-    this.router.navigate(['professor/addStudentAtCourse', course.id]);
+    this.router.navigate(['professor/', this.id , 'addStudentAtCourse', course.id]);
   }
 
   ngOnDestroy(): void {

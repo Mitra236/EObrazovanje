@@ -9,8 +9,17 @@ select {
   border: 1px solid grey;
   padding: 5px 10px;
   margin: 0;
-  width: 514px;
-  height: 25px;
+  flex: 5;
+  height: 28px;
+}
+
+span {
+  margin-left: 230px;
+  color: red;
+}
+
+.ng-invalid:not(form) {
+  border-color: lightcoral;
 }
 
 input {

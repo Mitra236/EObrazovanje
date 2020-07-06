@@ -19,6 +19,7 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
   students: StudentBasicInfo[]
   course: number;
   enrollmentForm: FormGroup;
+  id: number;
 
   constructor(
     private professorService: ProfessorService,
@@ -27,8 +28,9 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getStudents(+this.route.snapshot.paramMap.get("id"));
-    this.course = +this.route.snapshot.paramMap.get("id")
+    this.id = +localStorage.getItem("id");
+    this.getStudents(+this.route.parent.snapshot.paramMap.get("id"));
+    this.course = +this.route.snapshot.paramMap.get("id2")
     this.enrollmentForm = this.fb.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
@@ -46,7 +48,7 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.professorService.addEnrollment(this.enrollmentForm.value).subscribe(res => {
-      this.router.navigate(['professor/courseDetails', this.course]);
+      this.router.navigate(['professor/', this.id, 'courseDetails', this.course]);
     })
   }
 

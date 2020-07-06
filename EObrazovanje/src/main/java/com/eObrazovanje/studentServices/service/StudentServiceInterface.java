@@ -29,6 +29,7 @@ public interface StudentServiceInterface {
 	List<FinancialCardDTO> getFinancialCardInfo( int id);
 	int registerExam(int studentId, int examId);
 	List<ExamDTO> getCurrentExams(int id);
+	List<Student> findAllStudents();
 	
 	List<EnrollmentDTO> enrollUserToProgrammeCourses(int studentId, int programmeId);
 }

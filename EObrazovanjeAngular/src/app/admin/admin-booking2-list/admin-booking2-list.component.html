@@ -18,9 +18,9 @@
             <td>{{ course.courseCode }}</td>
             <td>{{ course.ECTS }}</td>
             <td>{{ course.lectures }}</td>
-            <td>{{ course.practicalCLasses }}</td>
+            <td>{{ course.practicalClasses }}</td>
             <td>
-              <button class="filled-btn-dark" [routerLink]="['../examBooking']">Dalje</button>
+              <button class="filled-btn-dark" (click) = "goToCourseBooking(course.id)">Dalje</button>
             </td>
           </tr>
         </tbody>

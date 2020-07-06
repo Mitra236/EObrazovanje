@@ -1,5 +1,6 @@
 package com.eObrazovanje.studentServices.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -8,8 +9,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
+import com.eObrazovanje.studentServices.DTO.ExamRegistrationCheckDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
+import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.EExamStatus;
 import com.eObrazovanje.studentServices.entity.Exam;
@@ -17,6 +21,7 @@ import com.eObrazovanje.studentServices.entity.ExamRegistration;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
+import com.eObrazovanje.studentServices.repository.StudentRepository;
 
 @Service
 public class ExamRegistrationService implements ExamRegistrationSServiceInterface{
@@ -29,6 +34,9 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 	
 	@Autowired
 	CourseRepository courseRepo;
+	
+	@Autowired
+	StudentRepository studentRepo;
 
 	@Override
 	public ExamRegistrationDTO findOne(int id) {
@@ -95,6 +103,13 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 	}
 	
 	@Override
+	public void checkRegistration(int id) {
+		ExamRegistration examRegistration = examRegRepo.findById(id).orElse(null);
+		examRegistration.setChecked(true);
+		examRegRepo.save(examRegistration);	
+	}
+	
+	@Override
 	public List<ExamRegistrationDTO> getActiveProfessorExams(int id) {
 		List<ExamRegistrationDTO> examRegistrationDTOs = new ArrayList<>();
 
@@ -110,7 +125,7 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 				for (ExamRegistration er: e.getExamRegistrations()) {
 					calExam.setTime(e.getPeriod().getStartDate());
 					examMonth = calExam.get(Calendar.MONTH);
-					if(month == examMonth) {
+					if(month == examMonth && er.isChecked() == false) {
 						ExamRegistrationDTO examRegistrationDTO = new ExamRegistrationDTO();
 						examRegistrationDTO.id = er.getId();
 						examRegistrationDTO.examPoints = er.getExam().getExamPoints();
@@ -129,5 +144,51 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 		return examRegistrationDTOs;
 	}
 
+	@Override
+	public List<ExamRegistrationCheckDTO> getNotCheckedExamsInActivePeriod(int id) {
+		List<ExamRegistrationCheckDTO> examRegistrationDTOs = new ArrayList<>();
+
+		java.util.Date date = new java.util.Date();
+		Calendar calCurrent = Calendar.getInstance();
+		Calendar calExam = Calendar.getInstance();
+		calCurrent.setTime(date);
+		int month = calCurrent.get(Calendar.MONTH);
+		int examMonth;
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		
+		Course course = courseRepo.findById(id).orElse(null);
+		List<Exam> exams = course.getExams();
+		for(Exam e: exams) {
+			for (ExamRegistration er: e.getExamRegistrations()) {
+				calExam.setTime(e.getPeriod().getStartDate());
+				examMonth = calExam.get(Calendar.MONTH);
+				if(month == examMonth && er.isChecked() == false && timestamp.after(er.getExam().getExam_date())) {
+					ExamRegistrationCheckDTO examRegistrationDTO = new ExamRegistrationCheckDTO();
+					examRegistrationDTO.id = er.getId();
+					examRegistrationDTO.finalGrade = er.getFinalGrade();
+					examRegistrationDTO.courseName = er.getExam().getCourse().getName();
+					examRegistrationDTO.status = er.getStatus();
+					examRegistrationDTO.student = new StudentDTO(er.getStudent());
+					examRegistrationDTO.date = er.getExam().getExam_date();
+					examRegistrationDTOs.add(examRegistrationDTO);
+				}
+			}		
+		}	
+		
+		return examRegistrationDTOs;
+	}
+
+	@Override
+	public ExamRegistrationCheckDTO findOneChecked(int id) {
+		return new ExamRegistrationCheckDTO(examRegRepo.findById(id).orElse(null));
+	}
+
+	@Override
+	public CourseDTO findCourseForExam(int id) {
+		ExamRegistration examReg = examRegRepo.findById(id).orElse(null);
+		Exam exam = examReg.getExam();
+		CourseDTO courseDTO = new CourseDTO(exam.getCourse());
+		return courseDTO;
+	}
 	
 }

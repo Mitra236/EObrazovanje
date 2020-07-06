@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AdminProfessorService } from 'src/app/services/admin/admin-professor.service';
 import { CourseService } from '../../services/course.service';
 import { Professor } from 'src/app/types/professor';
@@ -34,6 +34,7 @@ export class AdminAddUserComponent implements OnInit {
   positions = EPosition;
   functions = EEmployeeFunction;
   professor: Professor;
+  submitted = false;
 
   courses: Course[];
   selectedCourse: Course;
@@ -63,11 +64,13 @@ export class AdminAddUserComponent implements OnInit {
 
     onSubmit() {
       if(!this.student && !this.route.snapshot.params['id']) {
+        this.submitted = true;
         this.adminProfessorService.addProfessor(this.userForm.value).subscribe(res => {
           window.alert("Success")
           this.router.navigate(["admin/students"])
         });
       } else if(!this.student) {
+        this.submitted = true;
         this.adminProfessorService.editProfessorData(this.userEditForm.value).subscribe(res => {
           window.alert("Success")
           this.router.navigate(["admin/professors/professorsForAdmin"])
@@ -83,11 +86,11 @@ export class AdminAddUserComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         JMBG: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
         password: ['', Validators.required],
-        phoneNumber: [''],
+        phoneNumber: ['', this.numberValidator],
         biography: [''],
         academicTitle: ['', Validators.required],
-        position: [''],
-        emplyeeFunction: [''],
+        position: ['', Validators.required],
+        emplyeeFunction: ['', Validators.required],
         positionFrom: [''],
         employeeFunctionFrom: ['']
       })
@@ -111,9 +114,17 @@ export class AdminAddUserComponent implements OnInit {
         this.getProfessorEditData()
       })
     }
-
-    getCourses() {
+    numberValidator(
+      control: AbstractControl
+    ): { [key: string]: any } | null {
+      const valid = /^\d+$/.test(control.value)
+      return valid
+        ? null
+        : { invalidNumber: { valid: false, value: control.value } }
+    }
     
+    getCourses() {
+   
     }
 }
 

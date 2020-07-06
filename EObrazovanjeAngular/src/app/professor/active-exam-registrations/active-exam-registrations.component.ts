@@ -15,12 +15,14 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   examRegistration: ExamRegistration[]
   student: Student;
+  id: number;
 
   constructor(private professorService: ProfessorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.snapshot.params['id'] ?
-      this.subscription = this.route.params
+    this.id = +localStorage.getItem("id")
+    this.route.parent.snapshot.params['id'] ?
+      this.subscription = this.route.parent.params
         .pipe(switchMap((params: Params) =>
           this.professorService.getActiveExamRegistrations(+params["id"])))
           .subscribe(registration => {
@@ -42,7 +44,7 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
   }
 
   goToInsertPointsScreen(id: number) {
-    this.router.navigate(['professor/insertPoints', id])
+    this.router.navigate(['professor/', this.id, 'insertPoints', id])
   }
 
   ngOnDestroy(): void {

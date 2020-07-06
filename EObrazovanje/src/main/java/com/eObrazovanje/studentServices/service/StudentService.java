@@ -28,6 +28,7 @@ import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
 import com.eObrazovanje.studentServices.repository.ExamRegistrationRepository;
 import com.eObrazovanje.studentServices.repository.ExamRepository;
+import com.eObrazovanje.studentServices.repository.FinancialCardRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
 import com.eObrazovanje.studentServices.repository.StudyProgrammeRepository;
 
@@ -38,8 +39,10 @@ public class StudentService implements StudentServiceInterface {
 
 	@Autowired
 	StudentRepository studentRepository;
+	
 	@Autowired
 	ExamRepository examRepository;
+	
 	@Autowired
 	ExamRegistrationRepository examRegistrationRepository;
 	
@@ -48,6 +51,9 @@ public class StudentService implements StudentServiceInterface {
 	
 	@Autowired
 	EnrollmentRepository enrollmentRepository;
+	
+	@Autowired
+	FinancialCardRepository financialCardRepository;
 
 	@Override
 	public StudentDetailsDTO findOne(int id) {
@@ -212,6 +218,18 @@ public class StudentService implements StudentServiceInterface {
 			examReg.setExamPeriod(exam.getExamPeriod());
 			examReg.setFinalGrade(5);
 			examRegistrationRepository.save(examReg);
+			
+			double cost = exam.getExamPeriod().getPaymentAmount();
+			FinancialCard transaction = new FinancialCard();
+			transaction.setPaymentDate(new Date(new java.util.Date().getTime()));
+			transaction.setPaymentAmount(cost);
+			transaction.setPaymentDescription("Prijava ispita");
+			transaction.setStudent(student);
+			transaction.setTotalCost(cost);
+			transaction.setTotalPayment(cost);
+			
+			financialCardRepository.save(transaction);
+			
 			return examReg.getId();
 		}
 		return 0;
@@ -284,5 +302,10 @@ public class StudentService implements StudentServiceInterface {
 			
 		}
 		return enrollments;		
+	}
+
+	@Override
+	public List<Student> findAllStudents() {
+		return studentRepository.findAll();
 	}
 }

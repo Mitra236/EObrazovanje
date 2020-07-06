@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   users;
   loginForm;
   errorMessage = '';
+  user: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,24 +37,29 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(data) {
-    const user = this.users.find(
-      (u) => u.username === data.username && u.password === data.password
-    );
+    // const user = this.users.find(
+    //   (u) => u.username === data.username && u.password === data.password
+    // );
+    this.userService.login(data).subscribe((res) => {
+      this.user = res;
+      localStorage.setItem('id', this.user.id);
+      localStorage.setItem('role', this.user.role);
 
-    if (user !== undefined) {
-      this.userService.setUser(user);
+      if (this.user !== undefined) {
+        this.userService.setUser(this.user);
 
-      if (user.role === 'student') {
-        this.router.navigate(['student']);
-      } else if (user.role === 'professor') {
-        this.router.navigate(['professor']);
-      } else if (user.role === 'admin') {
-        this.router.navigate(['admin/students']);
+        if (this.user.role === 'student') {
+          this.router.navigate(['student']);
+        } else if (this.user.role === 'professor') {
+          this.router.navigate(['professor/', this.user.id]);
+        } else if (this.user.role === 'admin') {
+          this.router.navigate(['admin/students']);
+        }
+      } else {
+        this.errorMessage = 'Incorrect username or password!';
       }
-    } else {
-      this.errorMessage = 'Incorrect username or password!';
-    }
 
-    this.loginForm.reset();
+      this.loginForm.reset();
+    });
   }
 }

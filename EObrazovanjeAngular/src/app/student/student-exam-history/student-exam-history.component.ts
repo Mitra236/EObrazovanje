@@ -29,7 +29,7 @@ export class StudentExamHistoryComponent implements OnInit {
       case 'passed':
         this.title = 'Polozeni ispiti';
         this.studentService
-          .getPassedExams(1)
+          .getPassedExams()
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
           });
@@ -37,7 +37,7 @@ export class StudentExamHistoryComponent implements OnInit {
       case 'failed':
         this.title = 'Nepolozeni ispiti';
         this.studentService
-          .getFailedExams(1)
+          .getFailedExams()
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
           });
@@ -45,7 +45,7 @@ export class StudentExamHistoryComponent implements OnInit {
       default:
         this.title = 'Istorija polaganja';
         this.studentService
-          .getTakenExams(1)
+          .getTakenExams()
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
           });

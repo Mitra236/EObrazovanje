@@ -56,14 +56,14 @@ INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_
 INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_description, financial_card_payment_amount, financial_card_payment_exception, financial_card_initial_state, financial_card_total_payment, financial_card_total_cost, student_financial_card) VALUES ("2020-01-22", "opis uplate 2", 2000.00, 50.00, 1000.00, 2000.00, 1000.00, 1);
 INSERT INTO financial_cards(financial_card_payment_date, financial_card_payment_description, financial_card_payment_amount, financial_card_payment_exception, financial_card_initial_state, financial_card_total_payment, financial_card_total_cost, student_financial_card) VALUES ("2020-06-12", "opis uplate 3", 2000.00, 50.00, 1000.00, 2000.00, 1000.00, 2);
 
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (0, 10, 1, 1, 1);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 6, 1, 1, 2);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 5);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 4);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 6);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 1, 1, 4);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (1, 8, 2, 2, 3);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam) VALUES (2, 0, 6, 2, 6);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (0, 10, 1, 1, 1, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (1, 6, 1, 1, 2, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 5, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 4, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 6, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 4, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (1, 8, 2, 2, 3, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 6, 2, 6, 0);
 
 INSERT INTO professors_courses(course_id, professor_id) VALUES (1, 1);
 INSERT INTO professors_courses(course_id, professor_id) VALUES (2, 1);

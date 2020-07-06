@@ -30,6 +30,9 @@ public class ExamRegistration implements Serializable{
 	@Column(name = "final_grade",nullable = true)
 	private int finalGrade;
 	
+	@Column(name = "checked", nullable = true)
+	private boolean checked;
+	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "exam_period", referencedColumnName = "exam_period_id", nullable=false)
 	private ExamPeriod exam_period;
@@ -96,5 +99,13 @@ public class ExamRegistration implements Serializable{
 
 	public void setExam(Exam exam) {
 		this.exam = exam;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }
