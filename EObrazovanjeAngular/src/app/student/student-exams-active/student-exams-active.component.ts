@@ -47,11 +47,11 @@ export class StudentExamsActiveComponent implements OnInit {
 
   getExams(registration: boolean) {
     registration
-      ? this.studentService.getCurrentExams(1).subscribe((exams: Exam[]) => {
+      ? this.studentService.getCurrentExams().subscribe((exams: Exam[]) => {
           this.exams = exams;
         })
       : this.studentService
-          .getCurrentExamRegistrations(1)
+          .getCurrentExamRegistrations()
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
           });
@@ -89,7 +89,7 @@ export class StudentExamsActiveComponent implements OnInit {
   handleSubmit() {
     if (this.registration) {
       this.selectedExams.forEach((e) => {
-        this.studentService.registerExam(1, e.id).subscribe((data) => {
+        this.studentService.registerExam(e.id).subscribe((data) => {
           console.log(data);
         });
       });
@@ -97,7 +97,7 @@ export class StudentExamsActiveComponent implements OnInit {
     } else if (!this.registration) {
       this.selectedExams.forEach((e) => {
         this.studentService
-          .unregisterExam(1, e.id)
+          .unregisterExam(e.id)
           .subscribe((exams: ExamRegistration[]) => {
             this.exams = exams;
           });

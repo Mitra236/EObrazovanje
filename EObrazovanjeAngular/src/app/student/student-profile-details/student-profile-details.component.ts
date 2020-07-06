@@ -21,7 +21,7 @@ export class StudentProfileDetailsComponent implements OnInit {
   }
 
   getStudentDetails(): void {
-    this.studentService.getStudenById(1).subscribe((student: Student) => {
+    this.studentService.getStudenById().subscribe((student: Student) => {
       this.student = student;
     });
   }

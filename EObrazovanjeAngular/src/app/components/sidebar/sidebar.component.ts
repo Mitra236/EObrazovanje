@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +9,16 @@ import { UserService } from '../../services/user.service';
 export class SidebarComponent implements OnInit {
   role: string;
   id: number;
-  constructor() {}
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
-    this.role = localStorage.getItem("role");
-    this.id = +localStorage.getItem("id");
+    this.role = localStorage.getItem('role');
+    this.id = +localStorage.getItem('id');
+  }
+
+  logout() {
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
+    this.router.navigate(['']);
   }
 }

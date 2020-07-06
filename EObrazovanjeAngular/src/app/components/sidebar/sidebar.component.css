@@ -16,7 +16,7 @@ a {
 
 .title {
   font-size: 24px;
-  padding: 20px 30px 30px 30px;
+  padding: 20px 30px 10px 30px;
 }
 
 .group {
@@ -43,4 +43,8 @@ a {
 .item:hover {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+.logout {
+  margin-bottom: 30px;
 }
