@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ExamPeriodDTO;
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationCheckDTO;
@@ -57,6 +58,14 @@ public class ExamRegistrationController {
 		if(examRegistrationDTOs.size() <= 0) return new ResponseEntity<List<ExamRegistrationDTO>>(HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<List<ExamRegistrationDTO>>(examRegistrationDTOs, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/exam-course")
+	private ResponseEntity<CourseDTO> findCourseForExam(@RequestParam("id") int id) {
+		CourseDTO examRegistrationDTOs = examRegistrationSServiceInterface.findCourseForExam(id);
+		if(examRegistrationDTOs == null) return new ResponseEntity<CourseDTO>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<CourseDTO>(examRegistrationDTOs, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/activeExamsAdmin")

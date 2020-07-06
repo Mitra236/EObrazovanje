@@ -285,4 +285,9 @@ public class StudentService implements StudentServiceInterface {
 		}
 		return enrollments;		
 	}
+
+	@Override
+	public List<Student> findAllStudents() {
+		return studentRepository.findAll();
+	}
 }

@@ -1,6 +1,8 @@
 package com.eObrazovanje.studentServices.service;
 
 import java.util.List;
+
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationCheckDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
@@ -16,4 +18,5 @@ public interface ExamRegistrationSServiceInterface {
 	List<ExamRegistrationDTO> getActiveProfessorExams(int id);
 	List<ExamRegistrationCheckDTO> getNotCheckedExamsInActivePeriod(int id);
 	void checkRegistration(int id);
+	CourseDTO findCourseForExam(int id);
 }

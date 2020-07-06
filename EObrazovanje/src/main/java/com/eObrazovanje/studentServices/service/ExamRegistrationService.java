@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
 import com.eObrazovanje.studentServices.DTO.ExamPointsDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationCheckDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
@@ -124,7 +125,7 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 				for (ExamRegistration er: e.getExamRegistrations()) {
 					calExam.setTime(e.getPeriod().getStartDate());
 					examMonth = calExam.get(Calendar.MONTH);
-					if(month == examMonth) {
+					if(month == examMonth && er.isChecked() == false) {
 						ExamRegistrationDTO examRegistrationDTO = new ExamRegistrationDTO();
 						examRegistrationDTO.id = er.getId();
 						examRegistrationDTO.examPoints = er.getExam().getExamPoints();
@@ -180,6 +181,14 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 	@Override
 	public ExamRegistrationCheckDTO findOneChecked(int id) {
 		return new ExamRegistrationCheckDTO(examRegRepo.findById(id).orElse(null));
+	}
+
+	@Override
+	public CourseDTO findCourseForExam(int id) {
+		ExamRegistration examReg = examRegRepo.findById(id).orElse(null);
+		Exam exam = examReg.getExam();
+		CourseDTO courseDTO = new CourseDTO(exam.getCourse());
+		return courseDTO;
 	}
 	
 }

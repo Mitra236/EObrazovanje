@@ -106,4 +106,9 @@ public class ProfessorService implements ProfessorServiceInterface {
 		professorRepository.deleteById(id);
 		return false;
 	}
+
+	@Override
+	public List<Professor> findAllProfessors() {
+		return professorRepository.findAll();
+	}
 }
