@@ -24,6 +24,12 @@ public class StudentDetailsDTO {
 	public double accountBalance;
 	public int studyProgrammeId;
 	
+	
+	public StudentDetailsDTO() {
+		super();
+	}
+
+
 	public StudentDetailsDTO(Student student) {
 		super();
 		this.id = student.getId();

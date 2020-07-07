@@ -113,4 +113,8 @@ public class ExamPeriod implements Serializable{
 		this.examsTaken = examsTaken;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }
