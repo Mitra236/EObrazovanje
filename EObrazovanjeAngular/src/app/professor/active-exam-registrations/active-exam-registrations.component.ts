@@ -27,6 +27,7 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
           this.professorService.getActiveExamRegistrations(+params["id"])))
           .subscribe(registration => {
             this.examRegistration = registration
+            console.log(registration)
               for( let e of this.examRegistration ) {
                 this.getStudent(e.studentId)
               }
