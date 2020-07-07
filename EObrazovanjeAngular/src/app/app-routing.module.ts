@@ -29,6 +29,8 @@ import { StudentExamsActiveComponent } from './student/student-exams-active/stud
 import { StudentFinancingComponent } from './student/student-financing/student-financing.component';
 import { StudentProfileDetailsComponent } from './student/student-profile-details/student-profile-details.component';
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
+import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
+import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -193,6 +195,9 @@ const routes: Routes = [
         component: AdminAddProgrammeComponent,
         canActivate: [AuthGuard],
       },
+      { path: 'courses', component: AdminAllCoursesListComponent, canActivate: [AuthGuard] },
+      { path: 'addCourse', component: AdminAddCourseComponent, canActivate: [AuthGuard] },
+      { path: 'addCourse/:id', component: AdminAddCourseComponent, canActivate: [AuthGuard] },
     ],
   },
 ];

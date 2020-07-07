@@ -69,6 +69,14 @@ export class StudyProgrammeService {
     )
   }
 
+  removeCourseFromProgramme(programmeId: Number, course: Course) {
+    return this.http.delete<Course>(this.studyProgrammesUrl + '/programmeCourse/delete/' + course.id + '/' + programmeId,
+    {}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+  }
+
   saveStudyProgramme(studyProgramme: StudyProgramme){
     return this.http.post(this.studyProgrammesUrl, studyProgramme)
       .subscribe((response) => console.log(response),

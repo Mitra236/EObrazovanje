@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AdminProfessorService } from 'src/app/services/admin/admin-professor.service';
+import { CourseService } from '../../services/course.service';
 import { Professor } from 'src/app/types/professor';
+import { Course } from 'src/app/types/course';
 
 enum EPosition {
   FullTimeProfessor = "Full Time Professor",
@@ -34,8 +36,13 @@ export class AdminAddUserComponent implements OnInit {
   professor: Professor;
   submitted = false;
 
+  courses: Course[];
+  selectedCourse: Course;
+  availableCourses: Course[];
+
   constructor(
     private adminProfessorService: AdminProfessorService,
+    private coursesService: CourseService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute) {
@@ -43,6 +50,7 @@ export class AdminAddUserComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.availableCourses = [];
     this.student = this.router.url.toString().includes('student');
 
     if(!this.student && !this.route.snapshot.params['id']) {
@@ -51,6 +59,8 @@ export class AdminAddUserComponent implements OnInit {
       this.getProfessor(+this.route.snapshot.params['id'])
       }
     }
+
+    
 
     onSubmit() {
       if(!this.student && !this.route.snapshot.params['id']) {
@@ -104,7 +114,6 @@ export class AdminAddUserComponent implements OnInit {
         this.getProfessorEditData()
       })
     }
-
     numberValidator(
       control: AbstractControl
     ): { [key: string]: any } | null {
@@ -113,5 +122,10 @@ export class AdminAddUserComponent implements OnInit {
         ? null
         : { invalidNumber: { valid: false, value: control.value } }
     }
+    
+    getCourses() {
+   
+    }
 }
+
 

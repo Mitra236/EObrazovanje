@@ -1,0 +1,30 @@
+<div class="content-container">
+    <div class="info" >
+      <h3 class="card-title">Novi kurs</h3>
+      <div class="form">
+        <div class="row">
+          <label>Naziv:</label>
+          <input type="text" id="name" name="name" #textbox [(ngModel)]="name" />
+        </div>
+        <div class="row">
+            <label>Sifra:</label>
+            <input type="text" id="courseCode" name="courseCode" #textbox [(ngModel)]="courseCode" />
+        </div>
+        <div class="row">
+            <label>ESPB:</label>
+            <input type="text" id="ECTS" name="ECTS" #textbox [(ngModel)]="ECTS" />
+        </div>
+        <div class="row">
+            <label>Predavanja:</label>
+            <input type="text" id="lectures" name="lectures" #textbox [(ngModel)]="lectures" />
+        </div>
+        <div class="row">
+            <label>Vezbe:</label>
+            <input type="text" id="practicalClasses" name="practicalClasses" #textbox [(ngModel)]="practicalClasses" />
+        </div>
+      <div>
+        <button class="filled-btn-dark"  (click) = "saveCourse()" >Dodaj</button>
+      </div>
+    </div>
+  </div>
+  

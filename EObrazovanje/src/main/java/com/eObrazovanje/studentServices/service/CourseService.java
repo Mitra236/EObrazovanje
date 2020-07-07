@@ -14,9 +14,11 @@ import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Enrollment;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.entity.StudyProgramme;
 import com.eObrazovanje.studentServices.repository.CourseRepository;
 import com.eObrazovanje.studentServices.repository.EnrollmentRepository;
 import com.eObrazovanje.studentServices.repository.StudentRepository;
+import com.eObrazovanje.studentServices.repository.StudyProgrammeRepository;
 
 @Service
 public class CourseService implements CourseServiceInterface{
@@ -29,6 +31,8 @@ public class CourseService implements CourseServiceInterface{
 	
 	@Autowired
 	EnrollmentRepository enrollmentRepo;
+	@Autowired
+	StudyProgrammeRepository studyProgrammeRepository;
 
 	@Override
 	public CourseDTO findOne(int id) {
@@ -46,7 +50,18 @@ public class CourseService implements CourseServiceInterface{
 
 	@Override
 	public int save(Course course) {
-		return courseRepo.save(course).getId();
+		StudyProgramme pausedStudies = studyProgrammeRepository.findById(-1).orElse(null);
+		
+		if(course.getId() == 0) {
+			course.setStudyProgramme(pausedStudies);
+			
+			pausedStudies.getCourses().add(course);
+		}
+		
+
+		Course saved = courseRepo.save(course);
+		studyProgrammeRepository.save(pausedStudies);
+		return saved.getId();
 	}
 
 	@Override
@@ -68,6 +83,17 @@ public class CourseService implements CourseServiceInterface{
 		updatedCourse.setPracticalCLasses(course.getPracticalCLasses());
 		updatedCourse.setStudyProgramme(course.getStudyProgramme());
 		courseRepo.save(updatedCourse);
+	}
+
+	@Override
+	public int updateDTO(CourseDTO course) {
+		Course updatedCourse = courseRepo.findById(course.id).orElse(null);
+		updatedCourse.setCourseCode(course.courseCode);
+		updatedCourse.setName(course.name);
+		updatedCourse.setECTS(course.ECTS);
+		updatedCourse.setLectures(course.lectures);
+		updatedCourse.setPracticalCLasses(course.practicalClasses);
+		return courseRepo.save(updatedCourse).getId();
 	}
 
 	@Override
