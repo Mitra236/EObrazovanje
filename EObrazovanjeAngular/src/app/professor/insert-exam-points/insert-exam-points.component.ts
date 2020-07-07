@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from 'src/app/services/professor/professor.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Exam } from 'src/app/types/exam';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-insert-exam-points',
@@ -12,6 +14,7 @@ export class InsertExamPointsComponent implements OnInit {
   examForm: FormGroup;
   examReg: number;
   id: number;
+  exam: Exam;
 
   constructor(
     private professorService: ProfessorService,
@@ -24,8 +27,8 @@ export class InsertExamPointsComponent implements OnInit {
     this.examReg = +this.route.snapshot.paramMap.get("id2");
     this.examForm = this.fb.group({
       id: this.examReg,
-      examPoints: [0, Validators.required],
-      labPoints: [0, Validators.required]
+      examPoints: [0, [Validators.required, Validators.min(0), Validators.max(50)]],
+      labPoints: [0, [Validators.required, Validators.min(0), Validators.max(50)]]
     })
   }
 

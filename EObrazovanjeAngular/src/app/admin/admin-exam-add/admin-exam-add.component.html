@@ -1,0 +1,34 @@
+<div class="content-container">
+  <div class="info">
+    <h3 class="card-title">Dodaj ispit</h3>
+    <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+      <div class="form">
+        <div class="row">
+          <label>Predmet:</label>
+          <select formControlName="course">
+            <option *ngFor="let course of courses; let i = index" [ngValue]="course">{{ course.name }}</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Rokovi:</label>
+          <select formControlName="period">
+            <option *ngFor="let item of periods | keyvalue;" [ngValue] = "item.key" >{{ item.value }}</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Datum:</label>
+          <input type="datetime-local" formControlName="date"/>
+        </div>
+        <div class="row">
+          <label>Ucionica:</label>
+          <input type="text" formControlName="classroom"/>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="filled-btn-dark action-btn">Potvrdi</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

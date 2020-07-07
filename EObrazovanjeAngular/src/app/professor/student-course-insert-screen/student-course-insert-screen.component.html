@@ -6,21 +6,36 @@
         <div class="row">
           <label>Student:</label>
           <select formControlName="student">
-            <option *ngFor="let student of students; let i = index" [ngValue]="student.id" [attr.selected] = "i">{{ student.firstName }} {{ student.lastName }}</option>
+            <option *ngFor="let student of students; let i = index" [ngValue]="student.id">{{ student.firstName }} {{ student.lastName }}</option>
           </select>
         </div>
+        <span class="text-danger"
+          *ngIf="enrollmentForm.get('student').touched && enrollmentForm.get('student').errors?.required">
+          Polje je obavezno
+        </span>
         <div class="row">
           <label>Početak kursa:</label>
           <input type="date" formControlName="startDate"/>
         </div>
+        <span class="text-danger"
+          *ngIf="enrollmentForm.get('startDate').touched && enrollmentForm.get('startDate').errors?.required">
+          Polje je obavezno
+        </span>
         <div class="row">
           <label>Kraj kursa:</label>
           <input type="date" formControlName="endDate"/>
         </div>
+        <span class="text-danger"
+          *ngIf="enrollmentForm.get('endDate').touched && enrollmentForm.get('endDate').errors?.required">
+          Polje je obavezno
+        </span>
+        <span class="text-danger"
+          *ngIf=enrollmentForm.errors>
+          {{ enrollmentForm.errors?.dates }}
+        </span>
         <div class="button-container">
           <button type="submit" class="filled-btn-dark action-btn" [disabled]="!enrollmentForm.valid">Potvrdi</button>
         </div>
-        <!-- <label *ngIf="enrollmentForm.errors">{{ enrollmentForm.errors?.dates | json }}</label> -->
       </div>
     </form>
   </div>

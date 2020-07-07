@@ -17,6 +17,15 @@ select {
   height: 25px;
 }
 
+span {
+  margin-left: 230px;
+  color: red;
+}
+
+.ng-invalid:not(form) {
+  border-color: lightcoral;
+}
+
 .content-container {
   padding-right: 50px;
   padding-left: 50px;

@@ -29,7 +29,7 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.id = +localStorage.getItem("id");
-    this.getStudents(+this.route.parent.snapshot.paramMap.get("id"));
+    this.getStudents(+this.route.snapshot.paramMap.get("id2"));
     this.course = +this.route.snapshot.paramMap.get("id2")
     this.enrollmentForm = this.fb.group({
       startDate: ['', Validators.required],
@@ -58,7 +58,7 @@ export class StudentCourseInsertScreenComponent implements OnInit, OnDestroy {
       let e = group.controls[endDate];
       if (s.value > e.value) {
         return {
-          dates: "End date shouldn't be before start date"
+          dates: 'Datum kraja kursa ne sme biti pre datuma pocetka'
         };
       }
       return {};

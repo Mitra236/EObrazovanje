@@ -27,7 +27,6 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
           this.professorService.getActiveExamRegistrations(+params["id"])))
           .subscribe(registration => {
             this.examRegistration = registration
-            console.log(registration)
               for( let e of this.examRegistration ) {
                 this.getStudent(e.studentId)
               }
@@ -46,6 +45,15 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
 
   goToInsertPointsScreen(id: number) {
     this.router.navigate(['professor/', this.id, 'insertPoints', id])
+  }
+
+  isDateInFuture(date: string) : boolean {
+    let current = new Date()
+    let examDate = new Date(date);
+    if (examDate > current) {
+      return false
+    }
+      return true;
   }
 
   ngOnDestroy(): void {

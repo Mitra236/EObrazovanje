@@ -31,6 +31,8 @@ import { StudentProfileDetailsComponent } from './student/student-profile-detail
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
 import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
 import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
+import { AdminExamScreenComponent } from './admin/admin-exam-screen/admin-exam-screen.component';
+import { AdminExamAddComponent } from './admin/admin-exam-add/admin-exam-add.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -171,7 +173,17 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'examPeriod',
+        path: 'exam-screen/:id',
+        component: AdminExamScreenComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'exam-add',
+        component: AdminExamAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'examPeriod/:id1/:id2',
         component: AdminPeriods2ListComponent,
         canActivate: [AuthGuard],
       },

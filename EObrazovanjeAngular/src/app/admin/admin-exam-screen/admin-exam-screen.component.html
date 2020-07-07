@@ -1,0 +1,30 @@
+<div class="content-container">
+  <div class="info">
+    <h3 class="card-title">Informacije o profesoru</h3>
+    <div class="form" *ngIf="exam">
+      <div class="row">
+        <label>Predmet:</label>
+        <input type="text" value="{{ exam.course.name }}" disabled/>
+      </div>
+      <div class="row">
+        <label>Profesor:</label>
+        <input type="text" value="{{ exam.course.professorName }}" disabled/>
+      </div>
+      <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <label>Datum:</label>
+        <input type="datetime-local" formControlName="date"/>
+      </div>
+      <div class="row">
+        <label>Ucionica:</label>
+        <input type="text" formControlName="classroom"/>
+      </div>
+      <div class="button-container">
+        <button type="submit" class="filled-btn-dark action-btn">Potvrdi</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+

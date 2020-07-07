@@ -4,34 +4,34 @@
     <div class="form" *ngIf="professor">
       <div class="row">
         <label>Korisnicko ime:</label>
-        <input type="text" [(ngModel)]="professor.username"/>
+        <input type="text" [(ngModel)]="professor.username" name="username" id="username" required #myInput/>
       </div>
       <div class="row">
         <label>Ime:</label>
-        <input type="text" [(ngModel)]="professor.firstName"/>
+        <input type="text" [(ngModel)]="professor.firstName" name="firstName" id="firstName" required #myInput/>
       </div>
       <div class="row">
         <label>Prezime:</label>
-        <input type="text" [(ngModel)]="professor.lastName"/>
+        <input type="text" [(ngModel)]="professor.lastName" name="lastName" id="lastName" required #myInput/>
       </div>
       <div class="row">
         <label>Email:</label>
-        <input type="text" [(ngModel)]="professor.email"/>
+        <input type="email" [(ngModel)]="professor.email" name="email" id="email" required #myInput/>
       </div>
       <div class="row">
         <label>Broj telefona:</label>
-        <input type="text" [(ngModel)]="professor.phoneNumber"/>
+        <input type="text" [(ngModel)]="professor.phoneNumber" name="phoneNumber" id="phoneNumber"/>
       </div>
       <div class="row">
         <label>JMBG:</label>
-        <input type="text" [(ngModel)]="professor.JMBG"/>
+        <input type="text" [(ngModel)]="professor.JMBG" name="JMBG" id="JMBG" required #myInput/>
       </div>
       <div class="row">
         <label>Biografija:</label>
-        <input type="text" [(ngModel)]="professor.biography"/>
+        <input type="text" [(ngModel)]="professor.biography" name="biography" id="biography"/>
       </div>
       <div class="button-container">
-        <button class="filled-btn-dark action-btn" (click) = "edit()">Potvrdi</button>
+        <button class="filled-btn-dark action-btn" [disabled] = "!myInput.validity.valid" (click) = "edit()">Potvrdi</button>
       </div>
     </div>
   </div>
