@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { StudentServiceService } from 'src/app/services/student/student.service';
 import { Exam } from 'src/app/types/exam';
 import { ExamRegistration } from 'src/app/types/exam-registration';
+import { Student } from 'src/app/types/student';
 
 const mockDataUnregistration = [
   {
@@ -30,9 +31,9 @@ export class StudentExamsActiveComponent implements OnInit {
   registration;
   exams;
   selectedExams = [];
-  userAccountBalance = 1000;
+  userAccountBalance = 0;
   selectedExamsCost = 0;
-  newUserAccountBalance = 1000;
+  newUserAccountBalance = 0;
 
   constructor(
     private router: Router,
@@ -43,6 +44,13 @@ export class StudentExamsActiveComponent implements OnInit {
     const registration = !this.router.url.toString().includes('unregister');
     this.registration = registration;
     this.getExams(registration);
+  }
+
+  getAccountBalance() {
+    this.studentService.getStudenById().subscribe((student: Student) => {
+      this.userAccountBalance = student.accountBalance;
+      this.newUserAccountBalance = student.accountBalance;
+    });
   }
 
   getExams(registration: boolean) {
@@ -88,12 +96,14 @@ export class StudentExamsActiveComponent implements OnInit {
 
   handleSubmit() {
     if (this.registration) {
-      this.selectedExams.forEach((e) => {
-        this.studentService.registerExam(e.id).subscribe((data) => {
-          console.log(data);
+      if (this.newUserAccountBalance > 0) {
+        this.selectedExams.forEach((e) => {
+          this.studentService.registerExam(e.id).subscribe((data) => {
+            console.log(data);
+          });
         });
-      });
-      window.location.reload();
+        window.location.reload();
+      }
     } else if (!this.registration) {
       this.selectedExams.forEach((e) => {
         this.studentService

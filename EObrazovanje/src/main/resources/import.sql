@@ -47,8 +47,8 @@ INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (50, 50, "2020-04-16 12:30:00", 0, 2, 3);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (70, 30, "2020-02-10 12:30:00", 0, 3, 2);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-06-23 12:30:00", 0, 1, 4);
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 4, 5);
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 1, 5);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-25 12:30:00", 0, 4, 5);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-25 12:30:00", 0, 1, 5);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-09-07 12:30:00", 0, 5, 6);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-10-07 12:30:00", 0, 6, 2);
 
