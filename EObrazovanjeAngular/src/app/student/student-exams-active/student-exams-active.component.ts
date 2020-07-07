@@ -44,6 +44,7 @@ export class StudentExamsActiveComponent implements OnInit {
     const registration = !this.router.url.toString().includes('unregister');
     this.registration = registration;
     this.getExams(registration);
+    this.getAccountBalance();
   }
 
   getAccountBalance() {
