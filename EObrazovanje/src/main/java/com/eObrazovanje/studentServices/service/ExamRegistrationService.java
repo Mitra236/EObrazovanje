@@ -121,11 +121,11 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 		int examMonth;
 		
 		for (Course c: courseRepo.findProfessorCourses(id)) {
-			for(Exam e: c.getExams()) {
+			for(Exam e: c.getExams()) {			
 				for (ExamRegistration er: e.getExamRegistrations()) {
-					calExam.setTime(e.getPeriod().getStartDate());
+					calExam.setTime(er.getExam().getPeriod().getStartDate());
 					examMonth = calExam.get(Calendar.MONTH);
-					if(month == examMonth && er.isChecked() == false) {
+					if(month == examMonth && er.isChecked() == false && er.getExam().getCourse().getId() == c.getId()) {
 						ExamRegistrationDTO examRegistrationDTO = new ExamRegistrationDTO();
 						examRegistrationDTO.id = er.getId();
 						examRegistrationDTO.examPoints = er.getExam().getExamPoints();
@@ -138,7 +138,8 @@ public class ExamRegistrationService implements ExamRegistrationSServiceInterfac
 						examRegistrationDTO.date = er.getExam().getExam_date();
 						examRegistrationDTOs.add(examRegistrationDTO);
 					}
-				}		
+				
+				}
 			}		
 		}
 		return examRegistrationDTOs;

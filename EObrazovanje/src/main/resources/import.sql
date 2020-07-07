@@ -13,6 +13,7 @@ INSERT INTO admins(admin_username, admin_password) VALUES ("marko", "markovic");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Softverske i informacione tehnologije");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Energetika i elektronika");
 INSERT INTO study_programmes(study_programme_name) VALUES ("Racunarstvo i automatika");
+INSERT INTO study_programmes(study_programme_id, study_programme_name) VALUES (-1, "Zamrznute studije");
 
 INSERT INTO students(student_username, student_password, student_index,student_first_name,student_last_name, student_JMBG, student_enrollment_year, student_financing, student_year_of_study,student_time_enrolled, student_giro, student_personal_refernce_number, student_balance, study_programme) VALUES ("tina", "tinic", "sf25/2017", "Valentina", "Mackovic", "0711997825199", 2017, 0, 3, 1, "01929201", "718281299", 0, 1);
 INSERT INTO students(student_username, student_password, student_index,student_first_name,student_last_name, student_JMBG, student_enrollment_year, student_financing, student_year_of_study,student_time_enrolled, student_giro, student_personal_refernce_number, student_balance, study_programme) VALUES ("marko", "markovic", "sf26/2017", "Marko", "Markovic", "0712497825199", 2017, 0, 3, 1, "012459201", "24454281299", 2, 1);
@@ -47,7 +48,7 @@ INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (70, 30, "2020-02-10 12:30:00", 0, 3, 2);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-06-23 12:30:00", 0, 1, 4);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 4, 5);
-INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-07 12:30:00", 0, 1, 5);
+INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-07-05 12:30:00", 0, 1, 5);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-09-07 12:30:00", 0, 5, 6);
 INSERT INTO exams(exam_points, lab_points, exam_date, class_room, course, period) VALUES (0, 0, "2020-10-07 12:30:00", 0, 6, 2);
 
@@ -59,8 +60,7 @@ INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, 
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (1, 6, 1, 1, 2, 0);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 5, 0);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 4, 0);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 6, 0);
-INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 4, 0);
+INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 1, 1, 7, 0);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (1, 8, 2, 2, 3, 0);
 INSERT INTO exam_registrations(status, final_grade, exam_period, student, exam, checked) VALUES (2, 0, 6, 2, 6, 0);
 
