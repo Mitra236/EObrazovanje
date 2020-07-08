@@ -123,7 +123,7 @@ public class StudentController {
 	}
 	
 
-	@GetMapping(value="notEnrolledStudents/{courseId}")
+	@GetMapping(value="/notEnrolledStudents/{courseId}")
 	private ResponseEntity<List<StudentBasicInfoDTO>> getStudentsWithoutSelectedCourse(@PathVariable("courseId") int courseId) {
 		List<StudentBasicInfoDTO> studentDTOs = studentServiceInterface.getNotEnrolledStudents(courseId);
 		if(studentDTOs.size() <= 0) {
@@ -132,7 +132,7 @@ public class StudentController {
 		return new ResponseEntity<List<StudentBasicInfoDTO>>(studentDTOs, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="studentEnrollments/{studentId}")
+	@GetMapping(value="/studentEnrollments/{studentId}")
 	private ResponseEntity<List<EnrollmentDTO>> getStudentEnrollments(@PathVariable("studentId") int id) {
 		List<EnrollmentDTO> enrollmentDTOs = studentServiceInterface.getStudentEnrollments(id);
 		if(enrollmentDTOs == null || enrollmentDTOs.size() < 1)
