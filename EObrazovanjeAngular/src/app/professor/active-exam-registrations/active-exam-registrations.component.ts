@@ -47,6 +47,15 @@ export class ActiveExamRegistrationsComponent implements OnInit, OnDestroy {
     this.router.navigate(['professor/', this.id, 'insertPoints', id])
   }
 
+  isDateInFuture(date: string) : boolean {
+    let current = new Date()
+    let examDate = new Date(date);
+    if (examDate > current) {
+      return false
+    }
+      return true;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   }

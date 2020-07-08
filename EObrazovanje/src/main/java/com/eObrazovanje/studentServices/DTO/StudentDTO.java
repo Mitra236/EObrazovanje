@@ -12,6 +12,7 @@ public class StudentDTO {
 	public String lastName;
 	public String email;
 	public StudyProgrammeDTO studyProgramme;
+	public double accountBalance;
 	
 	public StudentDTO(Student student) {
 		this.id = student.getId();
@@ -22,6 +23,7 @@ public class StudentDTO {
 		this.lastName = student.getLastName();
 		this.email = student.getEmail();
 		this.studyProgramme = new StudyProgrammeDTO(student.getStudyProgramme());
+		this.accountBalance = student.getAccountBalance();
 	}
 
 	public StudentDTO() {

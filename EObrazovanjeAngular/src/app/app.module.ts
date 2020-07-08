@@ -38,6 +38,8 @@ import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/adm
 import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
 import { AdminCourseListComponent } from './admin/admin-course-list/admin-course-list.component';
 import { AdminAddStudentComponent } from './admin/admin-add-student/admin-add-student.component';
+import { AdminExamScreenComponent } from './admin/admin-exam-screen/admin-exam-screen.component';
+import { AdminExamAddComponent } from './admin/admin-exam-add/admin-exam-add.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { AdminAddStudentComponent } from './admin/admin-add-student/admin-add-st
     AdminAllCoursesListComponent,
     AdminAddCourseComponent,
     AdminCourseListComponent,
-    AdminAddStudentComponent
+    AdminAddStudentComponent,
+    AdminExamScreenComponent,
+    AdminExamAddComponent
   ],
   imports: [
     BrowserModule,

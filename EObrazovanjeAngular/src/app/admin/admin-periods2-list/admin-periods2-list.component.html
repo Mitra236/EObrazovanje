@@ -1,31 +1,33 @@
 <div class="content-container">
     <h2>Lista ispita po roku</h2>
-    <button class="filled-btn-dark">Dodaj</button> 
+    <button class="filled-btn-dark" (click) = "goToAdd()">Dodaj</button>
     <div class="examPeriods-info">
       <table class="table">
         <thead>
           <tr>
-            <th>Naziv</th>
-            <th>Broj bodova</th>
-            <th>Predispitne obaveze</th>
+            <th>Naziv predmeta</th>
+            <th>Profesor</th>
             <th>Datum</th>
             <th>Ucionica</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let period of examPeriod">
-            <td>{{ period.name }}</td>
-            <td>{{ period.exam_points }}</td>
-            <td>{{ period.lab_points }}</td>
-            <td>{{ period.exam_date }}</td>
-            <td>{{ period.class_room }}</td>
+          <tr *ngFor="let period of examPeriod; let i = index">
+            <td>{{ period.course.name }}</td>
+            <td>{{ period.course.professorName }}</td>
+            <td>{{ period.date | date:'dd/MM/yyyy'}}</td>
+            <td>{{ period.classroom }}</td>
             <td>
-              <button class="filled-btn-dark">Ukloni</button>
+              <button class="filled-btn-dark" (click) = "deleteExam(period.id, i)">Ukloni</button>
+            </td>
+            <td>
+              <button class="filled-btn-dark" (click) = "goToDetails(period.id)" >Dalje</button>
             </td>
           </tr>
         </tbody>
-      </table>    
+      </table>
     </div>
   </div>
-  
+

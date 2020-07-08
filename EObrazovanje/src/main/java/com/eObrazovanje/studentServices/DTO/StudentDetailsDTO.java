@@ -28,6 +28,7 @@ public class StudentDetailsDTO {
 	public StudentDetailsDTO() {
 		super();
 	}
+
 	public StudentDetailsDTO(Student student) {
 		super();
 		this.id = student.getId();

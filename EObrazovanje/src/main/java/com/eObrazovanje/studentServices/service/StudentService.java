@@ -232,6 +232,8 @@ public class StudentService implements StudentServiceInterface {
 			
 			financialCardRepository.save(transaction);
 			
+			student.setAccountBalance(student.getAccountBalance() - cost);
+			studentRepository.save(student);
 			return examReg.getId();
 		}
 		return 0;

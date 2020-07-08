@@ -12,7 +12,7 @@
           <tr *ngFor="let period of periods">
             <td>{{ period.name }}</td>
             <td>
-              <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+              <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Januarski']">Dalje</button>
             </td>
           </tr>
         </tbody>
@@ -30,7 +30,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Februarski']">Dalje</button>
               </td>
             </tr>
           </tbody>
@@ -48,7 +48,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Aprilski']">Dalje</button>
               </td>
             </tr>
           </tbody>
@@ -66,7 +66,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Junski']">Dalje</button>
               </td>
             </tr>
           </tbody>
@@ -84,7 +84,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Julski']">Dalje</button>
               </td>
             </tr>
           </tbody>
@@ -102,7 +102,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Septembarski']">Dalje</button>
               </td>
             </tr>
           </tbody>
@@ -120,7 +120,7 @@
             <tr *ngFor="let period of periods">
               <td>{{ period.name }}</td>
               <td>
-                <button class="filled-btn-dark" [routerLink]="['../periods/examPeriod']">Dalje</button>
+                <button class="filled-btn-dark" [routerLink]="['../examPeriod', period.id, 'Oktobarski']">Dalje</button>
               </td>
             </tr>
           </tbody>

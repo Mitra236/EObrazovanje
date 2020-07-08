@@ -7,10 +7,22 @@
           <label>Bodovi na ispitu:</label>
           <input type="text" formControlName="examPoints"/>
         </div>
+        <span class="text-danger"
+          *ngIf="examForm.get('examPoints').touched && examForm.get('examPoints').errors?.required">
+          Polje je obavezno
+        </span>
+        <span class="text-danger"
+          *ngIf="examForm.get('examPoints').touched && examForm.get('examPoints').invalid">
+          Broj bodova je veci od maksimuma
+        </span>
         <div class="row">
           <label>Bodovi na predispitnim obavezama:</label>
           <input type="text" formControlName="labPoints"/>
         </div>
+        <span class="text-danger"
+          *ngIf="examForm.get('labPoints').touched && examForm.get('labPoints').errors?.required">
+          Polje je obavezno
+        </span>
         <div class="button-container">
           <button type="submit" class="filled-btn-dark action-btn" [disabled]="!examForm.valid">Unesi</button>
         </div>

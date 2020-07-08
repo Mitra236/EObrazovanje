@@ -63,8 +63,13 @@ export class ProfessorService {
               .pipe(catchError(this.handleError));
   }
 
-  getStudent(id: number) : Promise<Student> {
-    return this.http.get<Student>(this.studentsUrl + "student?id=" + id).toPromise()
+  getExam(id: number) : Observable<Exam> {
+    return this.http.get<Exam>(this.examUrl + "exam/?id=" + id)
+              .pipe(catchError(this.handleError));
+  }
+
+  getStudent(id: number) : Observable<Student> {
+    return this.http.get<Student>(this.studentsUrl + "student?id=" + id)
   }
 
   getActiveExamRegistrations(id: number) : Observable<ExamRegistration[]> {

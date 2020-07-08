@@ -55,7 +55,7 @@ public class ExamRegistrationController {
 	@GetMapping(value="/activeExams")
 	private ResponseEntity<List<ExamRegistrationDTO>> getActiveExams(@RequestParam("id") int id) {
 		List<ExamRegistrationDTO> examRegistrationDTOs = examRegistrationSServiceInterface.getActiveProfessorExams(id);
-		if(examRegistrationDTOs.size() <= 0) return new ResponseEntity<List<ExamRegistrationDTO>>(HttpStatus.NOT_FOUND);
+		if(examRegistrationDTOs.size() <= 0) return new ResponseEntity<List<ExamRegistrationDTO>>(HttpStatus.NO_CONTENT);
 		
 		return new ResponseEntity<List<ExamRegistrationDTO>>(examRegistrationDTOs, HttpStatus.OK);
 	}
