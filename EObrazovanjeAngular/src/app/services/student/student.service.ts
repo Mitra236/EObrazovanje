@@ -7,6 +7,7 @@ import { ExamRegistration } from 'src/app/types/exam-registration';
 import { Student } from 'src/app/types/student';
 import { Transaction } from 'src/app/types/student-transaction';
 import { baseUrl } from '../url';
+import { Enrollment } from 'src/app/types/enrollment';
 
 @Injectable({
   providedIn: 'root',

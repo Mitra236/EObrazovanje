@@ -10,18 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eObrazovanje.studentServices.DTO.CourseDTO;
+import com.eObrazovanje.studentServices.DTO.CourseToAddDTO;
+import com.eObrazovanje.studentServices.DTO.EnrollmentDTO;
 import com.eObrazovanje.studentServices.DTO.ExamDTO;
 import com.eObrazovanje.studentServices.DTO.ExamRegistrationDTO;
 import com.eObrazovanje.studentServices.DTO.FinancialCardDTO;
 import com.eObrazovanje.studentServices.DTO.StudentBasicInfoDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDTO;
 import com.eObrazovanje.studentServices.DTO.StudentDetailsDTO;
+import com.eObrazovanje.studentServices.entity.Course;
 import com.eObrazovanje.studentServices.entity.Exam;
 import com.eObrazovanje.studentServices.entity.Student;
+import com.eObrazovanje.studentServices.service.CourseServiceInterface;
 import com.eObrazovanje.studentServices.service.ExamRegistrationSServiceInterface;
 import com.eObrazovanje.studentServices.service.StudentServiceInterface;
 
@@ -49,6 +55,26 @@ public class StudentController {
 	private StudentDetailsDTO getStudent(@RequestParam("id") int id) {
 		return studentServiceInterface.findOne(id);
 	}
+	
+	@PutMapping(consumes = "application/json")
+	private ResponseEntity<Integer> editStudent(@RequestBody StudentDetailsDTO editedStudent) {
+		StudentDetailsDTO student = studentServiceInterface.findOne(editedStudent.id);
+		if (student == null) return new ResponseEntity<Integer>(0, HttpStatus.NOT_FOUND); 
+		
+		int updatedId = studentServiceInterface.updateDTO(editedStudent);
+		
+		return new ResponseEntity<Integer>(updatedId, HttpStatus.CREATED);
+	}
+	
+	@PostMapping(consumes = "application/json")
+	private ResponseEntity<Integer> saveStudent(@RequestBody StudentDetailsDTO studentDTO) {
+		if (studentDTO == null) return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND); 
+		
+		int studentId = studentServiceInterface.create(studentDTO);
+		
+		return new ResponseEntity<Integer>(studentId, HttpStatus.CREATED);
+	}
+	
 	
 	@GetMapping(value="/{studentId}/exams-current")
 	private List<ExamDTO> getCurrentExamsForSTudent(@PathVariable("studentId") int id) {
@@ -95,6 +121,26 @@ public class StudentController {
 		}
 		return new ResponseEntity<List<StudentBasicInfoDTO>>(studentDTOs, HttpStatus.OK);
 	}
+	
+
+	@GetMapping(value="notEnrolledStudents/{courseId}")
+	private ResponseEntity<List<StudentBasicInfoDTO>> getStudentsWithoutSelectedCourse(@PathVariable("courseId") int courseId) {
+		List<StudentBasicInfoDTO> studentDTOs = studentServiceInterface.getNotEnrolledStudents(courseId);
+		if(studentDTOs.size() <= 0) {
+			return new ResponseEntity<List<StudentBasicInfoDTO>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<StudentBasicInfoDTO>>(studentDTOs, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="studentEnrollments/{studentId}")
+	private ResponseEntity<List<EnrollmentDTO>> getStudentEnrollments(@PathVariable("studentId") int id) {
+		List<EnrollmentDTO> enrollmentDTOs = studentServiceInterface.getStudentEnrollments(id);
+		if(enrollmentDTOs == null || enrollmentDTOs.size() < 1)
+			return new ResponseEntity<List<EnrollmentDTO>>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentDTOs, HttpStatus.OK);
+	}
+	
 	
 	@PostMapping(value="/{studentId}/register-exam/{examId}")
 	private int registerExam(@PathVariable("studentId") int studentId, @PathVariable("examId") int examId) {

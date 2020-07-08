@@ -31,4 +31,8 @@ export class AdminStudentsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  editStudent(id: number) {
+    this.router.navigate(["admin/addStudent/" + id]);
+  }
 }

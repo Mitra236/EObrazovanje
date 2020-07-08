@@ -75,6 +75,15 @@ public class CourseController {
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
 	}
 	
+
+	@GetMapping(value="/courseEnrollments/{courseId}")
+	private ResponseEntity<List<EnrollmentDTO>> getCourseEnrollments(@PathVariable ("courseId") int id) {
+		CourseDTO course = courseServiceInterface.findOne(id);
+		if (course == null) return new ResponseEntity<List<EnrollmentDTO>>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentServiceInterface.getEnrolledStudents(id), HttpStatus.OK);
+	}
+	
 	@GetMapping(value="/professorCourses")
 	private ResponseEntity<List<CourseDTO>> getProfessorCourses(@RequestParam("id") int id) {
 		List<CourseDTO> coursesDTO = courseServiceInterface.findProfessorCourses(id);
@@ -135,5 +144,21 @@ public class CourseController {
 		
 		courseServiceInterface.remove(course.id);	
 		return new ResponseEntity<Boolean>(HttpStatus.OK);
+	}
+	
+
+
+	@DeleteMapping(value = "/deleteFromCourse/{studentId}/{courseId}")
+	private ResponseEntity<Boolean> deleteFromCourse(
+			@PathVariable("studentId") int studentId, 
+			@PathVariable("courseId") int id) {
+		CourseDTO course = courseServiceInterface.findOne(id);
+		if (course == null) return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND); 
+		
+		Boolean removedEnrollment = enrollmentServiceInterface.removeEnrollment(id, studentId);
+
+		if (removedEnrollment == false) return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND); 
+		
+		return new ResponseEntity<Boolean>(removedEnrollment, HttpStatus.OK);
 	}
 }

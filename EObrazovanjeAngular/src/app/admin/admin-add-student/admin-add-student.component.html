@@ -1,0 +1,95 @@
+<div class="content-container">
+    <div class="info">
+      <h3 class="card-title">Informacije o studentu</h3>
+        <div class="form">
+          <div class="row">
+            <label>Korisnicko ime:</label>
+            <input type="text" #textbox [(ngModel)]="username"/>
+          </div>
+          <div class="row">
+            <label>Lozinka:</label>
+            <input type="text" #textbox [(ngModel)]="password"/>
+          </div>
+          <div class="row">
+            <label>Ime:</label>
+            <input type="text" #textbox [(ngModel)]="firstName"/>
+          </div>
+          <div class="row">
+            <label>Prezime:</label>
+            <input type="text" #textbox [(ngModel)]="lastName"/>
+          </div>
+          <div class="row">
+            <label>Email:</label>
+            <input type="text" #textbox [(ngModel)]="email"/>
+          </div>
+          <div class="row">
+            <label>Broj telefona:</label>
+            <input type="text" #textbox [(ngModel)]="phoneNumber"/>
+          </div>
+          <div class="row">
+            <label>JMBG:</label>
+            <input type="text" #textbox [(ngModel)]="JMBG"/>
+          </div>
+          <div class="row">
+            <label>Indeks:</label>
+            <input type="text" #textbox [(ngModel)]="index"/>
+          </div>
+          <div class="row">
+            <label>Godina upisa:</label>
+            <input type="number"  #textbox [(ngModel)]="yearOfEnrollment"/>
+          </div>
+          <div class="row">
+            <label>Godina studija:</label>
+            <input type="number" #textbox [(ngModel)]="yearOfStudy"/>
+          </div>
+          <div class="row">
+            <label>Redni broj upisa godine:</label>
+            <input type="text" #textbox [(ngModel)]="timeEnrolled"/>
+          </div>
+          <div class="row">
+            <label>Nacin finansiranja:</label>
+            <select #textbox [(ngModel)]="methodOfFinancing">
+              <option *ngFor="let item of methods | keyvalue" [ngValue] = "item.key">{{ item.value }}</option>
+            </select>
+          </div>
+          <div class="row">
+            <label>Broj ziro racuna:</label>
+            <input type="text" #textbox [(ngModel)]="giroAccountNumber"/>
+          </div>
+          <div class="row">
+            <label>Broj modela:</label>
+            <input type="number" #textbox [(ngModel)]="modelNumber"/>
+          </div>
+          <div class="row">
+            <label>Poziv na broj:</label>
+            <input type="number" #textbox [(ngModel)]="personalReferenceNumber"/>
+          </div>
+          <div class="row">
+            <label>Stanje na racunu:</label>
+            <input type="number" #textbox [(ngModel)]="accountBalance" disabled/>
+          </div>
+    </div>
+    
+      <div class="button-container">
+        <button type="submit" class="filled-btn-dark action-btn" (click)="saveStudent()" >Potvrdi</button>
+      </div>
+</div>
+
+  <div class="student-course-info">
+    <h3 class="card-title">Lista predmeta</h3>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Sifra predmeta</th>
+          <th>Naziv predmeta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enrollment of enrollments">
+            <td>{{ enrollment.course.courseCode }}</td>
+          <td>{{ enrollment.course.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+        

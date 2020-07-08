@@ -37,6 +37,7 @@ import { StudentScreenComponent } from './student/student-screen/student-screen.
 import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
 import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
 import { AdminCourseListComponent } from './admin/admin-course-list/admin-course-list.component';
+import { AdminAddStudentComponent } from './admin/admin-add-student/admin-add-student.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AdminCourseListComponent } from './admin/admin-course-list/admin-course
     AdminAddProgrammeComponent,
     AdminAllCoursesListComponent,
     AdminAddCourseComponent,
-    AdminCourseListComponent
+    AdminCourseListComponent,
+    AdminAddStudentComponent
   ],
   imports: [
     BrowserModule,

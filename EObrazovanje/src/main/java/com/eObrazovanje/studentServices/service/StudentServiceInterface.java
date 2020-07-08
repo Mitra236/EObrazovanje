@@ -32,4 +32,9 @@ public interface StudentServiceInterface {
 	List<Student> findAllStudents();
 	
 	List<EnrollmentDTO> enrollUserToProgrammeCourses(int studentId, int programmeId);
+	
+	List<EnrollmentDTO> getStudentEnrollments(int studentId);
+	
+	int updateDTO(StudentDetailsDTO student);
+	int create(StudentDetailsDTO dto);
 }

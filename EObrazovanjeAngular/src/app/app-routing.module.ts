@@ -31,6 +31,7 @@ import { StudentProfileDetailsComponent } from './student/student-profile-detail
 import { StudentScreenComponent } from './student/student-screen/student-screen.component';
 import { AdminAllCoursesListComponent } from './admin/admin-all-courses-list/admin-all-courses-list.component';
 import { AdminAddCourseComponent } from './admin/admin-add-course/admin-add-course.component';
+import { AdminAddStudentComponent } from './admin/admin-add-student/admin-add-student.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -195,9 +196,20 @@ const routes: Routes = [
         component: AdminAddProgrammeComponent,
         canActivate: [AuthGuard],
       },
+      {
+        path: 'addStudent',
+        component: AdminAddStudentComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addStudent/:id',
+        component: AdminAddStudentComponent,
+        canActivate: [AuthGuard],
+      },
       { path: 'courses', component: AdminAllCoursesListComponent, canActivate: [AuthGuard] },
       { path: 'addCourse', component: AdminAddCourseComponent, canActivate: [AuthGuard] },
       { path: 'addCourse/:id', component: AdminAddCourseComponent, canActivate: [AuthGuard] },
+      
     ],
   },
 ];

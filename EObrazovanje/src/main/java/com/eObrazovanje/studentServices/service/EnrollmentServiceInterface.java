@@ -10,6 +10,9 @@ public interface EnrollmentServiceInterface {
 	List<EnrollmentDTO> findAll();
 	int save(EnrollmentToAddDTO enrollment);
 	List<EnrollmentDTO> getEnrolledStudents(int id);
+	Boolean removeEnrollment(int courseId, int studentId);
 	void update(EnrollmentDTO enrollmentDTO);
+	
+	
 	boolean remove(int id);
 }

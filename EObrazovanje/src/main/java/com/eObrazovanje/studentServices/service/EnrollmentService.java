@@ -68,6 +68,22 @@ public class EnrollmentService implements EnrollmentServiceInterface {
 		
 		return enrollmentsDTO;
 	}
+	
+
+	@Override
+	public Boolean removeEnrollment(int courseId, int studentId) {
+		Course course = courseRepo.findById(courseId).orElse(null);
+		List<Enrollment> enrollments = course.getEnrollment();
+		for(Enrollment e: enrollments) {
+			if(e.getStudent().getId() == studentId) {
+				course.getEnrollment().remove(e);
+				courseRepo.save(course);
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	@Override
 	public void update(EnrollmentDTO enrollmentDTO) {

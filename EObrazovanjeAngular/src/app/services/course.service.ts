@@ -4,6 +4,11 @@ import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders  } from '@angu
 import { throwError, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Course } from 'src/app/types/course';
+import { Enrollment } from '../types/enrollment';
+import { StudentProfileDetailsComponent } from '../student/student-profile-details/student-profile-details.component';
+import { Student } from '../types/student';
+import { StudentServiceService } from './student/student.service';
+import { EnrollmentAdd } from '../types/enrollment-add';
 
 
 @Injectable({
@@ -19,7 +24,7 @@ export class CourseService {
   practicalClasses = Number;
   courses: [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private studentService: StudentServiceService) { }
 
   getCourses() {
     return this.courses.splice;
@@ -33,6 +38,15 @@ export class CourseService {
     let url = this.coursesUrl + "/getCourse/" + courseId;
     console.log(url);
     return this.http.get<Course>(url);
+  }
+
+  
+  getCourseEnrollments(courseId: Number) {
+    return this.http.get<Enrollment[]>(this.coursesUrl + '/courseEnrollments/' + courseId);
+  }
+
+  getAvailableStudents(courseId: Number) {
+    return this.http.get<Student[]>(this.studentService.studentsUrl + 'notEnrolledStudents/' + courseId);
   }
 
   saveCourse(course: Course){
@@ -53,14 +67,20 @@ export class CourseService {
       .subscribe((response) => console.log(response),
                   (error) => console.log(error));
   }
+  
+  addEnrollment(enrollment: EnrollmentAdd) {
+    return this.http.post<EnrollmentAdd>(baseUrl + 'enrollment', enrollment)
+          .subscribe((response) => console.log(response),
+                (error) => console.log(error));
+  }
 
-  /*removeStudentFromCourse(courseId: Number, student: Student) {
-    return this.http.delete<Course>(this.studyProgrammesUrl + '/programmeCourse/delete/' + course.id + '/' + programmeId,
+  
+  removeStudentFromCourse(enrollmentId: Number) {
+    return this.http.delete<Enrollment>(baseUrl + 'enrollment/' + enrollmentId ,
     {}).subscribe(
       (response) => console.log(response),
-      (error) => console.log(error)
-    )
-  }*/
+      (error) => console.log(error));
+  }
 
  
 }

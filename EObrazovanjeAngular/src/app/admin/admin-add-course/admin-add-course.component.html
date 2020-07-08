@@ -27,4 +27,36 @@
       </div>
     </div>
   </div>
+
+  
+  <div class="student-course-info">
+    <h3 class="card-title">Lista studenata</h3>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Indeks</th>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enrollment of enrollments">
+            <td>{{ enrollment.student.index }}</td>
+          <td>{{ enrollment.student.firstName }}</td>
+          <td>{{ enrollment.student.lastName }}</td>
+          <td>
+            <button class="filled-btn-dark" (click)="removeEnrollment(enrollment.id)">Ukloni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div>
+      <select [(ngModel)]="selectedStudent" class="select-list">
+        <option *ngFor="let student of availableStudents" [ngValue]="student">{{student.index}} {{student.firstName}} {{student.lastName}}</option>
+      </select>
+      <button class="filled-btn-dark" (click)="addStudentToCourse()">Dodaj</button>
+    </div>
+  </div>
   

@@ -27,7 +27,7 @@ export enum EEmployeeFunction {
   styleUrls: ['./admin-add-user.component.css'],
 })
 export class AdminAddUserComponent implements OnInit {
-  student;
+  student : Boolean;
   userForm: FormGroup;
   userEditForm: FormGroup;
   professorId: number;

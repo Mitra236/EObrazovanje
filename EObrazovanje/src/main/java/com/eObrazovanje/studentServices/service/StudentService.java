@@ -3,7 +3,9 @@ package com.eObrazovanje.studentServices.service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -307,5 +309,76 @@ public class StudentService implements StudentServiceInterface {
 	@Override
 	public List<Student> findAllStudents() {
 		return studentRepository.findAll();
+	}
+	
+	
+
+	@Override
+	public int updateDTO(StudentDetailsDTO dto) {
+		Student student = studentRepository.findById(dto.id).orElse(null);
+		student.setIndex(dto.index);
+		student.setFirstName(dto.firstName);
+		student.setLastName(dto.lastName);
+		student.setEmail(dto.email);
+		student.setGiroAccountNumber(dto.giroAccountNumber);
+		student.setJMBG(dto.JMBG);
+		student.setMethodOfFinancing(dto.methodOfFinancing);
+		student.setModelNumber(dto.modelNumber);
+		student.setPassword(dto.password);
+		student.setPersonalReferenceNumber(dto.personalReferenceNumber);
+		student.setPhoneNumber(dto.phone);
+		student.setTimeEnrolled(dto.timeEnrolled);
+		student.setYearOfStudy(dto.yearOfStudy);
+		student.setYearOfEnrollment(dto.yearOfEnrollment);		
+		return studentRepository.save(student).getId();
+	}
+	
+	@Override
+	public int create(StudentDetailsDTO dto) {
+		
+		StudyProgramme prog = studyProgrammeRepository.findById(-1).orElse(null);
+		
+		Student student = new Student();
+		student.setUsername(dto.username);
+		student.setIndex(dto.index);
+		student.setFirstName(dto.firstName);
+		student.setLastName(dto.lastName);
+		student.setEmail(dto.email);
+		student.setGiroAccountNumber(dto.giroAccountNumber);
+		student.setJMBG(dto.JMBG);
+		student.setMethodOfFinancing(dto.methodOfFinancing);
+		student.setModelNumber(dto.modelNumber);
+		student.setPassword(dto.password);
+		student.setPersonalReferenceNumber(dto.personalReferenceNumber);
+		student.setPhoneNumber(dto.phone);
+		student.setTimeEnrolled(dto.timeEnrolled);
+		student.setYearOfStudy(dto.yearOfStudy);
+		student.setYearOfEnrollment(dto.yearOfEnrollment);		
+		student.setStudyProgramme(prog);
+		student = studentRepository.save(student);
+
+		if(prog.getStudents() == null)
+			prog.setStudents(new ArrayList<Student>());
+		
+		prog.getStudents().add(student);
+		studyProgrammeRepository.save(prog);
+		
+		return student.getId();
+	}
+	
+
+	@Override
+	public List<EnrollmentDTO> getStudentEnrollments(int id) {
+		List<EnrollmentDTO> enrollmentDTOs = new ArrayList<>();
+		Student student = studentRepository.findById(id).orElse(null);
+		
+		if(student == null) return null;
+		for(Enrollment e : student.getEnrollment()) {
+			e.getStudent();
+			e.getCourse();
+			enrollmentDTOs.add(new EnrollmentDTO(e));
+		}
+				
+		return enrollmentDTOs;
 	}
 }
